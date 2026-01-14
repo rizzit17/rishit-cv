@@ -101,6 +101,45 @@ body {
 
 .light:hover { opacity: 0.8; }
 
+/* Theme Toggle Button */
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--vscode-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 100;
+    font-size: 16px;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    transition: transform 0.3s ease;
+    display: block;
+    line-height: 1;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(180deg);
+}
+
 /* Title Bar */
 .title-bar {
     background: var(--vscode-titlebar);
