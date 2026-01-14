@@ -112,15 +112,26 @@ function createGenieParticles(element) {
                 currentActive.classList.remove('active', 'genie-close');
                 
                 // Show new section with genie open animation
-                const targetElement = document.getElementById(targetSection);
-                if (targetElement) {
-                    targetElement.classList.add('active', 'genie-open');
-                    
-                    // Remove genie-open class after animation completes
-                    setTimeout(() => {
-                        targetElement.classList.remove('genie-open');
-                    }, 800);
-                }
+const targetElement = document.getElementById(targetSection);
+if (targetElement) {
+    targetElement.classList.add('active', 'genie-open');
+    
+    // Reset and restart card animations
+    const cards = targetElement.querySelectorAll('.info-card, .project-card, .skill-category, .timeline-item, .cert-card');
+    cards.forEach(card => {
+        // Remove animation
+        card.style.animation = 'none';
+        // Force reflow
+        void card.offsetWidth;
+        // Re-add animation
+        card.style.animation = '';
+    });
+    
+    // Remove genie-open class after animation completes
+    setTimeout(() => {
+        targetElement.classList.remove('genie-open');
+    }, 800);
+}
             }, 700); // Match genie-close duration
         } else {
             // First load - use genie bounce effect
@@ -534,6 +545,7 @@ setInterval(() => {
     // Silent update, don't spam console
 
 }, 60000);
+
 
 
 
