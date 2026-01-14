@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rishit.cv - Full-Stack Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- MacBook Window Frame -->
+    <div class="macbook-notch"></div>
+    
+    <!-- VS Code Window -->
+    <div class="vscode-window">
+        <!-- MacBook Traffic Lights -->
+        <div class="traffic-lights">
+            <span class="light red"></span>
+            <span class="light yellow"></span>
+            <span class="light green"></span>
+        </div>
+        
+        <!-- VS Code Title Bar -->
+        <div class="title-bar">
+            <div class="title-left">
+                <span class="vscode-logo">⚡</span>
+                <span class="file-name">rishit_chaudhary.dev</span>
+            </div>
+            <div class="title-center">
+                <span class="current-file">portfolio.jsx — rishit.cv</span>
+            </div>
+            <div class="title-right">
+                <span class="icon">⚙️</span>
+            </div>
+        </div>
+
+        <!-- VS Code Activity Bar + Sidebar + Editor Layout -->
+        <div class="vscode-layout">
+            
+            <!-- Activity Bar -->
+            <div class="activity-bar">
+                <div class="activity-icon active" data-tab="explorer" title="Explorer">
+                    <span>📁</span>
+                </div>
+                <div class="activity-icon" data-tab="search" title="Search">
+                    <span>🔍</span>
+                </div>
+                <div class="activity-icon" data-tab="git" title="Source Control">
+                    <span>🌿</span>
+                </div>
+                <div class="activity-icon" data-tab="extensions" title="Extensions">
+                    <span>🧩</span>
+                </div>
+                
+                <div class="activity-spacer"></div>
+                
+                <div class="activity-icon" data-tab="settings" title="Settings">
+                    <span>⚙️</span>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-header">
+                    <span>EXPLORER</span>
+                </div>
+                <div class="file-tree">
+                    <div class="folder open">
+                        <div class="folder-header">
+                            <span class="folder-icon">📁</span>
+                            <span class="folder-name">portfolio</span>
+                        </div>
+                        <div class="folder-content">
+                            <div class="file active" data-section="about">
+                                <span class="file-icon">📄</span>
+                                <span class="file-name">about.jsx</span>
+                            </div>
+                            <div class="file" data-section="projects">
+                                <span class="file-icon">🚀</span>
+                                <span class="file-name">projects.tsx</span>
+                            </div>
+                            <div class="file" data-section="skills">
+                                <span class="file-icon">⚡</span>
+                                <span class="file-name">skills.json</span>
+                            </div>
+                            <div class="file" data-section="experience">
+                                <span class="file-icon">💼</span>
+                                <span class="file-name">experience.ts</span>
+                            </div>
+                            <div class="file" data-section="certifications">
+                                <span class="file-icon">🏆</span>
+                                <span class="file-name">certifications.md</span>
+                            </div>
+                            <div class="file" data-section="contact">
+                                <span class="file-icon">📧</span>
+                                <span class="file-name">contact.css</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="editor">
+                <!-- Editor Tabs -->
+                <div class="editor-tabs">
+                    <div class="tab active">
+                        <span class="tab-icon">📄</span>
+                        <span class="tab-name">about.jsx</span>
+                        <span class="tab-close">×</span>
+                    </div>
+                </div>
+
+                <!-- Editor Content -->
+                <div class="editor-content">
+                    
+                    <!-- About Section -->
+                    <section id="about" class="code-section active">
+                        <div class="line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                            <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="keyword">import</span> <span class="class">Developer</span> <span class="keyword">from</span> <span class="string">'@vit/students'</span>;
+
+<span class="keyword">const</span> <span class="function">RishitChaudhary</span> <span class="operator">=</span> () <span class="operator">=></span> {
+  <span class="keyword">return</span> (
+    <span class="tag">&lt;Developer</span>
+      <span class="attribute">name</span>=<span class="string">"Rishit Chaudhary"</span>
+      <span class="attribute">role</span>=<span class="string">"Full-Stack Developer"</span>
+      <span class="attribute">location</span>=<span class="string">"📍 Noida, India"</span>
+      <span class="attribute">university</span>=<span class="string">"VIT Vellore"</span>
+      <span class="attribute">year</span>={<span class="number">3</span>}
+      <span class="attribute">cgpa</span>={<span class="number">8.60</span>}
+      <span class="attribute">passion</span>=<span class="string">"Building scalable web applications"</span>
+    <span class="tag">/&gt;</span>
+  );
+};
+
+<span class="comment">// 🎓 3rd Year CSE Student specializing in IoT & Full-Stack Development</span>
+<span class="comment">// 💻 Passionate about React, Node.js, and Cloud Technologies</span>
+<span class="comment">// 🚀 Open Source Contributor | Campus Leader | Tech Enthusiast</span>
+
+<span class="keyword">export default</span> RishitChaudhary;</code></pre>
+
+                            <!-- About Cards -->
+                            <div class="about-cards">
+                                <div class="info-card glass">
+                                    <div class="card-icon">👨‍💻</div>
+                                    <div class="card-content">
+                                        <h3>Full-Stack Developer</h3>
+                                        <p>Specializing in React, Node.js, and MongoDB with a passion for creating scalable web applications</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card glass">
+                                    <div class="card-icon">🎓</div>
+                                    <div class="card-content">
+                                        <h3>VIT Vellore</h3>
+                                        <p>B.Tech in Computer Science & Engineering (IoT) • CGPA: 8.60 • 2023-2027</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-card glass">
+                                    <div class="card-icon">🌟</div>
+                                    <div class="card-content">
+                                        <h3>Campus Leader</h3>
+                                        <p>Perplexity Campus Partner • IEEE CS • Pixelate Design Club • 200+ students impacted</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Links -->
+                            <div class="quick-links">
+                                <a href="https://github.com/rizzit17" target="_blank" class="link-btn glass">
+                                    <span class="link-icon">💻</span>
+                                    <span>GitHub</span>
+                                </a>
+                                <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="link-btn glass">
+                                    <span class="link-icon">💼</span>
+                                    <span>LinkedIn</span>
+                                </a>
+                                <a href="mailto:rishitwork28@gmail.com" class="link-btn glass">
+                                    <span class="link-icon">📧</span>
+                                    <span>Email</span>
+                                </a>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Projects Section -->
+                    <section id="projects" class="code-section">
+                        <div class="line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="keyword">const</span> <span class="variable">projects</span> <span class="operator">=</span> [
+  {
+    <span class="property">name</span>: <span class="string">"Amber Essence"</span>,
+    <span class="property">type</span>: <span class="string">"Full-Stack Restaurant Platform"</span>,
+    <span class="property">tech</span>: [<span class="string">"React"</span>, <span class="string">"FastAPI"</span>, <span class="string">"MongoDB"</span>, <span class="string">"Tailwind"</span>],
+    <span class="property">impact</span>: <span class="string">"60% reduction in booking time"</span>,
+  },
+  {
+    <span class="property">name</span>: <span class="string">"ShikshaPlay"</span>,
+    <span class="property">type</span>: <span class="string">"AI-Enabled Learning Platform"</span>,
+    <span class="property">tech</span>: [<span class="string">"React"</span>, <span class="string">"Node.js"</span>, <span class="string">"FastAPI"</span>, <span class="string">"i18n"</span>],
+    <span class="property">features</span>: <span class="string">"Gamification + Multilingual Support"</span>,
+  }
+];</code></pre>
+
+                            <!-- Project Cards -->
+                            <div class="projects-grid">
+                                <div class="project-card glass">
+                                    <div class="project-header">
+                                        <h3>🍽️ Amber Essence</h3>
+                                        <div class="project-links">
+                                            <a href="https://github.com/rizzit17/amber-essence" target="_blank" class="project-link">
+                                                <span>GitHub →</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <p class="project-type">Full-Stack Restaurant Platform</p>
+                                    <p class="project-desc">Built a responsive restaurant platform with table booking, authentication, and reviews. Reduced booking time by 60% using React Context API and optimized UI/UX.</p>
+                                    <div class="tech-stack">
+                                        <span class="tech-tag">React.js</span>
+                                        <span class="tech-tag">FastAPI</span>
+                                        <span class="tech-tag">MongoDB</span>
+                                        <span class="tech-tag">Tailwind CSS</span>
+                                    </div>
+                                </div>
+
+                                <div class="project-card glass">
+                                    <div class="project-header">
+                                        <h3>📚 ShikshaPlay</h3>
+                                        <div class="project-links">
+                                            <a href="https://github.com/rizzit17/shikshaplay" target="_blank" class="project-link">
+                                                <span>GitHub →</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <p class="project-type">AI-Enabled Learning Platform</p>
+                                    <p class="project-desc">Developed a gamified e-learning platform with interactive quizzes, leaderboards, and progress tracking. Added multilingual support (English & Hindi) for wider accessibility.</p>
+                                    <div class="tech-stack">
+                                        <span class="tech-tag">React.js</span>
+                                        <span class="tech-tag">Node.js</span>
+                                        <span class="tech-tag">FastAPI</span>
+                                        <span class="tech-tag">i18n</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Skills Section -->
+                    <section id="skills" class="code-section">
+                        <div class="line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            <span>11</span><span>12</span><span>13</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code>{
+  <span class="string">"languages"</span>: [<span class="string">"Python"</span>, <span class="string">"JavaScript"</span>, <span class="string">"TypeScript"</span>, <span class="string">"C++"</span>, <span class="string">"Java"</span>],
+  <span class="string">"frontend"</span>: [<span class="string">"React"</span>, <span class="string">"Tailwind CSS"</span>, <span class="string">"HTML/CSS"</span>],
+  <span class="string">"backend"</span>: [<span class="string">"Node.js"</span>, <span class="string">"FastAPI"</span>, <span class="string">"Express"</span>],
+  <span class="string">"databases"</span>: [<span class="string">"MongoDB"</span>, <span class="string">"MySQL"</span>, <span class="string">"Firebase"</span>],
+  <span class="string">"cloud"</span>: [<span class="string">"AWS EC2"</span>, <span class="string">"S3"</span>, <span class="string">"IAM"</span>],
+  <span class="string">"tools"</span>: [<span class="string">"Git"</span>, <span class="string">"Postman"</span>, <span class="string">"VS Code"</span>, <span class="string">"Figma"</span>],
+  <span class="string">"expertise"</span>: [
+    <span class="string">"Full-Stack Development"</span>,
+    <span class="string">"RESTful APIs"</span>,
+    <span class="string">"Responsive Design"</span>,
+    <span class="string">"Cloud Deployment"</span>
+  ]
+}</code></pre>
+
+                            <!-- Skills Grid -->
+                            <div class="skills-grid">
+                                <div class="skill-category glass">
+                                    <div class="skill-header">
+                                        <span class="skill-icon">💻</span>
+                                        <h3>Languages</h3>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Python</span>
+                                        <span class="skill-tag">JavaScript</span>
+                                        <span class="skill-tag">TypeScript</span>
+                                        <span class="skill-tag">C++</span>
+                                        <span class="skill-tag">Java</span>
+                                        <span class="skill-tag">SQL</span>
+                                    </div>
+                                </div>
+
+                                <div class="skill-category glass">
+                                    <div class="skill-header">
+                                        <span class="skill-icon">🎨</span>
+                                        <h3>Frontend</h3>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">React.js</span>
+                                        <span class="skill-tag">Tailwind CSS</span>
+                                        <span class="skill-tag">Context API</span>
+                                        <span class="skill-tag">HTML/CSS</span>
+                                    </div>
+                                </div>
+
+                                <div class="skill-category glass">
+                                    <div class="skill-header">
+                                        <span class="skill-icon">⚙️</span>
+                                        <h3>Backend</h3>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Node.js</span>
+                                        <span class="skill-tag">FastAPI</span>
+                                        <span class="skill-tag">Express.js</span>
+                                        <span class="skill-tag">REST APIs</span>
+                                    </div>
+                                </div>
+
+                                <div class="skill-category glass">
+                                    <div class="skill-header">
+                                        <span class="skill-icon">💾</span>
+                                        <h3>Databases</h3>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">MongoDB</span>
+                                        <span class="skill-tag">MySQL</span>
+                                        <span class="skill-tag">Firebase</span>
+                                    </div>
+                                </div>
+
+                                <div class="skill-category glass">
+                                    <div class="skill-header">
+                                        <span class="skill-icon">☁️</span>
+                                        <h3>Cloud & Tools</h3>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">AWS EC2</span>
+                                        <span class="skill-tag">S3</span>
+                                        <span class="skill-tag">Git/GitHub</span>
+                                        <span class="skill-tag">Postman</span>
+                                        <span class="skill-tag">Figma</span>
+                                    </div>
+                                </div>
+
+                                <div class="skill-category glass">
+                                    <div class="skill-header">
+                                        <span class="skill-icon">🧠</span>
+                                        <h3>Core CS</h3>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">DSA</span>
+                                        <span class="skill-tag">OOP</span>
+                                        <span class="skill-tag">OS</span>
+                                        <span class="skill-tag">Networks</span>
+                                        <span class="skill-tag">AI</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Experience Section -->
+                    <section id="experience" class="code-section">
+                        <div class="line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            <span>11</span><span>12</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="keyword">interface</span> <span class="class">Position</span> {
+  <span class="property">role</span>: <span class="type">string</span>;
+  <span class="property">organization</span>: <span class="type">string</span>;
+  <span class="property">period</span>: <span class="type">string</span>;
+  <span class="property">impact</span>: <span class="type">string[]</span>;
+}
+
+<span class="comment">// Leadership roles that shaped my journey 🚀</span></code></pre>
+
+                            <!-- Experience Timeline -->
+                            <div class="timeline">
+                                <div class="timeline-item glass">
+                                    <div class="timeline-marker">📱</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <h3>Perplexity Campus Partner</h3>
+                                            <span class="timeline-date">Aug 2024 - Present</span>
+                                        </div>
+                                        <p class="timeline-org">Perplexity AI</p>
+                                        <ul class="timeline-points">
+                                            <li>Led campus outreach initiatives, onboarding <strong>200+ students</strong> through workshops and demos</li>
+                                            <li>Acted as point of contact for student feedback, influencing product engagement strategies</li>
+                                            <li>Organized interactive sessions on AI-powered research tools</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item glass">
+                                    <div class="timeline-marker">💻</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <h3>Core Committee Member</h3>
+                                            <span class="timeline-date">Mar 2024 - Present</span>
+                                        </div>
+                                        <p class="timeline-org">IEEE Computer Society Chapter</p>
+                                        <ul class="timeline-points">
+                                            <li>Organized tech events and hackathons including <strong>HackBattle Hackathon</strong> with <strong>180+ participants</strong></li>
+                                            <li>Contributed to sponsorship coordination and promotion activities</li>
+                                            <li>Facilitated technical workshops and knowledge-sharing sessions</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="timeline-item glass">
+                                    <div class="timeline-marker">🎨</div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-header">
+                                            <h3>Core Committee Member</h3>
+                                            <span class="timeline-date">Mar 2024 - Present</span>
+                                        </div>
+                                        <p class="timeline-org">Pixelate Design Club</p>
+                                        <ul class="timeline-points">
+                                            <li>Designed and executed promotional creatives for multiple club events</li>
+                                            <li>Facilitated hands-on Figma workshop for <strong>150+ participants</strong></li>
+                                            <li>Applied UI/UX principles to enhance visual consistency across club branding</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Certifications Section -->
+                    <section id="certifications" class="code-section">
+                        <div class="line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="comment"># Certifications & Achievements 🏆</span>
+
+<span class="comment">## Professional Development</span>
+<span class="operator">-</span> Full-Stack Web Development <span class="operator">|</span> Udemy <span class="operator">|</span> 61.5 hours
+<span class="operator">-</span> UI/UX Design Masterclass <span class="operator">|</span> Udemy <span class="operator">|</span> 41.5 hours
+<span class="operator">-</span> Postman Student Expert <span class="operator">|</span> API Testing & Development
+
+<span class="comment">## Open Source</span>
+<span class="operator">-</span> GSSoC 2025 Contributor <span class="operator">|</span> Contributed to multiple projects</code></pre>
+
+                            <!-- Certifications Grid -->
+                            <div class="certifications-grid">
+                                <div class="cert-card glass">
+                                    <div class="cert-icon">🎓</div>
+                                    <h3>Full-Stack Web Development</h3>
+                                    <p class="cert-provider">Udemy • 61.5 hours</p>
+                                    <p class="cert-desc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p>
+                                    <a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="cert-link">
+                                        View Certificate →
+                                    </a>
+                                </div>
+
+                                <div class="cert-card glass">
+                                    <div class="cert-icon">🎨</div>
+                                    <h3>UI/UX Design Masterclass</h3>
+                                    <p class="cert-provider">Udemy • 41.5 hours</p>
+                                    <p class="cert-desc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p>
+                                    <a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="cert-link">
+                                        View Certificate →
+                                    </a>
+                                </div>
+
+                                <div class="cert-card glass">
+                                    <div class="cert-icon">🔧</div>
+                                    <h3>Postman Student Expert</h3>
+                                    <p class="cert-provider">Postman</p>
+                                    <p class="cert-desc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p>
+                                    <a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="cert-link">
+                                        View Badge →
+                                    </a>
+                                </div>
+
+                                <div class="cert-card glass">
+                                    <div class="cert-icon">🌟</div>
+                                    <h3>GSSoC 2025 Contributor</h3>
+                                    <p class="cert-provider">GirlScript Summer of Code</p>
+                                    <p class="cert-desc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p>
+                                    <a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="cert-link">
+                                        View Certificate →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section id="contact" class="code-section">
+                        <div class="line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            <span>11</span><span>12</span>
+                        </div>
+                        <div class="code-content">
+                            <pre><code><span class="class">.contact</span> {
+  <span class="property">display</span>: <span class="value">flex</span>;
+  <span class="property">flex-direction</span>: <span class="value">column</span>;
+  <span class="property">align-items</span>: <span class="value">center</span>;
+  <span class="property">gap</span>: <span class="value">2rem</span>;
+}
+
+<span class="comment">/* Let's build something amazing together! */</span></code></pre>
+
+                            <!-- Contact Content -->
+                            <div class="contact-container">
+                                <div class="contact-header">
+                                    <h2>Let's Connect! 🚀</h2>
+                                    <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                                </div>
+
+                                <div class="contact-grid">
+                                    <a href="mailto:rishitwork28@gmail.com" class="contact-card glass">
+                                        <div class="contact-icon">📧</div>
+                                        <h3>Email</h3>
+                                        <p>rishitwork28@gmail.com</p>
+                                    </a>
+
+                                    <a href="tel:+918076513921" class="contact-card glass">
+                                        <div class="contact-icon">📱</div>
+                                        <h3>Phone</h3>
+                                        <p>+91-8076513921</p>
+                                    </a>
+
+                                    <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="contact-card glass">
+                                        <div class="contact-icon">💼</div>
+                                        <h3>LinkedIn</h3>
+                                        <p>rishit-chaudhary17</p>
+                                    </a>
+
+                                    <a href="https://github.com/rizzit17" target="_blank" class="contact-card glass">
+                                        <div class="contact-icon">💻</div>
+                                        <h3>GitHub</h3>
+                                        <p>@rizzit17</p>
+                                    </a>
+
+                                    <div class="contact-card glass">
+                                        <div class="contact-icon">📍</div>
+                                        <h3>Location</h3>
+                                        <p>Noida, India</p>
+                                    </div>
+
+                                    <div class="contact-card glass">
+                                        <div class="contact-icon">🌍</div>
+                                        <h3>Languages</h3>
+                                        <p>English, Hindi, Punjabi, French</p>
+                                    </div>
+                                </div>
+
+                                <div class="terminal-output glass">
+                                    <div class="terminal-header">
+                                        <span>bash</span>
+                                    </div>
+                                    <div class="terminal-body">
+                                        <p><span class="terminal-prompt">$</span> git clone https://github.com/rizzit17/awesome-project.git</p>
+                                        <p><span class="terminal-prompt">$</span> cd awesome-project</p>
+                                        <p><span class="terminal-prompt">$</span> npm install && npm start</p>
+                                        <p class="terminal-success">✓ Ready to collaborate!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Status Bar -->
+                <div class="status-bar">
+                    <div class="status-left">
+                        <span class="status-item">⚡ Ln 1, Col 1</span>
+                        <span class="status-item">UTF-8</span>
+                        <span class="status-item">JSX</span>
+                    </div>
+                    <div class="status-right">
+                        <span class="status-item">React 18.2.0</span>
+                        <span class="status-item">Node.js v20.11.0</span>
+                        <span class="status-item">✓ Prettier</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
