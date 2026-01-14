@@ -1101,3 +1101,136 @@ body.light-theme ::-webkit-scrollbar-thumb:hover {
     background: #999999;
 }
 
+/* Light Theme Resume Button Fixes - Vibrant Version */
+body.light-theme .resume-btn {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+body.light-theme .resume-btn.view {
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .resume-btn.view:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .resume-btn.download {
+    border: 2px solid #0066cc;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 102, 204, 0.15),
+        rgba(0, 66, 204, 0.1)
+    );
+    color: #0066cc;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
+}
+
+body.light-theme .resume-btn.download:hover {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 102, 204, 0.25),
+        rgba(0, 66, 204, 0.2)
+    );
+    border-color: #0052a3;
+    color: #0052a3;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+/* Light Theme - Additional Visibility Fixes */
+
+/* Quick Links */
+body.light-theme .link-btn {
+    color: #1a1a1a;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.light-theme .link-btn:hover {
+    background: rgba(0, 102, 204, 0.1);
+    border-color: #0066cc;
+    color: #0066cc;
+}
+
+/* Project Links */
+body.light-theme .project-link {
+    color: #0066cc;
+}
+
+body.light-theme .project-link:hover {
+    color: #0052a3;
+}
+
+/* Certificate Links */
+body.light-theme .cert-link {
+    color: #0066cc;
+}
+
+body.light-theme .cert-link:hover {
+    color: #0052a3;
+}
+
+/* Contact Cards */
+body.light-theme .contact-card {
+    color: #1a1a1a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-card:hover {
+    background: rgba(0, 102, 204, 0.08);
+    border-color: rgba(0, 102, 204, 0.3);
+}
+
+/* Terminal Output in Light Mode */
+body.light-theme .terminal-output {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .terminal-body p {
+    color: #1a1a1a;
+}
+
+body.light-theme .terminal-prompt {
+    color: #0066cc;
+}
+
+body.light-theme .terminal-success {
+    color: #059669;
+}
+
+/* Card Content Text */
+body.light-theme .card-content h3,
+body.light-theme .project-header h3,
+body.light-theme .timeline-header h3,
+body.light-theme .cert-card h3,
+body.light-theme .contact-header h2 {
+    color: #1a1a1a;
+}
+
+body.light-theme .card-content p,
+body.light-theme .project-desc,
+body.light-theme .cert-desc,
+body.light-theme .contact-header p {
+    color: #4a5568;
+}
+
+/* Timeline Organization Name */
+body.light-theme .timeline-org {
+    color: #0066cc;
+}
+
+body.light-theme .timeline-points li {
+    color: #4a5568;
+}
+
+/* Certificate Provider */
+body.light-theme .cert-provider {
+    color: #0066cc;
+}
+
+
