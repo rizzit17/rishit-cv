@@ -1233,4 +1233,330 @@ body.light-theme .cert-provider {
     color: #0066cc;
 }
 
+/* ============================================
+   MACOS WINDOW SWITCHING ANIMATIONS
+   ============================================ */
+
+/* Enhanced section transitions */
+.code-section {
+    display: none;
+    opacity: 0;
+    transform: perspective(1000px) rotateY(-15deg) scale(0.95);
+    transform-origin: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.code-section.active {
+    display: flex;
+    opacity: 1;
+    transform: perspective(1000px) rotateY(0deg) scale(1);
+    animation: macWindowSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes macWindowSlide {
+    0% {
+        opacity: 0;
+        transform: perspective(1000px) rotateY(-20deg) scale(0.9) translateX(-100px);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: perspective(1000px) rotateY(-5deg) scale(0.95) translateX(-20px);
+        filter: blur(3px);
+    }
+    100% {
+        opacity: 1;
+        transform: perspective(1000px) rotateY(0deg) scale(1) translateX(0);
+        filter: blur(0);
+    }
+}
+
+/* Fade out animation for leaving section */
+.code-section.leaving {
+    animation: macWindowSlideOut 0.4s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes macWindowSlideOut {
+    0% {
+        opacity: 1;
+        transform: perspective(1000px) rotateY(0deg) scale(1) translateX(0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: perspective(1000px) rotateY(15deg) scale(0.95) translateX(50px);
+        filter: blur(5px);
+    }
+}
+
+/* Tab switching animation */
+.tab {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.tab::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tab.active::before {
+    width: 100%;
+}
+
+/* File selection ripple effect */
+.file {
+    position: relative;
+    overflow: hidden;
+}
+
+.file::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 100%;
+    background: rgba(0, 122, 204, 0.2);
+    transform: translateY(-50%);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.file:hover::after {
+    width: 4px;
+}
+
+.file.active::after {
+    width: 4px;
+    background: var(--accent-blue);
+}
+
+/* ============================================
+   CARD ENTRANCE ANIMATIONS
+   ============================================ */
+
+/* Staggered card animations */
+.about-cards .info-card,
+.projects-grid .project-card,
+.skills-grid .skill-category,
+.timeline-item,
+.certifications-grid .cert-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    animation: cardSlideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Stagger delays */
+.about-cards .info-card:nth-child(1) { animation-delay: 0.1s; }
+.about-cards .info-card:nth-child(2) { animation-delay: 0.2s; }
+.about-cards .info-card:nth-child(3) { animation-delay: 0.3s; }
+
+.projects-grid .project-card:nth-child(1) { animation-delay: 0.1s; }
+.projects-grid .project-card:nth-child(2) { animation-delay: 0.2s; }
+.projects-grid .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+.skills-grid .skill-category:nth-child(1) { animation-delay: 0.05s; }
+.skills-grid .skill-category:nth-child(2) { animation-delay: 0.1s; }
+.skills-grid .skill-category:nth-child(3) { animation-delay: 0.15s; }
+.skills-grid .skill-category:nth-child(4) { animation-delay: 0.2s; }
+.skills-grid .skill-category:nth-child(5) { animation-delay: 0.25s; }
+.skills-grid .skill-category:nth-child(6) { animation-delay: 0.3s; }
+
+.timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.timeline-item:nth-child(2) { animation-delay: 0.2s; }
+.timeline-item:nth-child(3) { animation-delay: 0.3s; }
+
+.certifications-grid .cert-card:nth-child(1) { animation-delay: 0.1s; }
+.certifications-grid .cert-card:nth-child(2) { animation-delay: 0.2s; }
+.certifications-grid .cert-card:nth-child(3) { animation-delay: 0.3s; }
+.certifications-grid .cert-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes cardSlideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px) scale(0.9);
+    }
+    60% {
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Reset animations when section changes */
+.code-section:not(.active) .info-card,
+.code-section:not(.active) .project-card,
+.code-section:not(.active) .skill-category,
+.code-section:not(.active) .timeline-item,
+.code-section:not(.active) .cert-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    animation: none;
+}
+
+/* ============================================
+   ENHANCED HOVER EFFECTS
+   ============================================ */
+
+/* Magnetic hover effect for cards */
+.glass {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.glass:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(0, 122, 204, 0.3),
+        0 0 0 1px rgba(0, 122, 204, 0.2);
+}
+
+/* Light mode hover */
+body.light-theme .glass:hover {
+    box-shadow: 
+        0 20px 40px rgba(0, 102, 204, 0.2),
+        0 0 0 1px rgba(0, 102, 204, 0.3);
+}
+
+/* Skill tag pulse on hover */
+.skill-tag {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skill-tag:hover {
+    transform: translateY(-4px) scale(1.1);
+    box-shadow: 0 8px 16px rgba(78, 201, 176, 0.3);
+    animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 8px 16px rgba(78, 201, 176, 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 24px rgba(78, 201, 176, 0.5);
+    }
+}
+
+/* Tech tag shine effect */
+.tech-tag {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.tech-tag::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.tech-tag:hover::before {
+    left: 100%;
+}
+
+/* Button glow effect */
+.link-btn,
+.resume-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.link-btn::before,
+.resume-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(0, 122, 204, 0.4);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.link-btn:hover::before,
+.resume-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Project card tilt effect on hover */
+.project-card {
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-style: preserve-3d;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+
+/* Smooth scroll behavior */
+.editor-content {
+    scroll-behavior: smooth;
+}
+
+/* Code line highlight on scroll */
+.line-numbers span {
+    transition: all 0.3s ease;
+    opacity: 0.3;
+}
+
+.line-numbers span:hover {
+    opacity: 1;
+    background: rgba(0, 122, 204, 0.1);
+    padding: 0 8px;
+    margin: 0 -8px;
+    border-radius: 3px;
+}
+
+/* Quick links wave animation */
+.quick-links {
+    display: flex;
+    gap: 15px;
+}
+
+.quick-links .link-btn {
+    animation: wave 3s ease-in-out infinite;
+}
+
+.quick-links .link-btn:nth-child(1) { animation-delay: 0s; }
+.quick-links .link-btn:nth-child(2) { animation-delay: 0.2s; }
+.quick-links .link-btn:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+
+
 
