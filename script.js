@@ -1,10 +1,10 @@
 // VS Code + MacBook Portfolio - Interactive Features
+// SIMPLE VERSION - No complex animations
 
-// File Navigation System
 document.addEventListener('DOMContentLoaded', function() {
 
     // ============================================
-    // THEME TOGGLE FUNCTIONALITY - ADD THIS HERE
+    // THEME TOGGLE FUNCTIONALITY
     // ============================================
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.querySelector('.theme-icon');
@@ -32,187 +32,61 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('%c☀️ Switched to Dark Mode', 'font-size: 14px; color: #007acc;');
         }
     });
+
     // ============================================
-    // END THEME TOGGLE
+    // FILE NAVIGATION SYSTEM - SIMPLE VERSION
     // ============================================
-    // Get all file elements and sections
     const files = document.querySelectorAll('.file');
     const sections = document.querySelectorAll('.code-section');
-    const tabs = document.querySelectorAll('.tab');
     
-    // Enhanced file click handler with GENIE ANIMATION
-files.forEach(file => {
-    file.addEventListener('click', function() {
-        const targetSection = this.getAttribute('data-section');
-        const currentActive = document.querySelector('.code-section.active');
-        
-        // Prevent clicking the same section
-        if (currentActive && currentActive.id === targetSection) {
-            return;
-        }
-        
-        // Add file activation effect
-        this.classList.add('genie-activate');
-        setTimeout(() => {
-            this.classList.remove('genie-activate');
-        }, 500);
-        
-        // Update active file in sidebar
-        files.forEach(f => f.classList.remove('active'));
-        this.classList.add('active');
-
-        // Create magical particles during genie animation
-function createGenieParticles(element) {
-    const rect = element.getBoundingClientRect();
-    const particleCount = 20;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'genie-particle';
-        
-        // Random position around the element
-        const x = rect.left + Math.random() * rect.width;
-        const y = rect.top + Math.random() * rect.height;
-        
-        particle.style.left = x + 'px';
-        particle.style.top = y + 'px';
-        
-        // Random direction
-        const tx = (Math.random() - 0.5) * 100;
-        const ty = (Math.random() - 0.5) * 100;
-        particle.style.setProperty('--tx', tx + 'px');
-        particle.style.setProperty('--ty', ty + 'px');
-        
-        // Random color
-        const colors = ['#007acc', '#4ec9b0', '#c586c0', '#dcdcaa'];
-        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
-        document.body.appendChild(particle);
-        
-        // Remove after animation
-        setTimeout(() => {
-            particle.remove();
-        }, 1000);
-    }
-}
-
-// Update the file click handler to include particles
-// Add this line in the file click handler where genie animation starts:
-// createGenieParticles(currentActive);
-        // GENIE ANIMATION SEQUENCE
-        if (currentActive) {
-            // Step 1: Close current section with genie effect
-            currentActive.classList.add('genie-close');
-            currentActive.classList.remove('genie-open');
-
-            createGenieParticles(currentActive);
+    // Simple file click handler
+    files.forEach(file => {
+        file.addEventListener('click', function() {
+            const targetSection = this.getAttribute('data-section');
+            const currentActive = document.querySelector('.code-section.active');
             
-            // Step 2: After close animation, show new section
-            setTimeout(() => {
-                currentActive.classList.remove('active', 'genie-close');
-                
-                // Show new section with genie open animation
-const targetElement = document.getElementById(targetSection);
-if (targetElement) {
-    targetElement.classList.add('active', 'genie-open');
-    
-    // Reset and restart card animations
-    const cards = targetElement.querySelectorAll('.info-card, .project-card, .skill-category, .timeline-item, .cert-card');
-    cards.forEach(card => {
-        // Remove animation
-        card.style.animation = 'none';
-        // Force reflow
-        void card.offsetWidth;
-        // Re-add animation
-        card.style.animation = '';
-    });
-    
-    // Remove genie-open class after animation completes
-    setTimeout(() => {
-        targetElement.classList.remove('genie-open');
-    }, 800);
-}
-            }, 700); // Match genie-close duration
-        } else {
-            // First load - use genie bounce effect
+            // Prevent clicking the same section
+            if (currentActive && currentActive.id === targetSection) {
+                return;
+            }
+            
+            // Update active file in sidebar
+            files.forEach(f => f.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Simple section switching
             sections.forEach(section => {
-                section.classList.remove('active', 'genie-open', 'genie-bounce');
+                section.classList.remove('active');
             });
             
             const targetElement = document.getElementById(targetSection);
             if (targetElement) {
-                targetElement.classList.add('active', 'genie-bounce');
-                
-                setTimeout(() => {
-                    targetElement.classList.remove('genie-bounce');
-                }, 600);
+                targetElement.classList.add('active');
             }
-        }
-        
-        // Update tab with smooth animation
-        const fileName = this.querySelector('.file-name').textContent;
-        const fileIcon = this.querySelector('.file-icon').textContent;
-        const tabName = document.querySelector('.tab-name');
-        const tabIcon = document.querySelector('.tab-icon');
-        const tab = document.querySelector('.tab');
-        
-        if (tab) {
-            tab.classList.add('switching');
-            setTimeout(() => {
-                if (tabName) tabName.textContent = fileName;
-                if (tabIcon) tabIcon.textContent = fileIcon;
-                tab.classList.remove('switching');
-            }, 200);
-        }
-        
-        // Smooth scroll to top
-        const editorContent = document.querySelector('.editor-content');
-        if (editorContent) {
-            editorContent.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        
-        // Play genie sound effect
-        playGenieSound();
+            
+            // Update tab
+            const fileName = this.querySelector('.file-name').textContent;
+            const fileIcon = this.querySelector('.file-icon').textContent;
+            const tabName = document.querySelector('.tab-name');
+            const tabIcon = document.querySelector('.tab-icon');
+            
+            if (tabName) tabName.textContent = fileName;
+            if (tabIcon) tabIcon.textContent = fileIcon;
+            
+            // Smooth scroll to top
+            const editorContent = document.querySelector('.editor-content');
+            if (editorContent) {
+                editorContent.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
-});
 
-// Genie sound effect (whoosh sound)
-function playGenieSound() {
-    try {
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        const filter = audioContext.createBiquadFilter();
-        
-        oscillator.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        // Whoosh sound parameters
-        oscillator.type = 'sawtooth';
-        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.3);
-        
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(2000, audioContext.currentTime);
-        filter.frequency.exponentialRampToValueAtTime(500, audioContext.currentTime + 0.3);
-        
-        gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + 0.3);
-    } catch (e) {
-        // Silently fail if audio context is not supported
-        console.log('Audio not supported');
-    }
-}
-
-    
-    // Traffic light animations
+    // ============================================
+    // TRAFFIC LIGHTS
+    // ============================================
     const redLight = document.querySelector('.light.red');
     const yellowLight = document.querySelector('.light.yellow');
     const greenLight = document.querySelector('.light.green');
@@ -251,18 +125,21 @@ function playGenieSound() {
             }
         });
     }
-    
-    // Tab close button
+
+    // ============================================
+    // TAB CLOSE BUTTON
+    // ============================================
     const tabClose = document.querySelector('.tab-close');
     if (tabClose) {
         tabClose.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Just show alert, don't actually close
             alert('Cannot close the only tab! 🔒');
         });
     }
-    
-    // Activity bar interactions
+
+    // ============================================
+    // ACTIVITY BAR INTERACTIONS
+    // ============================================
     const activityIcons = document.querySelectorAll('.activity-icon');
     
     activityIcons.forEach(icon => {
@@ -281,15 +158,15 @@ function playGenieSound() {
             } else if (tab === 'extensions') {
                 alert('🧩 Extensions - Coming soon!');
             } else if (tab === 'settings') {
-                const theme = confirm('Switch to Light Theme?');
-                if (theme) {
-                    alert('Light theme not available yet! 🌙 Dark mode is better anyway 😎');
-                }
+                // Toggle theme when settings is clicked
+                themeToggle.click();
             }
         });
     });
-    
-    // Smooth scroll for internal links
+
+    // ============================================
+    // SMOOTH SCROLL FOR INTERNAL LINKS
+    // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -303,14 +180,14 @@ function playGenieSound() {
         });
     });
 
-    
-    // Typing effect for terminal
+    // ============================================
+    // TERMINAL TYPING EFFECT
+    // ============================================
     const terminalBody = document.querySelector('.terminal-body');
     if (terminalBody) {
         const originalContent = terminalBody.innerHTML;
         terminalBody.innerHTML = '';
         
-        let index = 0;
         const commands = [
             { text: '$ git clone https://github.com/rizzit17/awesome-project.git', delay: 50 },
             { text: '$ cd awesome-project', delay: 30 },
@@ -355,40 +232,21 @@ function playGenieSound() {
         // Start typing effect after a delay
         setTimeout(() => typeCommand(0), 1000);
     }
-    
-    // Add hover effects to glassmorphism cards
-    const glassCards = document.querySelectorAll('.glass');
-    glassCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.boxShadow = '0 8px 32px rgba(0, 122, 204, 0.2)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.boxShadow = 'none';
-        });
-    });
-    
-    // Update status bar time
-    function updateStatusBar() {
-        const statusLeft = document.querySelector('.status-left');
-        if (statusLeft) {
-            const lineCol = statusLeft.querySelector('.status-item');
-            if (lineCol) {
-                // Random line/col updates for effect
-                const randomLine = Math.floor(Math.random() * 100) + 1;
-                const randomCol = Math.floor(Math.random() * 50) + 1;
-                // Keep it static for now
-                // lineCol.textContent = `⚡ Ln ${randomLine}, Col ${randomCol}`;
-            }
-        }
-    }
-    
-    // Keyboard shortcuts
+
+    // ============================================
+    // KEYBOARD SHORTCUTS
+    // ============================================
     document.addEventListener('keydown', function(e) {
-        // Ctrl/Cmd + K for Quick Open (file search)
+        // Ctrl/Cmd + K for Quick Open
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
             alert('⌨️ Quick Open - Press number keys 1-6 to navigate sections!');
+        }
+        
+        // Ctrl/Cmd + Shift + T for theme toggle
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
+            e.preventDefault();
+            themeToggle.click();
         }
         
         // Number keys for quick navigation
@@ -409,8 +267,12 @@ function playGenieSound() {
             }
         }
     });
+
+    // ============================================
+    // HOVER EFFECTS
+    // ============================================
     
-    // Animate skill tags on hover
+    // Skill tags hover
     const skillTags = document.querySelectorAll('.skill-tag');
     skillTags.forEach(tag => {
         tag.addEventListener('mouseenter', function() {
@@ -422,132 +284,26 @@ function playGenieSound() {
         });
     });
     
-    // Add ripple effect to buttons
-    const buttons = document.querySelectorAll('.link-btn, .project-link, .cert-link');
-    buttons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            ripple.style.position = 'absolute';
-            ripple.style.borderRadius = '50%';
-            ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-            ripple.style.width = '20px';
-            ripple.style.height = '20px';
-            ripple.style.left = e.offsetX + 'px';
-            ripple.style.top = e.offsetY + 'px';
-            ripple.style.transform = 'scale(0)';
-            ripple.style.animation = 'ripple 0.6s ease-out';
-            
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-            
-            setTimeout(() => ripple.remove(), 600);
+    // Glass cards hover
+    const glassCards = document.querySelectorAll('.glass');
+    glassCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.boxShadow = '0 8px 32px rgba(0, 122, 204, 0.2)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.boxShadow = 'none';
         });
     });
-    
-    // Add CSS for ripple animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes ripple {
-            to {
-                transform: scale(4);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    // Console easter egg
+
+    // ============================================
+    // CONSOLE EASTER EGG
+    // ============================================
     console.log('%c🚀 Welcome to Rishit\'s Portfolio!', 'font-size: 20px; font-weight: bold; color: #007acc;');
     console.log('%c💻 Built with VS Code theme + MacBook design', 'font-size: 14px; color: #4ec9b0;');
     console.log('%c⚡ Full-Stack Developer | React | Node.js | MongoDB', 'font-size: 12px; color: #dcdcaa;');
     console.log('%c📧 rishitwork28@gmail.com', 'font-size: 12px; color: #ce9178;');
+    console.log('%c🎨 Theme: ' + currentTheme.toUpperCase() + ' | Toggle: Ctrl+Shift+T', 'font-size: 11px; color: #c586c0;');
     console.log('%cHint: Press Ctrl+K for keyboard shortcuts!', 'font-size: 11px; color: #858585;');
-    
-    // Add floating code particles effect (subtle)
-    createFloatingParticles();
-    
-    function createFloatingParticles() {
-        const particleCount = 20;
-        const particles = [];
-        const symbols = ['{}', '[]', '<>', '()', ';', '==', '=>', '...', '/*', '*/'];
-        
-        for (let i = 0; i < particleCount; i++) {
-            const particle = document.createElement('div');
-            particle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            particle.style.position = 'fixed';
-            particle.style.fontSize = '12px';
-            particle.style.color = 'rgba(204, 204, 204, 0.1)';
-            particle.style.pointerEvents = 'none';
-            particle.style.zIndex = '1';
-            particle.style.fontFamily = 'Fira Code, monospace';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            
-            document.body.appendChild(particle);
-            particles.push({
-                element: particle,
-                x: parseFloat(particle.style.left),
-                y: parseFloat(particle.style.top),
-                speedX: (Math.random() - 0.5) * 0.5,
-                speedY: (Math.random() - 0.5) * 0.5
-            });
-        }
-        
-        function animateParticles() {
-            particles.forEach(particle => {
-                particle.x += particle.speedX;
-                particle.y += particle.speedY;
-                
-                // Wrap around screen
-                if (particle.x < 0) particle.x = window.innerWidth;
-                if (particle.x > window.innerWidth) particle.x = 0;
-                if (particle.y < 0) particle.y = window.innerHeight;
-                if (particle.y > window.innerHeight) particle.y = 0;
-                
-                particle.element.style.left = particle.x + 'px';
-                particle.element.style.top = particle.y + 'px';
-            });
-            
-            requestAnimationFrame(animateParticles);
-        }
-        
-        animateParticles();
-    }
-
-    
-    // Smooth reveal animations for sections
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-    
-    // Observe all glass elements for animation
-    document.querySelectorAll('.glass').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-    
     console.log('%c✨ Portfolio loaded successfully!', 'font-size: 14px; font-weight: bold; color: #28c840;');
 });
-
-// Update current time in console
-setInterval(() => {
-    const now = new Date();
-    // Silent update, don't spam console
-
-}, 60000);
-
-
-
-
-
-
