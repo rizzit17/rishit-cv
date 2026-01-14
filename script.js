@@ -60,12 +60,52 @@ files.forEach(file => {
         // Update active file in sidebar
         files.forEach(f => f.classList.remove('active'));
         this.classList.add('active');
+
+        // Create magical particles during genie animation
+function createGenieParticles(element) {
+    const rect = element.getBoundingClientRect();
+    const particleCount = 20;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'genie-particle';
         
+        // Random position around the element
+        const x = rect.left + Math.random() * rect.width;
+        const y = rect.top + Math.random() * rect.height;
+        
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        
+        // Random direction
+        const tx = (Math.random() - 0.5) * 100;
+        const ty = (Math.random() - 0.5) * 100;
+        particle.style.setProperty('--tx', tx + 'px');
+        particle.style.setProperty('--ty', ty + 'px');
+        
+        // Random color
+        const colors = ['#007acc', '#4ec9b0', '#c586c0', '#dcdcaa'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        
+        document.body.appendChild(particle);
+        
+        // Remove after animation
+        setTimeout(() => {
+            particle.remove();
+        }, 1000);
+    }
+}
+
+// Update the file click handler to include particles
+// Add this line in the file click handler where genie animation starts:
+// createGenieParticles(currentActive);
         // GENIE ANIMATION SEQUENCE
         if (currentActive) {
             // Step 1: Close current section with genie effect
             currentActive.classList.add('genie-close');
             currentActive.classList.remove('genie-open');
+
+            createGenieParticles(currentActive);
             
             // Step 2: After close animation, show new section
             setTimeout(() => {
@@ -251,6 +291,7 @@ function playGenieSound() {
             }
         });
     });
+
     
     // Typing effect for terminal
     const terminalBody = document.querySelector('.terminal-body');
@@ -493,6 +534,7 @@ setInterval(() => {
     // Silent update, don't spam console
 
 }, 60000);
+
 
 
 
