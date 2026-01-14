@@ -1666,47 +1666,6 @@ body.light-theme .glass:hover {
     }
 }
 
-/* ============================================
-   CUSTOM CURSOR
-   ============================================ */
-
-body {
-    cursor: none;
-}
-
-.custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--accent-blue);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: all 0.1s ease;
-    transform: translate(-50%, -50%);
-}
-
-.custom-cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent-blue);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    transition: all 0.05s ease;
-    transform: translate(-50%, -50%);
-}
-
-/* Cursor grows on hover */
-.glass:hover ~ .custom-cursor,
-.link-btn:hover ~ .custom-cursor,
-.file:hover ~ .custom-cursor {
-    width: 40px;
-    height: 40px;
-    border-color: var(--accent-purple);
-    background: rgba(139, 92, 246, 0.1);
-}
 
 
 
