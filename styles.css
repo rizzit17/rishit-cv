@@ -43,6 +43,40 @@
     --accent-green: #10b981;
 }
 
+/* Light Theme Colors */
+body.light-theme {
+    background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ea 50%, #f0f0f2 100%);
+    
+    /* VS Code Light Theme Colors */
+    --vscode-bg: #ffffff;
+    --vscode-sidebar: #f3f3f3;
+    --vscode-editor: #ffffff;
+    --vscode-titlebar: #dddddd;
+    --vscode-border: #e5e5e5;
+    --vscode-text: #333333;
+    --vscode-text-muted: #6e7681;
+    --vscode-blue: #0451a5;
+    --vscode-green: #0d7d6f;
+    --vscode-yellow: #795e26;
+    --vscode-orange: #a31515;
+    --vscode-purple: #af00db;
+    --vscode-red: #cd3131;
+    --vscode-pink: #c41a65;
+    
+    /* MacBook Colors for Light Mode */
+    --mac-gray: #e8e8e8;
+    --mac-light: #ffffff;
+    
+    /* Glassmorphism for Light Mode */
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    
+    /* Accent Colors for Light Mode */
+    --accent-blue: #0066cc;
+    --accent-purple: #7c3aed;
+    --accent-green: #059669;
+}
+
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
@@ -980,4 +1014,180 @@ code {
 ::-moz-selection {
     background: rgba(0, 122, 204, 0.3);
     color: var(--vscode-text);
+}
+
+/* ============================================
+   LIGHT THEME SPECIFIC OVERRIDES
+   ============================================ */
+
+/* Light theme glass cards */
+body.light-theme .glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .glass:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 102, 204, 0.2);
+}
+
+/* Light theme resume buttons */
+body.light-theme .resume-btn {
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
+body.light-theme .resume-btn.view {
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .resume-btn.view:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .resume-btn.download {
+    border: 2px solid #0066cc;
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.15), rgba(0, 66, 204, 0.1));
+    color: #0066cc;
+    box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
+}
+
+body.light-theme .resume-btn.download:hover {
+    background: linear-gradient(135deg, rgba(0, 102, 204, 0.25), rgba(0, 66, 204, 0.2));
+    border-color: #0052a3;
+    color: #0052a3;
+    box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+/* Light theme links */
+body.light-theme .link-btn {
+    color: #1a1a1a;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+body.light-theme .link-btn:hover {
+    background: rgba(0, 102, 204, 0.1);
+    border-color: #0066cc;
+    color: #0066cc;
+}
+
+body.light-theme .project-link,
+body.light-theme .cert-link {
+    color: #0066cc;
+}
+
+body.light-theme .project-link:hover,
+body.light-theme .cert-link:hover {
+    color: #0052a3;
+}
+
+/* Light theme contact cards */
+body.light-theme .contact-card {
+    color: #1a1a1a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-card:hover {
+    background: rgba(0, 102, 204, 0.08);
+    border-color: rgba(0, 102, 204, 0.3);
+}
+
+/* Light theme terminal */
+body.light-theme .terminal-output {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .terminal-body p {
+    color: #1a1a1a;
+}
+
+body.light-theme .terminal-prompt {
+    color: #0066cc;
+}
+
+body.light-theme .terminal-success {
+    color: #059669;
+}
+
+/* Light theme text colors */
+body.light-theme .card-content h3,
+body.light-theme .project-header h3,
+body.light-theme .timeline-header h3,
+body.light-theme .cert-card h3,
+body.light-theme .contact-header h2,
+body.light-theme .skill-header h3 {
+    color: #1a1a1a;
+}
+
+body.light-theme .card-content p,
+body.light-theme .project-desc,
+body.light-theme .cert-desc,
+body.light-theme .contact-header p,
+body.light-theme .timeline-points li,
+body.light-theme .project-type {
+    color: #4a5568;
+}
+
+body.light-theme .timeline-org,
+body.light-theme .cert-provider {
+    color: #0066cc;
+}
+
+/* Light theme tags */
+body.light-theme .tech-tag {
+    background: rgba(0, 66, 204, 0.1);
+    border: 1px solid rgba(0, 66, 204, 0.2);
+    color: #0451a5;
+}
+
+body.light-theme .skill-tag {
+    background: rgba(13, 125, 111, 0.1);
+    border: 1px solid rgba(13, 125, 111, 0.2);
+    color: #0d7d6f;
+}
+
+body.light-theme .timeline-marker {
+    background: rgba(0, 66, 204, 0.15);
+    border-color: #0066cc;
+}
+
+/* Light theme scrollbar */
+body.light-theme ::-webkit-scrollbar-track {
+    background: #f3f3f3;
+}
+
+body.light-theme ::-webkit-scrollbar-thumb {
+    background: #cccccc;
+}
+
+body.light-theme ::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+
+/* Light theme notch */
+body.light-theme .macbook-notch {
+    background: #333;
+}
+
+/* Light theme window shadow */
+body.light-theme .vscode-window {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Light theme toggle button */
+body.light-theme .theme-toggle {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme .theme-toggle:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(0, 0, 0, 0.25);
 }
