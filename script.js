@@ -40,40 +40,90 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.code-section');
     const tabs = document.querySelectorAll('.tab');
     
-    // File click handler
-    files.forEach(file => {
-        file.addEventListener('click', function() {
-            const targetSection = this.getAttribute('data-section');
+    // Enhanced file click handler with smooth transitions
+files.forEach(file => {
+    file.addEventListener('click', function() {
+        const targetSection = this.getAttribute('data-section');
+        const currentActive = document.querySelector('.code-section.active');
+        
+        // Update active file in sidebar
+        files.forEach(f => f.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Add leaving animation to current section
+        if (currentActive && currentActive.id !== targetSection) {
+            currentActive.classList.add('leaving');
             
-            // Update active file in sidebar
-            files.forEach(f => f.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Update active section
-            sections.forEach(section => {
-                if (section.id === targetSection) {
-                    section.classList.add('active');
-                } else {
-                    section.classList.remove('active');
+            setTimeout(() => {
+                currentActive.classList.remove('active', 'leaving');
+                
+                // Show new section
+                const targetElement = document.getElementById(targetSection);
+                if (targetElement) {
+                    targetElement.classList.add('active');
                 }
+            }, 400); // Match the leaving animation duration
+        } else {
+            // First load or same section
+            sections.forEach(section => {
+                section.classList.remove('active');
             });
             
-            // Update tab name
-            const fileName = this.querySelector('.file-name').textContent;
-            const fileIcon = this.querySelector('.file-icon').textContent;
-            const tabName = document.querySelector('.tab-name');
-            const tabIcon = document.querySelector('.tab-icon');
-            
-            if (tabName) tabName.textContent = fileName;
-            if (tabIcon) tabIcon.textContent = fileIcon;
-            
-            // Scroll to top of editor content
-            const editorContent = document.querySelector('.editor-content');
-            if (editorContent) {
-                editorContent.scrollTop = 0;
+            const targetElement = document.getElementById(targetSection);
+            if (targetElement) {
+                targetElement.classList.add('active');
             }
-        });
+        }
+        
+        // Update tab with animation
+        const fileName = this.querySelector('.file-name').textContent;
+        const fileIcon = this.querySelector('.file-icon').textContent;
+        const tabName = document.querySelector('.tab-name');
+        const tabIcon = document.querySelector('.tab-icon');
+        const tab = document.querySelector('.tab');
+        
+        if (tab) {
+            tab.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                if (tabName) tabName.textContent = fileName;
+                if (tabIcon) tabIcon.textContent = fileIcon;
+                tab.style.transform = 'scale(1)';
+            }, 150);
+        }
+        
+        // Smooth scroll to top
+        const editorContent = document.querySelector('.editor-content');
+        if (editorContent) {
+            editorContent.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Play subtle sound effect (optional)
+        playClickSound();
     });
+});
+
+// Optional: Subtle click sound
+function playClickSound() {
+    // Create a very subtle click sound using Web Audio API
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.value = 800;
+    oscillator.type = 'sine';
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+}
     
     // Traffic light animations
     const redLight = document.querySelector('.light.red');
@@ -406,3 +456,4 @@ setInterval(() => {
     // Silent update, don't spam console
 
 }, 60000);
+
