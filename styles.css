@@ -10,6 +10,40 @@
 }
 
 :root {
+   /* Light Theme Colors */
+body.light-theme {
+    /* VS Code Light Theme Colors */
+    --vscode-bg: #ffffff;
+    --vscode-sidebar: #f3f3f3;
+    --vscode-editor: #ffffff;
+    --vscode-titlebar: #dddddd;
+    --vscode-border: #e5e5e5;
+    --vscode-text: #333333;
+    --vscode-text-muted: #6e7681;
+    --vscode-blue: #0451a5;
+    --vscode-green: #0d7d6f;
+    --vscode-yellow: #795e26;
+    --vscode-orange: #a31515;
+    --vscode-purple: #af00db;
+    --vscode-red: #cd3131;
+    --vscode-pink: #c41a65;
+    
+    /* MacBook Colors */
+    --mac-gray: #e8e8e8;
+    --mac-light: #ffffff;
+    
+    /* Glassmorphism for Light Mode */
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    
+    /* Accent Colors */
+    --accent-blue: #0066cc;
+    --accent-purple: #7c3aed;
+    --accent-green: #059669;
+    
+    /* Background */
+    background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ea 50%, #f0f0f2 100%);
+}
     /* VS Code Dark Theme Colors */
     --vscode-bg: #1e1e1e;
     --vscode-sidebar: #252526;
@@ -989,3 +1023,81 @@ code {
 .resume-btn .link-icon {
     font-size: 1rem;
 }
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--vscode-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 100;
+    font-size: 16px;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: rotate(180deg);
+}
+
+/* Light theme adjustments for glassmorphism */
+body.light-theme .glass {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .glass:hover {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Light theme tech tags */
+body.light-theme .tech-tag {
+    background: rgba(0, 66, 204, 0.1);
+    border: 1px solid rgba(0, 66, 204, 0.2);
+}
+
+body.light-theme .skill-tag {
+    background: rgba(13, 125, 111, 0.1);
+    border: 1px solid rgba(13, 125, 111, 0.2);
+}
+
+/* Light theme timeline marker */
+body.light-theme .timeline-marker {
+    background: rgba(0, 66, 204, 0.15);
+}
+
+/* Light theme scrollbar */
+body.light-theme ::-webkit-scrollbar-track {
+    background: #f3f3f3;
+}
+
+body.light-theme ::-webkit-scrollbar-thumb {
+    background: #cccccc;
+}
+
+body.light-theme ::-webkit-scrollbar-thumb:hover {
+    background: #999999;
+}
+
