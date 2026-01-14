@@ -2,7 +2,39 @@
 
 // File Navigation System
 document.addEventListener('DOMContentLoaded', function() {
-    
+
+    // ============================================
+    // THEME TOGGLE FUNCTIONALITY - ADD THIS HERE
+    // ============================================
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.querySelector('.theme-icon');
+    const body = document.body;
+
+    // Check for saved theme preference or default to 'dark'
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+        body.classList.add('light-theme');
+        themeIcon.textContent = '🌙';
+    }
+
+    // Toggle theme on button click
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('light-theme');
+        
+        // Update icon and save preference
+        if (body.classList.contains('light-theme')) {
+            themeIcon.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+            console.log('%c🌙 Switched to Light Mode', 'font-size: 14px; color: #0066cc;');
+        } else {
+            themeIcon.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+            console.log('%c☀️ Switched to Dark Mode', 'font-size: 14px; color: #007acc;');
+        }
+    });
+    // ============================================
+    // END THEME TOGGLE
+    // ============================================
     // Get all file elements and sections
     const files = document.querySelectorAll('.file');
     const sections = document.querySelectorAll('.code-section');
@@ -372,4 +404,5 @@ document.addEventListener('DOMContentLoaded', function() {
 setInterval(() => {
     const now = new Date();
     // Silent update, don't spam console
+
 }, 60000);
