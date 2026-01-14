@@ -10,15 +10,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeIcon = document.querySelector('.theme-icon');
     const body = document.body;
 
+    // Debug: Check if elements exist
+    if (!themeToggle) {
+        console.error('Theme toggle button not found!');
+        return;
+    }
+    if (!themeIcon) {
+        console.error('Theme icon not found!');
+        return;
+    }
+
+    console.log('✅ Theme toggle initialized');
+
     // Check for saved theme preference or default to 'dark'
     const currentTheme = localStorage.getItem('theme') || 'dark';
     if (currentTheme === 'light') {
         body.classList.add('light-theme');
         themeIcon.textContent = '🌙';
+        console.log('Loaded saved light theme');
+    } else {
+        console.log('Starting in dark theme');
     }
 
     // Toggle theme on button click
     themeToggle.addEventListener('click', () => {
+        console.log('Theme toggle clicked!');
         body.classList.toggle('light-theme');
         
         // Update icon and save preference
