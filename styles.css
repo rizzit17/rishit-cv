@@ -941,4 +941,51 @@ code {
 ::-moz-selection {
     background: rgba(0, 122, 204, 0.3);
     color: var(--vscode-text);
+
+}
+/* Resume Buttons */
+.resume-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.resume-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.25s ease;
+}
+
+/* View Resume */
+.resume-btn.view {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Download Resume (Primary CTA) */
+.resume-btn.download {
+    border: 1px solid rgba(99, 102, 241, 0.45);
+    background: linear-gradient(
+        135deg,
+        rgba(99, 102, 241, 0.35),
+        rgba(59, 130, 246, 0.25)
+    );
+}
+
+/* Hover Effects */
+.resume-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Icon Styling */
+.resume-btn .link-icon {
+    font-size: 1rem;
 }
