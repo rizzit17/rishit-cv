@@ -40,42 +40,65 @@ document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.code-section');
     const tabs = document.querySelectorAll('.tab');
     
-    // Enhanced file click handler with smooth transitions
+    // Enhanced file click handler with GENIE ANIMATION
 files.forEach(file => {
     file.addEventListener('click', function() {
         const targetSection = this.getAttribute('data-section');
         const currentActive = document.querySelector('.code-section.active');
         
+        // Prevent clicking the same section
+        if (currentActive && currentActive.id === targetSection) {
+            return;
+        }
+        
+        // Add file activation effect
+        this.classList.add('genie-activate');
+        setTimeout(() => {
+            this.classList.remove('genie-activate');
+        }, 500);
+        
         // Update active file in sidebar
         files.forEach(f => f.classList.remove('active'));
         this.classList.add('active');
         
-        // Add leaving animation to current section
-        if (currentActive && currentActive.id !== targetSection) {
-            currentActive.classList.add('leaving');
+        // GENIE ANIMATION SEQUENCE
+        if (currentActive) {
+            // Step 1: Close current section with genie effect
+            currentActive.classList.add('genie-close');
+            currentActive.classList.remove('genie-open');
             
+            // Step 2: After close animation, show new section
             setTimeout(() => {
-                currentActive.classList.remove('active', 'leaving');
+                currentActive.classList.remove('active', 'genie-close');
                 
-                // Show new section
+                // Show new section with genie open animation
                 const targetElement = document.getElementById(targetSection);
                 if (targetElement) {
-                    targetElement.classList.add('active');
+                    targetElement.classList.add('active', 'genie-open');
+                    
+                    // Remove genie-open class after animation completes
+                    setTimeout(() => {
+                        targetElement.classList.remove('genie-open');
+                    }, 800);
                 }
-            }, 400); // Match the leaving animation duration
+            }, 700); // Match genie-close duration
         } else {
-            // First load or same section
+            // First load - use genie bounce effect
             sections.forEach(section => {
-                section.classList.remove('active');
+                section.classList.remove('active', 'genie-open', 'genie-bounce');
             });
             
             const targetElement = document.getElementById(targetSection);
             if (targetElement) {
-                targetElement.classList.add('active');
+                targetElement.classList.add('active', 'genie-bounce');
+                
+                setTimeout(() => {
+                    targetElement.classList.remove('genie-bounce');
+                }, 600);
             }
         }
         
-        // Update tab with animation
+        // Update tab with smooth animation
         const fileName = this.querySelector('.file-name').textContent;
         const fileIcon = this.querySelector('.file-icon').textContent;
         const tabName = document.querySelector('.tab-name');
@@ -83,12 +106,12 @@ files.forEach(file => {
         const tab = document.querySelector('.tab');
         
         if (tab) {
-            tab.style.transform = 'scale(0.95)';
+            tab.classList.add('switching');
             setTimeout(() => {
                 if (tabName) tabName.textContent = fileName;
                 if (tabIcon) tabIcon.textContent = fileIcon;
-                tab.style.transform = 'scale(1)';
-            }, 150);
+                tab.classList.remove('switching');
+            }, 200);
         }
         
         // Smooth scroll to top
@@ -100,11 +123,42 @@ files.forEach(file => {
             });
         }
         
-        // Play subtle sound effect (optional)
-        playClickSound();
+        // Play genie sound effect
+        playGenieSound();
     });
 });
 
+// Genie sound effect (whoosh sound)
+function playGenieSound() {
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        const filter = audioContext.createBiquadFilter();
+        
+        oscillator.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Whoosh sound parameters
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.3);
+        
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(2000, audioContext.currentTime);
+        filter.frequency.exponentialRampToValueAtTime(500, audioContext.currentTime + 0.3);
+        
+        gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.3);
+    } catch (e) {
+        // Silently fail if audio context is not supported
+        console.log('Audio not supported');
+    }
+}
 
     
     // Traffic light animations
@@ -439,6 +493,7 @@ setInterval(() => {
     // Silent update, don't spam console
 
 }, 60000);
+
 
 
 
