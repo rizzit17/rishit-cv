@@ -426,7 +426,48 @@ function playClickSound() {
         
         animateParticles();
     }
+
+    // Custom Cursor (add to your script.js)
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing code ...
     
+    // Custom cursor
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+    
+    const cursorDot = document.createElement('div');
+    cursorDot.className = 'custom-cursor-dot';
+    document.body.appendChild(cursorDot);
+    
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+    let dotX = 0, dotY = 0;
+    
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+    
+    function animateCursor() {
+        // Smooth follow effect
+        cursorX += (mouseX - cursorX) * 0.1;
+        cursorY += (mouseY - cursorY) * 0.1;
+        
+        dotX += (mouseX - dotX) * 0.15;
+        dotY += (mouseY - dotY) * 0.15;
+        
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    
+    animateCursor();
+});
     // Smooth reveal animations for sections
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -456,4 +497,5 @@ setInterval(() => {
     // Silent update, don't spam console
 
 }, 60000);
+
 
