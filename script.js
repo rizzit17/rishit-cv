@@ -234,6 +234,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div id="searchResults" style="margin-top: 15px; color: var(--vscode-text-muted); font-size: 13px;">
                     <p style="margin: 10px 0;">🔍 Quick Search:</p>
                     <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">
+                        <button class="search-quick-btn" data-section="about" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
+                            📄 About
+                        </button>
                         <button class="search-quick-btn" data-section="projects" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
                             🚀 Projects
                         </button>
@@ -242,6 +245,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         </button>
                         <button class="search-quick-btn" data-section="experience" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
                             💼 Experience
+                        </button>
+                        <button class="search-quick-btn" data-section="internships" style="text-align: left; padding: 8px 12px; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 4px; color: var(--vscode-purple); cursor: pointer; font-size: 12px;">
+                            🎯 Internships
                         </button>
                         <button class="search-quick-btn" data-section="certifications" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
                             🏆 Certifications
