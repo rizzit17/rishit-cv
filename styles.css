@@ -1230,3 +1230,187 @@ body.light-theme .theme-toggle:hover {
     background: rgba(255, 255, 255, 1);
     border-color: rgba(0, 0, 0, 0.25);
 }
+
+/* ============================================
+   INTERNSHIP EXPERIENCE SECTION STYLES
+   Add these styles to your existing styles.css
+   ============================================ */
+
+/* Experience Timeline (can be reused for internships) */
+.experience-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.experience-card {
+    padding: 25px;
+}
+
+.experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 20px;
+}
+
+.company-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--vscode-text);
+    margin-bottom: 5px;
+}
+
+.company-info .role {
+    color: var(--accent-blue);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.experience-header .duration {
+    color: var(--vscode-text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.experience-desc {
+    color: var(--vscode-text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Experience list items */
+.experience-desc li {
+    color: var(--vscode-text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.experience-desc li::marker {
+    color: var(--accent-blue);
+}
+
+/* Alternative arrow-style bullets */
+.experience-desc li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent-blue);
+    font-weight: bold;
+}
+
+/* Remove default list marker when using custom arrow */
+.experience-desc {
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Internship-specific styling for "Looking for Opportunities" card */
+.experience-card.glass h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Light theme overrides for experience cards */
+body.light-theme .company-info .role {
+    color: #0066cc;
+}
+
+body.light-theme .experience-header .duration {
+    color: #4a5568;
+}
+
+body.light-theme .experience-desc,
+body.light-theme .experience-desc li {
+    color: #4a5568;
+}
+
+body.light-theme .experience-desc li::before {
+    color: #0066cc;
+}
+
+/* Responsive adjustments for experience cards */
+@media (max-width: 768px) {
+    .experience-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .experience-header .duration {
+        align-self: flex-start;
+    }
+    
+    .company-info h3 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .experience-card {
+        padding: 20px;
+    }
+    
+    .company-info h3 {
+        font-size: 16px;
+    }
+    
+    .experience-desc li {
+        font-size: 13px;
+    }
+}
+
+/* Animation for experience cards */
+.experience-card {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Hover effect refinement for experience cards */
+.experience-card.glass:hover {
+    background: rgba(37, 37, 38, 0.85);
+    border-color: rgba(0, 122, 204, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 122, 204, 0.15);
+}
+
+body.light-theme .experience-card.glass:hover {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 102, 204, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 102, 204, 0.2);
+}
+
+/* Special styling for internship icons in headers */
+.experience-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Ensure strong text within descriptions maintains readability */
+.experience-desc strong {
+    color: var(--vscode-text);
+    font-weight: 600;
+}
+
+body.light-theme .experience-desc strong {
+    color: #1a1a1a;
+}
+
+
+
+
+
+
+
+
+
+
+
+
