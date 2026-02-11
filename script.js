@@ -1,5 +1,5 @@
 // VS Code + MacBook Portfolio - Interactive Features
-// SIMPLE VERSION - No complex animations
+// Updated with functional activity bar buttons
 
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================
-    // FILE NAVIGATION SYSTEM - SIMPLE VERSION
+    // FILE NAVIGATION SYSTEM
     // ============================================
     const files = document.querySelectorAll('.file');
     const sections = document.querySelectorAll('.code-section');
@@ -99,6 +99,451 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // ============================================
+    // ACTIVITY BAR INTERACTIONS - UPDATED
+    // ============================================
+    const activityIcons = document.querySelectorAll('.activity-icon');
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarHeader = document.querySelector('.sidebar-header span');
+    
+    activityIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const tab = this.getAttribute('data-tab');
+            
+            // Update active state
+            activityIcons.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Handle different tabs
+            if (tab === 'explorer') {
+                // Show file explorer (default view)
+                showExplorer();
+            } else if (tab === 'search') {
+                // Show search interface
+                showSearch();
+            } else if (tab === 'git') {
+                // Show source control (GitHub links)
+                showSourceControl();
+            } else if (tab === 'extensions') {
+                // Show extensions (skills/certifications)
+                showExtensions();
+            } else if (tab === 'settings') {
+                // Toggle theme when settings is clicked
+                themeToggle.click();
+            }
+        });
+    });
+
+    // ============================================
+    // SIDEBAR VIEWS
+    // ============================================
+    
+    function showExplorer() {
+        sidebarHeader.textContent = 'EXPLORER';
+        sidebar.innerHTML = `
+            <div class="sidebar-header">
+                <span>EXPLORER</span>
+            </div>
+            <div class="file-tree">
+                <div class="folder open">
+                    <div class="folder-header">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-name">portfolio</span>
+                    </div>
+                    <div class="folder-content">
+                        <div class="file ${document.getElementById('about').classList.contains('active') ? 'active' : ''}" data-section="about">
+                            <span class="file-icon">📄</span>
+                            <span class="file-name">about.jsx</span>
+                        </div>
+                        <div class="file ${document.getElementById('projects').classList.contains('active') ? 'active' : ''}" data-section="projects">
+                            <span class="file-icon">🚀</span>
+                            <span class="file-name">projects.tsx</span>
+                        </div>
+                        <div class="file ${document.getElementById('skills').classList.contains('active') ? 'active' : ''}" data-section="skills">
+                            <span class="file-icon">⚡</span>
+                            <span class="file-name">skills.json</span>
+                        </div>
+                        <div class="file ${document.getElementById('experience').classList.contains('active') ? 'active' : ''}" data-section="experience">
+                            <span class="file-icon">💼</span>
+                            <span class="file-name">positions.ts</span>
+                        </div>
+                        <div class="file ${document.getElementById('internships').classList.contains('active') ? 'active' : ''}" data-section="internships">
+                            <span class="file-icon">🎯</span>
+                            <span class="file-name">internships.tsx</span>
+                        </div>
+                        <div class="file ${document.getElementById('certifications').classList.contains('active') ? 'active' : ''}" data-section="certifications">
+                            <span class="file-icon">🏆</span>
+                            <span class="file-name">certifications.md</span>
+                        </div>
+                        <div class="file ${document.getElementById('contact').classList.contains('active') ? 'active' : ''}" data-section="contact">
+                            <span class="file-icon">📧</span>
+                            <span class="file-name">contact.css</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Re-attach file click handlers
+        const newFiles = sidebar.querySelectorAll('.file');
+        newFiles.forEach(file => {
+            file.addEventListener('click', function() {
+                const targetSection = this.getAttribute('data-section');
+                const currentActive = document.querySelector('.code-section.active');
+                
+                if (currentActive && currentActive.id === targetSection) return;
+                
+                newFiles.forEach(f => f.classList.remove('active'));
+                this.classList.add('active');
+                
+                sections.forEach(section => section.classList.remove('active'));
+                
+                const targetElement = document.getElementById(targetSection);
+                if (targetElement) {
+                    targetElement.classList.add('active');
+                }
+                
+                const fileName = this.querySelector('.file-name').textContent;
+                const fileIcon = this.querySelector('.file-icon').textContent;
+                const tabName = document.querySelector('.tab-name');
+                const tabIcon = document.querySelector('.tab-icon');
+                
+                if (tabName) tabName.textContent = fileName;
+                if (tabIcon) tabIcon.textContent = fileIcon;
+                
+                const editorContent = document.querySelector('.editor-content');
+                if (editorContent) {
+                    editorContent.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+    }
+
+    function showSearch() {
+        sidebar.innerHTML = `
+            <div class="sidebar-header">
+                <span>SEARCH</span>
+            </div>
+            <div style="padding: 15px;">
+                <input type="text" id="searchInput" placeholder="Search portfolio..." 
+                    style="width: 100%; padding: 8px 12px; background: var(--vscode-editor); 
+                    color: var(--vscode-text); border: 1px solid var(--vscode-border); 
+                    border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 13px;">
+                
+                <div id="searchResults" style="margin-top: 15px; color: var(--vscode-text-muted); font-size: 13px;">
+                    <p style="margin: 10px 0;">🔍 Quick Search:</p>
+                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">
+                        <button class="search-quick-btn" data-section="projects" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
+                            🚀 Projects
+                        </button>
+                        <button class="search-quick-btn" data-section="skills" style="text-align: left; padding: 8px 12px; background: rgba(78, 201, 176, 0.15); border: 1px solid rgba(78, 201, 176, 0.3); border-radius: 4px; color: var(--vscode-green); cursor: pointer; font-size: 12px;">
+                            ⚡ Skills
+                        </button>
+                        <button class="search-quick-btn" data-section="experience" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
+                            💼 Experience
+                        </button>
+                        <button class="search-quick-btn" data-section="certifications" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
+                            🏆 Certifications
+                        </button>
+                        <button class="search-quick-btn" data-section="contact" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
+                            📧 Contact
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        
+        searchInput.addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if (query.length < 2) {
+                searchResults.innerHTML = '<p style="margin: 10px 0;">Type to search...</p>';
+                return;
+            }
+            
+            // Search through all sections
+            const results = [];
+            sections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    results.push({
+                        id: section.id,
+                        name: section.id.charAt(0).toUpperCase() + section.id.slice(1)
+                    });
+                }
+            });
+            
+            if (results.length > 0) {
+                searchResults.innerHTML = `
+                    <p style="margin: 10px 0; color: var(--vscode-green);">✓ Found ${results.length} result(s):</p>
+                    ${results.map(r => `
+                        <div class="search-result" data-section="${r.id}" 
+                            style="padding: 8px 12px; margin: 5px 0; background: rgba(0, 122, 204, 0.1); 
+                            border-radius: 4px; cursor: pointer; font-size: 12px; color: var(--vscode-text);">
+                            → ${r.name}
+                        </div>
+                    `).join('')}
+                `;
+                
+                // Add click handlers to results
+                document.querySelectorAll('.search-result').forEach(result => {
+                    result.addEventListener('click', function() {
+                        const sectionId = this.getAttribute('data-section');
+                        navigateToSection(sectionId);
+                    });
+                });
+            } else {
+                searchResults.innerHTML = '<p style="margin: 10px 0; color: var(--vscode-text-muted);">No results found</p>';
+            }
+        });
+        
+        // Quick buttons
+        document.querySelectorAll('.search-quick-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const sectionId = this.getAttribute('data-section');
+                navigateToSection(sectionId);
+            });
+        });
+    }
+
+    function showSourceControl() {
+        sidebar.innerHTML = `
+            <div class="sidebar-header">
+                <span>SOURCE CONTROL</span>
+            </div>
+            <div style="padding: 15px; color: var(--vscode-text);">
+                <p style="font-size: 13px; margin-bottom: 15px; color: var(--vscode-text-muted);">
+                    📦 Repository Links
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="https://github.com/rizzit17" target="_blank" 
+                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
+                        transition: all 0.2s; display: block;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 20px;">💻</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 13px;">GitHub Profile</div>
+                                <div style="font-size: 11px; color: var(--vscode-text-muted);">@rizzit17</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/rizzit17/smartmeeting" target="_blank" 
+                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
+                        transition: all 0.2s; display: block;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 20px;">🎙️</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 13px;">Meetzy</div>
+                                <div style="font-size: 11px; color: var(--vscode-text-muted);">AI Meeting Platform</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/rizzit17/vakeelapp" target="_blank" 
+                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
+                        transition: all 0.2s; display: block;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 20px;">⚖️</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 13px;">LegalGPT</div>
+                                <div style="font-size: 11px; color: var(--vscode-text-muted);">AI Legal Assistant</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/rizzit17/amber-essence" target="_blank" 
+                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
+                        transition: all 0.2s; display: block;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 20px;">🍽️</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 13px;">Amber Essence</div>
+                                <div style="font-size: 11px; color: var(--vscode-text-muted);">Restaurant Platform</div>
+                            </div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/rizzit17/shikshaplay" target="_blank" 
+                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
+                        transition: all 0.2s; display: block;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 20px;">📚</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 13px;">ShikshaPlay</div>
+                                <div style="font-size: 11px; color: var(--vscode-text-muted);">Learning Platform</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 12px; background: rgba(0, 122, 204, 0.1); 
+                    border-radius: 8px; border: 1px solid rgba(0, 122, 204, 0.2);">
+                    <p style="font-size: 11px; color: var(--vscode-text-muted); margin: 0;">
+                        💡 View all repositories on GitHub
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    function showExtensions() {
+        sidebar.innerHTML = `
+            <div class="sidebar-header">
+                <span>EXTENSIONS</span>
+            </div>
+            <div style="padding: 15px; color: var(--vscode-text);">
+                <p style="font-size: 13px; margin-bottom: 15px; color: var(--vscode-text-muted);">
+                    🧩 Installed Skills & Tools
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <div class="extension-item" data-section="skills" 
+                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 18px;">⚡</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 12px;">Full-Stack Development</div>
+                                <div style="font-size: 10px; color: var(--vscode-text-muted);">React, Node.js, MongoDB</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-item" data-section="skills" 
+                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 18px;">📱</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 12px;">Android Development</div>
+                                <div style="font-size: 10px; color: var(--vscode-text-muted);">Kotlin, Jetpack Compose</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-item" data-section="skills" 
+                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 18px;">🤖</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 12px;">AI/ML Integration</div>
+                                <div style="font-size: 10px; color: var(--vscode-text-muted);">OpenAI API, ML Kit</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-item" data-section="certifications" 
+                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 18px;">🏆</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 12px;">Certifications</div>
+                                <div style="font-size: 10px; color: var(--vscode-text-muted);">4 Professional Certificates</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-item" data-section="skills" 
+                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 18px;">☁️</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 12px;">Cloud Services</div>
+                                <div style="font-size: 10px; color: var(--vscode-text-muted);">AWS EC2, S3, IAM</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="extension-item" data-section="skills" 
+                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
+                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span style="font-size: 18px;">🎨</span>
+                            <div>
+                                <div style="font-weight: 600; font-size: 12px;">UI/UX Design</div>
+                                <div style="font-size: 10px; color: var(--vscode-text-muted);">Figma, Tailwind CSS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 15px; padding: 12px; background: rgba(78, 201, 176, 0.1); 
+                    border-radius: 8px; border: 1px solid rgba(78, 201, 176, 0.2);">
+                    <p style="font-size: 11px; color: var(--vscode-text-muted); margin: 0;">
+                        💡 Click any extension to view details
+                    </p>
+                </div>
+            </div>
+        `;
+        
+        // Add click handlers to extension items
+        document.querySelectorAll('.extension-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const sectionId = this.getAttribute('data-section');
+                navigateToSection(sectionId);
+            });
+            
+            item.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(78, 201, 176, 0.15)';
+                this.style.borderColor = 'rgba(78, 201, 176, 0.3)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.background = 'var(--glass-bg)';
+                this.style.borderColor = 'var(--glass-border)';
+            });
+        });
+    }
+
+    function navigateToSection(sectionId) {
+        sections.forEach(section => section.classList.remove('active'));
+        const targetElement = document.getElementById(sectionId);
+        if (targetElement) {
+            targetElement.classList.add('active');
+        }
+        
+        // Switch back to explorer view
+        activityIcons.forEach(i => i.classList.remove('active'));
+        document.querySelector('[data-tab="explorer"]').classList.add('active');
+        showExplorer();
+        
+        // Update active file in explorer
+        setTimeout(() => {
+            const file = document.querySelector(`[data-section="${sectionId}"]`);
+            if (file) {
+                document.querySelectorAll('.file').forEach(f => f.classList.remove('active'));
+                file.classList.add('active');
+                
+                const fileName = file.querySelector('.file-name').textContent;
+                const fileIcon = file.querySelector('.file-icon').textContent;
+                const tabName = document.querySelector('.tab-name');
+                const tabIcon = document.querySelector('.tab-icon');
+                
+                if (tabName) tabName.textContent = fileName;
+                if (tabIcon) tabIcon.textContent = fileIcon;
+            }
+        }, 100);
+        
+        // Smooth scroll to top
+        const editorContent = document.querySelector('.editor-content');
+        if (editorContent) {
+            editorContent.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }
 
     // ============================================
     // TRAFFIC LIGHTS
@@ -152,33 +597,6 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Cannot close the only tab! 🔒');
         });
     }
-
-    // ============================================
-    // ACTIVITY BAR INTERACTIONS
-    // ============================================
-    const activityIcons = document.querySelectorAll('.activity-icon');
-    
-    activityIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
-            const tab = this.getAttribute('data-tab');
-            
-            // Update active state
-            activityIcons.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Handle different tabs
-            if (tab === 'search') {
-                alert('🔍 Search functionality - Coming soon!');
-            } else if (tab === 'git') {
-                alert('🌿 Git integration - Coming soon!');
-            } else if (tab === 'extensions') {
-                alert('🧩 Extensions - Coming soon!');
-            } else if (tab === 'settings') {
-                // Toggle theme when settings is clicked
-                themeToggle.click();
-            }
-        });
-    });
 
     // ============================================
     // SMOOTH SCROLL FOR INTERNAL LINKS
@@ -256,7 +674,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Ctrl/Cmd + K for Quick Open
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
-            alert('⌨️ Quick Open - Press number keys 1-6 to navigate sections!');
+            alert('⌨️ Keyboard Shortcuts:\n\n1-7: Navigate sections\nCtrl+Shift+T: Toggle theme\nCtrl+B: Toggle sidebar\nCtrl+Shift+F: Search');
         }
         
         // Ctrl/Cmd + Shift + T for theme toggle
@@ -265,8 +683,14 @@ document.addEventListener('DOMContentLoaded', function() {
             themeToggle.click();
         }
         
+        // Ctrl/Cmd + Shift + F for search
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'F') {
+            e.preventDefault();
+            document.querySelector('[data-tab="search"]').click();
+        }
+        
         // Number keys for quick navigation
-        if (e.key >= '1' && e.key <= '6') {
+        if (e.key >= '1' && e.key <= '7') {
             const fileIndex = parseInt(e.key) - 1;
             const fileElements = document.querySelectorAll('.file');
             if (fileElements[fileIndex]) {
@@ -320,6 +744,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('%c⚡ Full-Stack Developer | React | Node.js | MongoDB', 'font-size: 12px; color: #dcdcaa;');
     console.log('%c📧 rishitwork28@gmail.com', 'font-size: 12px; color: #ce9178;');
     console.log('%c🎨 Theme: ' + currentTheme.toUpperCase() + ' | Toggle: Ctrl+Shift+T', 'font-size: 11px; color: #c586c0;');
-    console.log('%cHint: Press Ctrl+K for keyboard shortcuts!', 'font-size: 11px; color: #858585;');
+    console.log('%c🔍 Search: Ctrl+Shift+F | Sidebar: Ctrl+B', 'font-size: 11px; color: #858585;');
+    console.log('%cHint: Press Ctrl+K for all keyboard shortcuts!', 'font-size: 11px; color: #858585;');
     console.log('%c✨ Portfolio loaded successfully!', 'font-size: 14px; font-weight: bold; color: #28c840;');
 });
