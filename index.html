@@ -67,45 +67,49 @@
             </div>
 
             <!-- Sidebar -->
-            <div class="sidebar">
-                <div class="sidebar-header">
-                    <span>EXPLORER</span>
+<div class="sidebar">
+    <div class="sidebar-header">
+        <span>EXPLORER</span>
+    </div>
+    <div class="file-tree">
+        <div class="folder open">
+            <div class="folder-header">
+                <span class="folder-icon">📁</span>
+                <span class="folder-name">portfolio</span>
+            </div>
+            <div class="folder-content">
+                <div class="file active" data-section="about">
+                    <span class="file-icon">📄</span>
+                    <span class="file-name">about.jsx</span>
                 </div>
-                <div class="file-tree">
-                    <div class="folder open">
-                        <div class="folder-header">
-                            <span class="folder-icon">📁</span>
-                            <span class="folder-name">portfolio</span>
-                        </div>
-                        <div class="folder-content">
-                            <div class="file active" data-section="about">
-                                <span class="file-icon">📄</span>
-                                <span class="file-name">about.jsx</span>
-                            </div>
-                            <div class="file" data-section="projects">
-                                <span class="file-icon">🚀</span>
-                                <span class="file-name">projects.tsx</span>
-                            </div>
-                            <div class="file" data-section="skills">
-                                <span class="file-icon">⚡</span>
-                                <span class="file-name">skills.json</span>
-                            </div>
-                            <div class="file" data-section="experience">
-                                <span class="file-icon">💼</span>
-                                <span class="file-name">experience.ts</span>
-                            </div>
-                            <div class="file" data-section="certifications">
-                                <span class="file-icon">🏆</span>
-                                <span class="file-name">certifications.md</span>
-                            </div>
-                            <div class="file" data-section="contact">
-                                <span class="file-icon">📧</span>
-                                <span class="file-name">contact.css</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="file" data-section="projects">
+                    <span class="file-icon">🚀</span>
+                    <span class="file-name">projects.tsx</span>
+                </div>
+                <div class="file" data-section="skills">
+                    <span class="file-icon">⚡</span>
+                    <span class="file-name">skills.json</span>
+                </div>
+                <div class="file" data-section="experience">
+                    <span class="file-icon">💼</span>
+                    <span class="file-name">positions.ts</span>
+                </div>
+                <div class="file" data-section="internships">
+                    <span class="file-icon">🎯</span>
+                    <span class="file-name">internships.tsx</span>
+                </div>
+                <div class="file" data-section="certifications">
+                    <span class="file-icon">🏆</span>
+                    <span class="file-name">certifications.md</span>
+                </div>
+                <div class="file" data-section="contact">
+                    <span class="file-icon">📧</span>
+                    <span class="file-name">contact.css</span>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
             <!-- Editor Area -->
             <div class="editor">
@@ -506,75 +510,148 @@
     </div>
 </section>
 
+                    <!-- Internship Experience Section -->
+<section id="internships" class="code-section">
+    <div class="line-numbers">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+        <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+    </div>
+    <div class="code-content">
+        <pre><code><span class="keyword">const</span> <span class="variable">internships</span> <span class="operator">=</span> [
+  {
+    <span class="property">company</span>: <span class="string">"India Space Lab"</span>,
+    <span class="property">role</span>: <span class="string">"Winter Intern - Space Technology & Remote Sensing"</span>,
+    <span class="property">duration</span>: <span class="string">"Jan 2026 - Present"</span>,
+    <span class="property">type</span>: <span class="string">"Remote"</span>,
+    <span class="property">focus</span>: [
+      <span class="string">"Satellite Systems"</span>,
+      <span class="string">"Remote Sensing Analytics"</span>,
+      <span class="string">"Drone-based Data Collection"</span>
+    ]
+  }
+];</code></pre>
+
+        <!-- Internship Cards -->
+        <div class="experience-timeline">
+            <div class="experience-card glass">
+                <div class="experience-header">
+                    <div class="company-info">
+                        <h3>🛰️ India Space Lab</h3>
+                        <p class="role">Winter Intern - Space Technology & Remote Sensing</p>
+                    </div>
+                    <span class="duration">Jan 2026 - Present</span>
+                </div>
+                <ul class="experience-desc">
+                    <li>Participating in a <strong>competitive national internship</strong> focusing on the application of space technologies in real-world scenarios</li>
+                    <li>Undergoing hands-on training in <strong>satellite systems, remote sensing analytics, and drone-based data collection</strong></li>
+                    <li>Collaborating with a remote team on technical case studies to design and evaluate <strong>space-based engineering solutions</strong></li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">Remote Sensing</span>
+                    <span class="tech-tag">Satellite Systems</span>
+                    <span class="tech-tag">Drone Technology</span>
+                    <span class="tech-tag">Geospatial Analysis</span>
+                </div>
+            </div>
+
+            <!-- Template for future internships - uncomment and fill when you get another one -->
+            <!-- 
+            <div class="experience-card glass">
+                <div class="experience-header">
+                    <div class="company-info">
+                        <h3>Company Name</h3>
+                        <p class="role">Software Development Intern</p>
+                    </div>
+                    <span class="duration">Jun 2025 - Aug 2025</span>
+                </div>
+                <ul class="experience-desc">
+                    <li>Achievement or responsibility #1</li>
+                    <li>Achievement or responsibility #2</li>
+                    <li>Achievement or responsibility #3</li>
+                </ul>
+                <div class="tech-stack">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</section>
+                    
                     <!-- Experience Section -->
-                    <section id="experience" class="code-section">
-                        <div class="line-numbers">
-                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                            <span>11</span><span>12</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code><span class="keyword">interface</span> <span class="class">Position</span> {
+<section id="experience" class="code-section">
+    <div class="line-numbers">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+        <span>11</span><span>12</span>
+        <span>13</span>
+    </div>
+    <div class="code-content">
+        <pre><code><span class="keyword">interface</span> <span class="class">Position</span> {
   <span class="property">role</span>: <span class="type">string</span>;
   <span class="property">organization</span>: <span class="type">string</span>;
   <span class="property">period</span>: <span class="type">string</span>;
   <span class="property">impact</span>: <span class="type">string[]</span>;
+  <span class="property">participants</span>?: <span class="type">number</span>;
 }
 
 <span class="comment">// Leadership roles that shaped my journey 🚀</span></code></pre>
 
-                            <!-- Experience Timeline -->
-                            <div class="timeline">
-                                <div class="timeline-item glass">
-                                    <div class="timeline-marker">📱</div>
-                                    <div class="timeline-content">
-                                        <div class="timeline-header">
-                                            <h3>Perplexity Campus Partner</h3>
-                                            <span class="timeline-date">Aug 2024 - Present</span>
-                                        </div>
-                                        <p class="timeline-org">Perplexity AI</p>
-                                        <ul class="timeline-points">
-                                            <li>Led campus outreach initiatives, onboarding <strong>200+ students</strong> through workshops and demos</li>
-                                            <li>Acted as point of contact for student feedback, influencing product engagement strategies</li>
-                                            <li>Organized interactive sessions on AI-powered research tools</li>
-                                        </ul>
-                                    </div>
-                                </div>
+        <!-- Experience Timeline -->
+        <div class="timeline">
+            <div class="timeline-item glass">
+                <div class="timeline-marker">📱</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>Perplexity Campus Partner</h3>
+                        <span class="timeline-date">Aug 2024 - Present</span>
+                    </div>
+                    <p class="timeline-org">Perplexity AI</p>
+                    <ul class="timeline-points">
+                        <li>Led campus outreach initiatives, onboarding <strong>200+ students</strong> through workshops and demos</li>
+                        <li>Acted as point of contact for student feedback, influencing product engagement strategies</li>
+                        <li>Organized interactive sessions on AI-powered research tools and best practices</li>
+                    </ul>
+                </div>
+            </div>
 
-                                <div class="timeline-item glass">
-                                    <div class="timeline-marker">💻</div>
-                                    <div class="timeline-content">
-                                        <div class="timeline-header">
-                                            <h3>Core Committee Member</h3>
-                                            <span class="timeline-date">Mar 2024 - Present</span>
-                                        </div>
-                                        <p class="timeline-org">IEEE Computer Society Chapter</p>
-                                        <ul class="timeline-points">
-                                            <li>Organized tech events and hackathons including <strong>HackBattle Hackathon</strong> with <strong>180+ participants</strong></li>
-                                            <li>Contributed to sponsorship coordination and promotion activities</li>
-                                            <li>Facilitated technical workshops and knowledge-sharing sessions</li>
-                                        </ul>
-                                    </div>
-                                </div>
+            <div class="timeline-item glass">
+                <div class="timeline-marker">💻</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>Core Committee Member</h3>
+                        <span class="timeline-date">Mar 2024 - Present</span>
+                    </div>
+                    <p class="timeline-org">IEEE Computer Society Chapter</p>
+                    <ul class="timeline-points">
+                        <li>Organized tech events and hackathons including <strong>HackBattle Hackathon</strong> with <strong>180+ participants</strong></li>
+                        <li>Led sponsorship coordination and promotional activities for chapter events</li>
+                        <li>Facilitated technical workshops and knowledge-sharing sessions on emerging technologies</li>
+                    </ul>
+                </div>
+            </div>
 
-                                <div class="timeline-item glass">
-                                    <div class="timeline-marker">🎨</div>
-                                    <div class="timeline-content">
-                                        <div class="timeline-header">
-                                            <h3>Core Committee Member</h3>
-                                            <span class="timeline-date">Mar 2024 - Present</span>
-                                        </div>
-                                        <p class="timeline-org">Pixelate Design Club</p>
-                                        <ul class="timeline-points">
-                                            <li>Designed and executed promotional creatives for multiple club events</li>
-                                            <li>Facilitated hands-on Figma workshop for <strong>150+ participants</strong></li>
-                                            <li>Applied UI/UX principles to enhance visual consistency across club branding</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+            <div class="timeline-item glass">
+                <div class="timeline-marker">🎨</div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <h3>Core Committee Member</h3>
+                        <span class="timeline-date">Mar 2024 - Present</span>
+                    </div>
+                    <p class="timeline-org">Pixelate Design Club</p>
+                    <ul class="timeline-points">
+                        <li>Designed and executed promotional creatives for multiple club events and campaigns</li>
+                        <li>Conducted hands-on Figma workshop for <strong>150+ participants</strong>, teaching UI/UX fundamentals</li>
+                        <li>Applied modern design principles to enhance visual consistency across club branding materials</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
                     <!-- Certifications Section -->
                     <section id="certifications" class="code-section">
@@ -738,6 +815,7 @@
 </body>
 
 </html>
+
 
 
 
