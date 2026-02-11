@@ -196,14 +196,14 @@
                             </div>
                             <!-- Resume Actions -->
 <div class="resume-actions">
-    <a href="rishit_resume.pdf"
+    <a href="rishit's resume v.pdf"
        target="_blank"
        class="link-btn glass resume-btn view">
         <span class="link-icon">👀</span>
         <span>View Resume</span>
     </a>
 
-    <a href="rishit_resume.pdf"
+    <a href="rishit's resume v.pdf"
        download
        class="link-btn glass resume-btn download">
         <span class="link-icon">⬇️</span>
@@ -215,215 +215,296 @@
                     </section>
 
                     <!-- Projects Section -->
-                    <section id="projects" class="code-section">
-                        <div class="line-numbers">
-                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code><span class="keyword">const</span> <span class="variable">projects</span> <span class="operator">=</span> [
+<section id="projects" class="code-section">
+    <div class="line-numbers">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+        <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+        <span>16</span><span>17</span><span>18</span><span>19</span><span>20</span>
+        <span>21</span><span>22</span><span>23</span><span>24</span><span>25</span>
+    </div>
+    <div class="code-content">
+        <pre><code><span class="keyword">const</span> <span class="variable">projects</span> <span class="operator">=</span> [
+  {
+    <span class="property">name</span>: <span class="string">"Meetzy"</span>,
+    <span class="property">type</span>: <span class="string">"AI-Powered Meeting Platform"</span>,
+    <span class="property">tech</span>: [<span class="string">"React"</span>, <span class="string">"Node.js"</span>, <span class="string">"OpenAI"</span>, <span class="string">"MongoDB"</span>],
+    <span class="property">impact</span>: <span class="string">"70% reduction in manual note-taking"</span>,
+  },
+  {
+    <span class="property">name</span>: <span class="string">"LegalGPT"</span>,
+    <span class="property">type</span>: <span class="string">"AI Legal Assistant App"</span>,
+    <span class="property">tech</span>: [<span class="string">"Kotlin"</span>, <span class="string">"Jetpack Compose"</span>, <span class="string">"ML Kit"</span>, <span class="string">"Retrofit"</span>],
+    <span class="property">features</span>: <span class="string">"OCR scanning + AI-driven legal intelligence"</span>,
+  },
   {
     <span class="property">name</span>: <span class="string">"Amber Essence"</span>,
     <span class="property">type</span>: <span class="string">"Full-Stack Restaurant Platform"</span>,
     <span class="property">tech</span>: [<span class="string">"React"</span>, <span class="string">"FastAPI"</span>, <span class="string">"MongoDB"</span>, <span class="string">"Tailwind"</span>],
     <span class="property">impact</span>: <span class="string">"60% reduction in booking time"</span>,
   },
-{
-  <span class="property">name</span>: <span class="string">"VS Code Portfolio"</span>,
-  <span class="property">type</span>: <span class="string">"VS Code–Themed Personal Website"</span>,
-  <span class="property">tech</span>: [
-    <span class="string">"HTML"</span>,
-    <span class="string">"CSS"</span>,
-    <span class="string">"JavaScript"</span>
-  ],
-  <span class="property">features</span>: <span class="string">
-    "VS Code UI layout, MacBook-style window, interactive sections"
-  </span>,
-},
   {
     <span class="property">name</span>: <span class="string">"ShikshaPlay"</span>,
     <span class="property">type</span>: <span class="string">"AI-Enabled Learning Platform"</span>,
     <span class="property">tech</span>: [<span class="string">"React"</span>, <span class="string">"Node.js"</span>, <span class="string">"FastAPI"</span>, <span class="string">"i18n"</span>],
     <span class="property">features</span>: <span class="string">"Gamification + Multilingual Support"</span>,
+  },
+  {
+    <span class="property">name</span>: <span class="string">"VS Code Portfolio"</span>,
+    <span class="property">type</span>: <span class="string">"VS Code–Themed Personal Website"</span>,
+    <span class="property">tech</span>: [<span class="string">"HTML"</span>, <span class="string">"CSS"</span>, <span class="string">"JavaScript"</span>],
+    <span class="property">features</span>: <span class="string">"MacBook-style window, interactive sections"</span>,
   }
 ];</code></pre>
 
-                            <!-- Project Cards -->
-                            <div class="projects-grid">
-                                <div class="project-card glass">
-                                    <div class="project-header">
-                                        <h3>🍽️ Amber Essence</h3>
-                                        <div class="project-links">
-                                            <a href="https://github.com/rizzit17/amber-essence" target="_blank" class="project-link">
-                                                <span>GitHub →</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <p class="project-type">Full-Stack Restaurant Platform</p>
-                                    <p class="project-desc">Built a responsive restaurant platform with table booking, authentication, and reviews. Reduced booking time by 60% using React Context API and optimized UI/UX.</p>
-                                    <div class="tech-stack">
-                                        <span class="tech-tag">React.js</span>
-                                        <span class="tech-tag">FastAPI</span>
-                                        <span class="tech-tag">MongoDB</span>
-                                        <span class="tech-tag">Tailwind CSS</span>
-                                    </div>
-                                </div>
+        <!-- Project Cards -->
+        <div class="projects-grid">
+            <div class="project-card glass">
+                <div class="project-header">
+                    <h3>🎙️ Meetzy</h3>
+                    <div class="project-links">
+                        <a href="https://github.com/rizzit17/smartmeeting" target="_blank" class="project-link">
+                            <span>GitHub →</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="project-type">AI-Powered Meeting Platform</p>
+                <p class="project-desc">Developed a full-stack AI meeting platform enabling real-time transcription and automated summaries. Integrated OpenAI API to extract key insights and action items, reducing manual note-taking by 70%.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">OpenAI API</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">JWT</span>
+                </div>
+            </div>
 
-                                <div class="project-card glass">
-    <div class="project-header">
-        <h3>💻 VS Code Portfolio</h3>
-        <div class="project-links">
-            <a href="https://rishit-cv.vercel.app/" target="_blank" class="project-link">
-                <span>Live →</span>
-            </a>
+            <div class="project-card glass">
+                <div class="project-header">
+                    <h3>⚖️ LegalGPT</h3>
+                    <div class="project-links">
+                        <a href="https://github.com/rizzit17/vakeelapp" target="_blank" class="project-link">
+                            <span>GitHub →</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="project-type">AI Legal Assistant App</p>
+                <p class="project-desc">Engineered a native Android app using Jetpack Compose to provide AI-driven legal intelligence, risk detection, and automated contract generation. Integrated Google ML Kit OCR and CameraX for high-accuracy document scanning.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Kotlin</span>
+                    <span class="tech-tag">Jetpack Compose</span>
+                    <span class="tech-tag">ML Kit</span>
+                    <span class="tech-tag">Retrofit</span>
+                    <span class="tech-tag">Hilt</span>
+                    <span class="tech-tag">CameraX</span>
+                </div>
+            </div>
+
+            <div class="project-card glass">
+                <div class="project-header">
+                    <h3>🍽️ Amber Essence</h3>
+                    <div class="project-links">
+                        <a href="https://github.com/rizzit17/amber-essence" target="_blank" class="project-link">
+                            <span>GitHub →</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="project-type">Full-Stack Restaurant Platform</p>
+                <p class="project-desc">Built a responsive restaurant platform with table booking, authentication, and reviews. Reduced booking time by 60% using React Context API and optimized UI/UX.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Tailwind CSS</span>
+                </div>
+            </div>
+
+            <div class="project-card glass">
+                <div class="project-header">
+                    <h3>📚 ShikshaPlay</h3>
+                    <div class="project-links">
+                        <a href="https://github.com/rizzit17/shikshaplay" target="_blank" class="project-link">
+                            <span>GitHub →</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="project-type">AI-Enabled Learning Platform</p>
+                <p class="project-desc">Developed a gamified e-learning platform with interactive quizzes, leaderboards, and progress tracking. Added multilingual support (English & Hindi) for wider accessibility.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">React.js</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">i18n</span>
+                </div>
+            </div>
+
+            <div class="project-card glass">
+                <div class="project-header">
+                    <h3>💻 VS Code Portfolio</h3>
+                    <div class="project-links">
+                        <a href="https://rishit-cv.vercel.app/" target="_blank" class="project-link">
+                            <span>Live →</span>
+                        </a>
+                    </div>
+                </div>
+                <p class="project-type">VS Code–Themed Personal Website</p>
+                <p class="project-desc">Designed and developed a VS Code–inspired portfolio with a MacBook-style window, interactive sections, and a clean code-based UI using vanilla HTML, CSS, and JavaScript.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </div>
         </div>
     </div>
-
-    <p class="project-type">VS Code–Themed Personal Website</p>
-
-    <p class="project-desc">
-        Designed and developed a VS Code–inspired portfolio with a MacBook-style window,
-        interactive sections, and a clean code-based UI using vanilla HTML, CSS, and JavaScript.
-    </p>
-
-    <div class="tech-stack">
-        <span class="tech-tag">HTML</span>
-        <span class="tech-tag">CSS</span>
-        <span class="tech-tag">JavaScript</span>
-    </div>
-</div>
-
-                                <div class="project-card glass">
-                                    <div class="project-header">
-                                        <h3>📚 ShikshaPlay</h3>
-                                        <div class="project-links">
-                                            <a href="https://github.com/rizzit17/shikshaplay" target="_blank" class="project-link">
-                                                <span>GitHub →</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <p class="project-type">AI-Enabled Learning Platform</p>
-                                    <p class="project-desc">Developed a gamified e-learning platform with interactive quizzes, leaderboards, and progress tracking. Added multilingual support (English & Hindi) for wider accessibility.</p>
-                                    <div class="tech-stack">
-                                        <span class="tech-tag">React.js</span>
-                                        <span class="tech-tag">Node.js</span>
-                                        <span class="tech-tag">FastAPI</span>
-                                        <span class="tech-tag">i18n</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
+</section>
                     <!-- Skills Section -->
-                    <section id="skills" class="code-section">
-                        <div class="line-numbers">
-                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
-                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                            <span>11</span><span>12</span><span>13</span>
-                        </div>
-                        <div class="code-content">
-                            <pre><code>{
-  <span class="string">"languages"</span>: [<span class="string">"Python"</span>, <span class="string">"JavaScript"</span>, <span class="string">"TypeScript"</span>, <span class="string">"C++"</span>, <span class="string">"Java"</span>],
+<section id="skills" class="code-section">
+    <div class="line-numbers">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+        <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+        <span>16</span>
+    </div>
+    <div class="code-content">
+        <pre><code>{
+  <span class="string">"languages"</span>: [<span class="string">"Python"</span>, <span class="string">"JavaScript"</span>, <span class="string">"TypeScript"</span>, <span class="string">"Kotlin"</span>, <span class="string">"C++"</span>, <span class="string">"Java"</span>],
   <span class="string">"frontend"</span>: [<span class="string">"React"</span>, <span class="string">"Tailwind CSS"</span>, <span class="string">"HTML/CSS"</span>],
-  <span class="string">"backend"</span>: [<span class="string">"Node.js"</span>, <span class="string">"FastAPI"</span>, <span class="string">"Express"</span>],
+  <span class="string">"backend"</span>: [<span class="string">"Node.js"</span>, <span class="string">"Express.js"</span>, <span class="string">"FastAPI"</span>],
+  <span class="string">"mobile"</span>: [<span class="string">"Android"</span>, <span class="string">"Jetpack Compose"</span>, <span class="string">"Kotlin"</span>, <span class="string">"CameraX"</span>],
   <span class="string">"databases"</span>: [<span class="string">"MongoDB"</span>, <span class="string">"MySQL"</span>, <span class="string">"Firebase"</span>],
+  <span class="string">"ai_ml"</span>: [<span class="string">"OpenAI API"</span>, <span class="string">"Google ML Kit"</span>, <span class="string">"OCR"</span>],
   <span class="string">"cloud"</span>: [<span class="string">"AWS EC2"</span>, <span class="string">"S3"</span>, <span class="string">"IAM"</span>],
-  <span class="string">"tools"</span>: [<span class="string">"Git"</span>, <span class="string">"Postman"</span>, <span class="string">"VS Code"</span>, <span class="string">"Figma"</span>],
+  <span class="string">"tools"</span>: [<span class="string">"Git"</span>, <span class="string">"Postman"</span>, <span class="string">"VS Code"</span>, <span class="string">"Figma"</span>, <span class="string">"Retrofit"</span>, <span class="string">"Hilt"</span>],
   <span class="string">"expertise"</span>: [
     <span class="string">"Full-Stack Development"</span>,
+    <span class="string">"AI/ML Integration"</span>,
+    <span class="string">"Native Android Development"</span>,
     <span class="string">"RESTful APIs"</span>,
     <span class="string">"Responsive Design"</span>,
     <span class="string">"Cloud Deployment"</span>
   ]
 }</code></pre>
 
-                            <!-- Skills Grid -->
-                            <div class="skills-grid">
-                                <div class="skill-category glass">
-                                    <div class="skill-header">
-                                        <span class="skill-icon">💻</span>
-                                        <h3>Languages</h3>
-                                    </div>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">Python</span>
-                                        <span class="skill-tag">JavaScript</span>
-                                        <span class="skill-tag">TypeScript</span>
-                                        <span class="skill-tag">C++</span>
-                                        <span class="skill-tag">Java</span>
-                                        <span class="skill-tag">SQL</span>
-                                    </div>
-                                </div>
+        <!-- Skills Grid -->
+        <div class="skills-grid">
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">💻</span>
+                    <h3>Languages</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Kotlin</span>
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
 
-                                <div class="skill-category glass">
-                                    <div class="skill-header">
-                                        <span class="skill-icon">🎨</span>
-                                        <h3>Frontend</h3>
-                                    </div>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">React.js</span>
-                                        <span class="skill-tag">Tailwind CSS</span>
-                                        <span class="skill-tag">Context API</span>
-                                        <span class="skill-tag">HTML/CSS</span>
-                                    </div>
-                                </div>
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">🎨</span>
+                    <h3>Frontend</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Tailwind CSS</span>
+                    <span class="skill-tag">Context API</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                </div>
+            </div>
 
-                                <div class="skill-category glass">
-                                    <div class="skill-header">
-                                        <span class="skill-icon">⚙️</span>
-                                        <h3>Backend</h3>
-                                    </div>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">Node.js</span>
-                                        <span class="skill-tag">FastAPI</span>
-                                        <span class="skill-tag">Express.js</span>
-                                        <span class="skill-tag">REST APIs</span>
-                                    </div>
-                                </div>
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">⚙️</span>
+                    <h3>Backend</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express.js</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">JWT Auth</span>
+                </div>
+            </div>
 
-                                <div class="skill-category glass">
-                                    <div class="skill-header">
-                                        <span class="skill-icon">💾</span>
-                                        <h3>Databases</h3>
-                                    </div>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">MongoDB</span>
-                                        <span class="skill-tag">MySQL</span>
-                                        <span class="skill-tag">Firebase</span>
-                                    </div>
-                                </div>
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">📱</span>
+                    <h3>Mobile Development</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Android</span>
+                    <span class="skill-tag">Jetpack Compose</span>
+                    <span class="skill-tag">Kotlin</span>
+                    <span class="skill-tag">MVVM</span>
+                    <span class="skill-tag">Retrofit</span>
+                    <span class="skill-tag">Hilt (DI)</span>
+                    <span class="skill-tag">CameraX</span>
+                    <span class="skill-tag">Coroutines</span>
+                </div>
+            </div>
 
-                                <div class="skill-category glass">
-                                    <div class="skill-header">
-                                        <span class="skill-icon">☁️</span>
-                                        <h3>Cloud & Tools</h3>
-                                    </div>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">AWS EC2</span>
-                                        <span class="skill-tag">S3</span>
-                                        <span class="skill-tag">Git/GitHub</span>
-                                        <span class="skill-tag">Postman</span>
-                                        <span class="skill-tag">Figma</span>
-                                    </div>
-                                </div>
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">🤖</span>
+                    <h3>AI/ML</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">OpenAI API</span>
+                    <span class="skill-tag">Google ML Kit</span>
+                    <span class="skill-tag">OCR</span>
+                    <span class="skill-tag">NLP</span>
+                </div>
+            </div>
 
-                                <div class="skill-category glass">
-                                    <div class="skill-header">
-                                        <span class="skill-icon">🧠</span>
-                                        <h3>Core CS</h3>
-                                    </div>
-                                    <div class="skill-tags">
-                                        <span class="skill-tag">DSA</span>
-                                        <span class="skill-tag">OOPS</span>
-                                        <span class="skill-tag">OS</span>
-                                        <span class="skill-tag">Computer Networks</span>
-                                        <span class="skill-tag">AI</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">💾</span>
+                    <h3>Databases</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Firebase</span>
+                </div>
+            </div>
+
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">☁️</span>
+                    <h3>Cloud & Tools</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS EC2</span>
+                    <span class="skill-tag">S3</span>
+                    <span class="skill-tag">IAM</span>
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">Figma</span>
+                </div>
+            </div>
+
+            <div class="skill-category glass">
+                <div class="skill-header">
+                    <span class="skill-icon">🧠</span>
+                    <h3>Core CS</h3>
+                </div>
+                <div class="skill-tags">
+                    <span class="skill-tag">DSA</span>
+                    <span class="skill-tag">OOPS</span>
+                    <span class="skill-tag">OS</span>
+                    <span class="skill-tag">Computer Networks</span>
+                    <span class="skill-tag">AI</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
                     <!-- Experience Section -->
                     <section id="experience" class="code-section">
@@ -657,6 +738,7 @@
 </body>
 
 </html>
+
 
 
 
