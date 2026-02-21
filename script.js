@@ -1,7 +1,7 @@
 // VS Code + MacBook Portfolio - Interactive Features
 // Updated with functional activity bar buttons
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     // ============================================
     // THEME TOGGLE FUNCTIONALITY
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     themeToggle.addEventListener('click', () => {
         console.log('Theme toggle clicked!');
         body.classList.toggle('light-theme');
-        
+
         // Update icon and save preference
         if (body.classList.contains('light-theme')) {
             themeIcon.textContent = '🌙';
@@ -54,41 +54,41 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     const files = document.querySelectorAll('.file');
     const sections = document.querySelectorAll('.code-section');
-    
+
     // Simple file click handler
     files.forEach(file => {
-        file.addEventListener('click', function() {
+        file.addEventListener('click', function () {
             const targetSection = this.getAttribute('data-section');
             const currentActive = document.querySelector('.code-section.active');
-            
+
             // Prevent clicking the same section
             if (currentActive && currentActive.id === targetSection) {
                 return;
             }
-            
+
             // Update active file in sidebar
             files.forEach(f => f.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Simple section switching
             sections.forEach(section => {
                 section.classList.remove('active');
             });
-            
+
             const targetElement = document.getElementById(targetSection);
             if (targetElement) {
                 targetElement.classList.add('active');
             }
-            
+
             // Update tab
             const fileName = this.querySelector('.file-name').textContent;
             const fileIcon = this.querySelector('.file-icon').textContent;
             const tabName = document.querySelector('.tab-name');
             const tabIcon = document.querySelector('.tab-icon');
-            
+
             if (tabName) tabName.textContent = fileName;
             if (tabIcon) tabIcon.textContent = fileIcon;
-            
+
             // Smooth scroll to top
             const editorContent = document.querySelector('.editor-content');
             if (editorContent) {
@@ -96,6 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     top: 0,
                     behavior: 'smooth'
                 });
+            }
+
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                const sidebar = document.querySelector('.sidebar');
+                const menuToggle = document.getElementById('menuToggle');
+                if (sidebar) sidebar.classList.remove('active');
+                if (menuToggle) menuToggle.classList.remove('active');
             }
         });
     });
@@ -106,15 +114,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const activityIcons = document.querySelectorAll('.activity-icon');
     const sidebar = document.querySelector('.sidebar');
     const sidebarHeader = document.querySelector('.sidebar-header span');
-    
+
     activityIcons.forEach(icon => {
-        icon.addEventListener('click', function() {
+        icon.addEventListener('click', function () {
             const tab = this.getAttribute('data-tab');
-            
+
             // Update active state
             activityIcons.forEach(i => i.classList.remove('active'));
             this.classList.add('active');
-            
+
             // Handle different tabs
             if (tab === 'explorer') {
                 // Show file explorer (default view)
@@ -132,13 +140,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Toggle theme when settings is clicked
                 themeToggle.click();
             }
+
+            // Show sidebar when activity icon is clicked on mobile
+            if (window.innerWidth <= 768) {
+                sidebar.classList.add('active');
+                menuToggle.classList.add('active');
+            }
         });
+    });
+
+    // ============================================
+    // MOBILE MENU TOGGLE
+    // ============================================
+    const menuToggle = document.getElementById('menuToggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function () {
+            this.classList.toggle('active');
+            sidebar.classList.toggle('active');
+        });
+    }
+
+    // Close sidebar when clicking outside on mobile
+    document.addEventListener('click', function (e) {
+        if (window.innerWidth <= 768) {
+            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        }
     });
 
     // ============================================
     // SIDEBAR VIEWS
     // ============================================
-    
+
     function showExplorer() {
         sidebarHeader.textContent = 'EXPLORER';
         sidebar.innerHTML = `
@@ -184,37 +219,44 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        
+
         // Re-attach file click handlers
         const newFiles = sidebar.querySelectorAll('.file');
         newFiles.forEach(file => {
-            file.addEventListener('click', function() {
+            file.addEventListener('click', function () {
                 const targetSection = this.getAttribute('data-section');
                 const currentActive = document.querySelector('.code-section.active');
-                
+
                 if (currentActive && currentActive.id === targetSection) return;
-                
+
                 newFiles.forEach(f => f.classList.remove('active'));
                 this.classList.add('active');
-                
+
                 sections.forEach(section => section.classList.remove('active'));
-                
+
                 const targetElement = document.getElementById(targetSection);
                 if (targetElement) {
                     targetElement.classList.add('active');
                 }
-                
+
                 const fileName = this.querySelector('.file-name').textContent;
                 const fileIcon = this.querySelector('.file-icon').textContent;
                 const tabName = document.querySelector('.tab-name');
                 const tabIcon = document.querySelector('.tab-icon');
-                
+
                 if (tabName) tabName.textContent = fileName;
                 if (tabIcon) tabIcon.textContent = fileIcon;
-                
+
                 const editorContent = document.querySelector('.editor-content');
                 if (editorContent) {
                     editorContent.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    const menuToggle = document.getElementById('menuToggle');
+                    if (menuToggle) menuToggle.classList.remove('active');
                 }
             });
         });
@@ -259,18 +301,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        
+
         // Add search functionality
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
-        
-        searchInput.addEventListener('input', function(e) {
+
+        searchInput.addEventListener('input', function (e) {
             const query = e.target.value.toLowerCase();
             if (query.length < 2) {
                 searchResults.innerHTML = '<p style="margin: 10px 0;">Type to search...</p>';
                 return;
             }
-            
+
             // Search through all sections
             const results = [];
             sections.forEach(section => {
@@ -282,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             });
-            
+
             if (results.length > 0) {
                 searchResults.innerHTML = `
                     <p style="margin: 10px 0; color: var(--vscode-green);">✓ Found ${results.length} result(s):</p>
@@ -294,10 +336,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>
                     `).join('')}
                 `;
-                
+
                 // Add click handlers to results
                 document.querySelectorAll('.search-result').forEach(result => {
-                    result.addEventListener('click', function() {
+                    result.addEventListener('click', function () {
                         const sectionId = this.getAttribute('data-section');
                         navigateToSection(sectionId);
                     });
@@ -306,10 +348,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 searchResults.innerHTML = '<p style="margin: 10px 0; color: var(--vscode-text-muted);">No results found</p>';
             }
         });
-        
+
         // Quick buttons
         document.querySelectorAll('.search-quick-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const sectionId = this.getAttribute('data-section');
                 navigateToSection(sectionId);
             });
@@ -495,20 +537,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
-        
+
         // Add click handlers to extension items
         document.querySelectorAll('.extension-item').forEach(item => {
-            item.addEventListener('click', function() {
+            item.addEventListener('click', function () {
                 const sectionId = this.getAttribute('data-section');
                 navigateToSection(sectionId);
             });
-            
-            item.addEventListener('mouseenter', function() {
+
+            item.addEventListener('mouseenter', function () {
                 this.style.background = 'rgba(78, 201, 176, 0.15)';
                 this.style.borderColor = 'rgba(78, 201, 176, 0.3)';
             });
-            
-            item.addEventListener('mouseleave', function() {
+
+            item.addEventListener('mouseleave', function () {
                 this.style.background = 'var(--glass-bg)';
                 this.style.borderColor = 'var(--glass-border)';
             });
@@ -521,29 +563,29 @@ document.addEventListener('DOMContentLoaded', function() {
         if (targetElement) {
             targetElement.classList.add('active');
         }
-        
+
         // Switch back to explorer view
         activityIcons.forEach(i => i.classList.remove('active'));
         document.querySelector('[data-tab="explorer"]').classList.add('active');
         showExplorer();
-        
+
         // Update active file in explorer
         setTimeout(() => {
             const file = document.querySelector(`[data-section="${sectionId}"]`);
             if (file) {
                 document.querySelectorAll('.file').forEach(f => f.classList.remove('active'));
                 file.classList.add('active');
-                
+
                 const fileName = file.querySelector('.file-name').textContent;
                 const fileIcon = file.querySelector('.file-icon').textContent;
                 const tabName = document.querySelector('.tab-name');
                 const tabIcon = document.querySelector('.tab-icon');
-                
+
                 if (tabName) tabName.textContent = fileName;
                 if (tabIcon) tabIcon.textContent = fileIcon;
             }
         }, 100);
-        
+
         // Smooth scroll to top
         const editorContent = document.querySelector('.editor-content');
         if (editorContent) {
@@ -557,9 +599,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const redLight = document.querySelector('.light.red');
     const yellowLight = document.querySelector('.light.yellow');
     const greenLight = document.querySelector('.light.green');
-    
+
     if (redLight) {
-        redLight.addEventListener('click', function() {
+        redLight.addEventListener('click', function () {
             if (confirm('Close window?')) {
                 document.querySelector('.vscode-window').style.opacity = '0';
                 setTimeout(() => {
@@ -568,9 +610,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     if (yellowLight) {
-        yellowLight.addEventListener('click', function() {
+        yellowLight.addEventListener('click', function () {
             const vscodeWindow = document.querySelector('.vscode-window');
             if (vscodeWindow.style.transform === 'scale(0.9)') {
                 vscodeWindow.style.transform = 'scale(1)';
@@ -579,9 +621,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     if (greenLight) {
-        greenLight.addEventListener('click', function() {
+        greenLight.addEventListener('click', function () {
             const vscodeWindow = document.querySelector('.vscode-window');
             if (vscodeWindow.style.maxWidth === '100%') {
                 vscodeWindow.style.maxWidth = '1600px';
@@ -598,7 +640,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     const tabClose = document.querySelector('.tab-close');
     if (tabClose) {
-        tabClose.addEventListener('click', function(e) {
+        tabClose.addEventListener('click', function (e) {
             e.stopPropagation();
             alert('Cannot close the only tab! 🔒');
         });
@@ -608,7 +650,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // SMOOTH SCROLL FOR INTERNAL LINKS
     // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -627,17 +669,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (terminalBody) {
         const originalContent = terminalBody.innerHTML;
         terminalBody.innerHTML = '';
-        
+
         const commands = [
             { text: '$ git clone https://github.com/rizzit17/awesome-project.git', delay: 50 },
             { text: '$ cd awesome-project', delay: 30 },
             { text: '$ npm install && npm start', delay: 40 },
             { text: '✓ Ready to collaborate!', delay: 20, isSuccess: true }
         ];
-        
+
         function typeCommand(commandIndex) {
             if (commandIndex >= commands.length) return;
-            
+
             const command = commands[commandIndex];
             const p = document.createElement('p');
             if (command.isSuccess) {
@@ -649,12 +691,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 p.appendChild(prompt);
                 p.appendChild(document.createTextNode(' '));
             }
-            
+
             terminalBody.appendChild(p);
-            
+
             let charIndex = 0;
             const commandText = command.isSuccess ? command.text : command.text.substring(2);
-            
+
             const typeInterval = setInterval(() => {
                 if (charIndex < commandText.length) {
                     p.textContent = (command.isSuccess ? '' : '$ ') + commandText.substring(0, charIndex + 1);
@@ -668,7 +710,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }, command.delay);
         }
-        
+
         // Start typing effect after a delay
         setTimeout(() => typeCommand(0), 1000);
     }
@@ -676,25 +718,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // KEYBOARD SHORTCUTS
     // ============================================
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function (e) {
         // Ctrl/Cmd + K for Quick Open
         if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
             e.preventDefault();
             alert('⌨️ Keyboard Shortcuts:\n\n1-7: Navigate sections\nCtrl+Shift+T: Toggle theme\nCtrl+B: Toggle sidebar\nCtrl+Shift+F: Search');
         }
-        
+
         // Ctrl/Cmd + Shift + T for theme toggle
         if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
             e.preventDefault();
             themeToggle.click();
         }
-        
+
         // Ctrl/Cmd + Shift + F for search
         if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'F') {
             e.preventDefault();
             document.querySelector('[data-tab="search"]').click();
         }
-        
+
         // Number keys for quick navigation
         if (e.key >= '1' && e.key <= '7') {
             const fileIndex = parseInt(e.key) - 1;
@@ -703,7 +745,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 fileElements[fileIndex].click();
             }
         }
-        
+
         // Ctrl/Cmd + B to toggle sidebar
         if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
             e.preventDefault();
@@ -717,27 +759,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // HOVER EFFECTS
     // ============================================
-    
+
     // Skill tags hover
     const skillTags = document.querySelectorAll('.skill-tag');
     skillTags.forEach(tag => {
-        tag.addEventListener('mouseenter', function() {
+        tag.addEventListener('mouseenter', function () {
             this.style.transform = 'translateY(-3px) scale(1.05)';
         });
-        
-        tag.addEventListener('mouseleave', function() {
+
+        tag.addEventListener('mouseleave', function () {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
-    
+
     // Glass cards hover
     const glassCards = document.querySelectorAll('.glass');
     glassCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
+        card.addEventListener('mouseenter', function () {
             this.style.boxShadow = '0 8px 32px rgba(0, 122, 204, 0.2)';
         });
-        
-        card.addEventListener('mouseleave', function() {
+
+        card.addEventListener('mouseleave', function () {
             this.style.boxShadow = 'none';
         });
     });
