@@ -24,7 +24,7 @@ A clean, responsive developer portfolio featuring a unique **VS Code-themed UI**
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/rizzit17/rishit-cv.git](https://github.com/rizzit17/rishit-cv.git)
+   git clone https://github.com/rizzit17/rishit-cv.git
 Navigate to the project directory:
 
 Bash
