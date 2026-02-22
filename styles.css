@@ -1543,3 +1543,76 @@ body.light-theme .experience-card.glass:hover {
 body.light-theme .experience-desc strong {
     color: #1a1a1a;
 }
+
+/* ============================================
+   TRANSITIONS & ANIMATIONS
+   ============================================ */
+
+/* Page Section Transitions */
+.code-section.active {
+    display: flex;
+    animation: sectionFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Sidebar View Transitions */
+.sidebar-header,
+.file-tree,
+.folder,
+#searchResults,
+.extension-item {
+    animation: sidebarContentFadeIn 0.3s ease-out;
+}
+
+@keyframes sidebarContentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Tab Switching Polish */
+.tab {
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Activity Bar Icon Polish */
+.activity-icon {
+    transition: color 0.2s ease;
+}
+
+.activity-icon span {
+    transition: transform 0.2s ease;
+}
+
+.activity-icon:hover span {
+    transform: scale(1.1);
+}
+
+.activity-icon.active span {
+    transform: scale(1.15);
+}
+
+/* Smooth Scroll behaviors are already in JS, 
+   but ensuring base editor content has smooth rendering */
+.editor-content {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--vscode-border) transparent;
+}
