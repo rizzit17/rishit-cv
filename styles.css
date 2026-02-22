@@ -1099,53 +1099,104 @@ body.light-theme .profile-frame {
 }
 
 /* Responsive Design */
+/* Responsive Design Overhaul */
 @media (max-width: 1200px) {
-    .vscode-layout {
-        height: auto;
-        min-height: auto;
+    .vscode-window {
+        margin: 20px;
     }
 
-    .editor-content {
-        max-height: 80vh;
+    .vscode-layout {
+        height: calc(100vh - 100px);
+    }
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .about-cards {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
     body {
-        padding: 10px;
+        padding: 5px;
     }
 
     .macbook-notch {
-        width: 150px;
-        height: 25px;
+        width: 120px;
+        height: 20px;
     }
 
     .vscode-window {
-        margin-top: 35px;
-    }
-
-    .sidebar {
-        width: 200px;
-    }
-
-    .activity-bar {
-        width: 45px;
+        margin: 10px auto;
+        border-radius: 8px;
     }
 
     .title-bar {
-        padding: 0 50px;
+        padding: 0 45px;
+        height: 40px;
     }
 
     .title-center {
         display: none;
     }
 
+    .vscode-layout {
+        position: relative;
+        height: calc(100vh - 80px);
+    }
+
+    /* Mobile Sidebar Toggle Behavior */
+    .sidebar {
+        position: absolute;
+        left: 50px;
+        top: 0;
+        bottom: 0;
+        width: 250px;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-right: 1px solid var(--vscode-border);
+        box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .activity-bar {
+        width: 50px;
+        z-index: 1001;
+    }
+
+    .editor {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .editor-content {
+        padding: 15px;
+    }
+
+    /* Stack cards on mobile */
     .about-cards,
     .projects-grid,
     .skills-grid,
     .certifications-grid,
     .contact-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .info-card,
+    .project-card,
+    .skill-category,
+    .cert-card,
+    .contact-card {
+        padding: 15px;
     }
 
     .code-section {
@@ -1155,18 +1206,64 @@ body.light-theme .profile-frame {
     .line-numbers {
         display: none;
     }
+
+    .code-content {
+        padding: 10px 5px;
+    }
+
+    .about-intro {
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .about-image-container {
+        width: 160px !important;
+        margin-top: 0;
+    }
+
+    .resume-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .resume-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .quick-links {
+        justify-content: center;
+    }
+
+    .terminal-output {
+        padding: 10px;
+    }
 }
 
 @media (max-width: 480px) {
-    .sidebar {
-        width: 150px;
-    }
-
-    .title-left .file-name,
-    .title-right {
+    .title-left .file-name {
         display: none;
     }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .title-bar {
+        padding: 0 45px;
+    }
+
+    .vscode-logo {
+        margin-right: 10px;
+    }
+
+    .activity-icon {
+        height: 45px;
+        font-size: 18px;
+    }
 }
+
 
 /* Animations */
 @keyframes fadeIn {
