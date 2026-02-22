@@ -97,6 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth'
                 });
             }
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                const sb = document.querySelector('.sidebar');
+                if (sb) sb.classList.remove('mobile-open');
+            }
         });
     });
 
@@ -110,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
     activityIcons.forEach(icon => {
         icon.addEventListener('click', function () {
             const tab = this.getAttribute('data-tab');
+            const isMobile = window.innerWidth <= 768;
 
             // Update active state
             activityIcons.forEach(i => i.classList.remove('active'));
@@ -117,23 +123,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Handle different tabs
             if (tab === 'explorer') {
-                // Show file explorer (default view)
                 showExplorer();
             } else if (tab === 'search') {
-                // Show search interface
                 showSearch();
             } else if (tab === 'git') {
-                // Show source control (GitHub links)
                 showSourceControl();
             } else if (tab === 'extensions') {
-                // Show extensions (skills/certifications)
                 showExtensions();
             } else if (tab === 'settings') {
-                // Toggle theme when settings is clicked
                 themeToggle.click();
+            }
+
+            // Mobile Sidebar Toggle
+            if (isMobile) {
+                sidebar.classList.toggle('mobile-open');
+                console.log('Mobile sidebar toggled');
             }
         });
     });
+
+    // Close sidebar on mobile when clicking on editor content
+    const editor = document.querySelector('.editor');
+    if (editor) {
+        editor.addEventListener('click', function () {
+            if (window.innerWidth <= 768 && sidebar.classList.contains('mobile-open')) {
+                sidebar.classList.remove('mobile-open');
+            }
+        });
+    }
+
 
     // ============================================
     // SIDEBAR VIEWS
@@ -215,6 +233,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const editorContent = document.querySelector('.editor-content');
                 if (editorContent) {
                     editorContent.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('mobile-open');
                 }
             });
         });
@@ -548,6 +570,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const editorContent = document.querySelector('.editor-content');
         if (editorContent) {
             editorContent.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        // Close sidebar on mobile
+        if (window.innerWidth <= 768) {
+            sidebar.classList.remove('mobile-open');
         }
     }
 
