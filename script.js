@@ -97,14 +97,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth'
                 });
             }
-
-            // Close sidebar on mobile after selection
-            if (window.innerWidth <= 768) {
-                const sidebar = document.querySelector('.sidebar');
-                const menuToggle = document.getElementById('menuToggle');
-                if (sidebar) sidebar.classList.remove('active');
-                if (menuToggle) menuToggle.classList.remove('active');
-            }
         });
     });
 
@@ -140,34 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Toggle theme when settings is clicked
                 themeToggle.click();
             }
-
-            // Show sidebar when activity icon is clicked on mobile
-            if (window.innerWidth <= 768) {
-                sidebar.classList.add('active');
-                menuToggle.classList.add('active');
-            }
         });
-    });
-
-    // ============================================
-    // MOBILE MENU TOGGLE
-    // ============================================
-    const menuToggle = document.getElementById('menuToggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function () {
-            this.classList.toggle('active');
-            sidebar.classList.toggle('active');
-        });
-    }
-
-    // Close sidebar when clicking outside on mobile
-    document.addEventListener('click', function (e) {
-        if (window.innerWidth <= 768) {
-            if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                menuToggle.classList.remove('active');
-            }
-        }
     });
 
     // ============================================
@@ -250,13 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const editorContent = document.querySelector('.editor-content');
                 if (editorContent) {
                     editorContent.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-
-                // Close sidebar on mobile after selection
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('active');
-                    const menuToggle = document.getElementById('menuToggle');
-                    if (menuToggle) menuToggle.classList.remove('active');
                 }
             });
         });
