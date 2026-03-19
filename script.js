@@ -1,782 +1,430 @@
-// VS Code + MacBook Portfolio - Interactive Features
-// Updated with functional activity bar buttons
+// ================================================================
+// VS Code Portfolio — Script
+// ================================================================
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 
-    // ============================================
-    // THEME TOGGLE FUNCTIONALITY
-    // ============================================
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.querySelector('.theme-icon');
-    const body = document.body;
+    // ── State ──────────────────────────────────────────────────────
+    const state = {
+        activeSection: 'about',
+        openTabs: ['about'],
+        activePanel: 'explorer',
+        theme: localStorage.getItem('vscode-theme') || 'dark',
+    };
 
-    // Debug: Check if elements exist
-    if (!themeToggle) {
-        console.error('Theme toggle button not found!');
-        return;
-    }
-    if (!themeIcon) {
-        console.error('Theme icon not found!');
-        return;
-    }
+    // ── Elements ───────────────────────────────────────────────────
+    const body          = document.body;
+    const themeToggle   = document.getElementById('themeToggle');
+    const themeIcon     = document.getElementById('themeIcon');
+    const tabbar        = document.getElementById('tabbar');
+    const editorContent = document.getElementById('editorContent');
+    const sidebar       = document.querySelector('.sidebar');
+    const sbLang        = document.getElementById('sb-lang');
+    const sbPos         = document.getElementById('sb-pos');
+    const breadcrumbActive = document.getElementById('breadcrumb-active');
 
-    console.log('✅ Theme toggle initialized');
+    // Section metadata
+    const sectionMeta = {
+        about:          { name: 'about.jsx',          ext: 'jsx',  lang: 'JSX' },
+        projects:       { name: 'projects.tsx',        ext: 'tsx',  lang: 'TSX' },
+        skills:         { name: 'skills.json',         ext: 'json', lang: 'JSON' },
+        experience:     { name: 'positions.ts',        ext: 'ts',   lang: 'TypeScript' },
+        internships:    { name: 'internships.tsx',     ext: 'tsx',  lang: 'TSX' },
+        certifications: { name: 'certifications.md',  ext: 'md',   lang: 'Markdown' },
+        contact:        { name: 'contact.css',         ext: 'css',  lang: 'CSS' },
+    };
 
-    // Check for saved theme preference or default to 'dark'
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    if (currentTheme === 'light') {
-        body.classList.add('light-theme');
-        themeIcon.textContent = '🌙';
-        console.log('Loaded saved light theme');
-    } else {
-        console.log('Starting in dark theme');
-    }
-
-    // Toggle theme on button click
-    themeToggle.addEventListener('click', () => {
-        console.log('Theme toggle clicked!');
-        body.classList.toggle('light-theme');
-
-        // Update icon and save preference
-        if (body.classList.contains('light-theme')) {
+    // ── Theme ─────────────────────────────────────────────────────
+    function applyTheme(t) {
+        if (t === 'light') {
+            body.classList.add('light');
             themeIcon.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-            console.log('%c🌙 Switched to Light Mode', 'font-size: 14px; color: #0066cc;');
         } else {
+            body.classList.remove('light');
             themeIcon.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-            console.log('%c☀️ Switched to Dark Mode', 'font-size: 14px; color: #007acc;');
         }
+        localStorage.setItem('vscode-theme', t);
+        state.theme = t;
+    }
+
+    applyTheme(state.theme);
+
+    themeToggle.addEventListener('click', () => {
+        applyTheme(state.theme === 'dark' ? 'light' : 'dark');
     });
 
-    // ============================================
-    // FILE NAVIGATION SYSTEM
-    // ============================================
-    const files = document.querySelectorAll('.file');
-    const sections = document.querySelectorAll('.code-section');
+    // ── Line Gutters ───────────────────────────────────────────────
+    function buildGutter(id, lines = 60) {
+        const gutter = document.getElementById(id);
+        if (!gutter) return;
+        gutter.innerHTML = '';
+        for (let i = 1; i <= lines; i++) {
+            const span = document.createElement('span');
+            span.textContent = i;
+            span.style.display = 'block';
+            span.style.lineHeight = '1.65';
+            span.style.fontSize = '13px';
+            gutter.appendChild(span);
+        }
+    }
 
-    // Simple file click handler
-    files.forEach(file => {
-        file.addEventListener('click', function () {
-            const targetSection = this.getAttribute('data-section');
-            const currentActive = document.querySelector('.code-section.active');
+    buildGutter('gutter-about', 40);
+    buildGutter('gutter-projects', 80);
+    buildGutter('gutter-skills', 55);
+    buildGutter('gutter-internships', 35);
+    buildGutter('gutter-experience', 55);
+    buildGutter('gutter-certifications', 30);
+    buildGutter('gutter-contact', 35);
 
-            // Prevent clicking the same section
-            if (currentActive && currentActive.id === targetSection) {
+    // ── Section Navigation ─────────────────────────────────────────
+    function navigateTo(sectionId) {
+        if (!sectionMeta[sectionId]) return;
+        const meta = sectionMeta[sectionId];
+
+        // Hide all sections
+        document.querySelectorAll('.editor-section').forEach(s => s.classList.remove('active'));
+
+        // Show target
+        const target = document.getElementById(sectionId);
+        if (target) target.classList.add('active');
+
+        state.activeSection = sectionId;
+
+        // Update sidebar file highlights
+        document.querySelectorAll('.tree-file').forEach(f => {
+            f.classList.toggle('active', f.dataset.section === sectionId);
+        });
+        document.querySelectorAll('.sidebar-file').forEach(f => {
+            f.classList.toggle('active', f.dataset.section === sectionId);
+        });
+
+        // Add tab if not open
+        if (!state.openTabs.includes(sectionId)) {
+            state.openTabs.push(sectionId);
+            addTab(sectionId, meta);
+        }
+
+        // Update all tabs active state
+        document.querySelectorAll('.tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.section === sectionId);
+        });
+
+        // Update status bar language
+        if (sbLang) sbLang.textContent = meta.lang;
+
+        // Update breadcrumb
+        if (breadcrumbActive) breadcrumbActive.textContent = meta.name;
+
+        // Scroll editor to top
+        editorContent.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Update open editors list
+        updateOpenEditorsList();
+    }
+
+    function addTab(sectionId, meta) {
+        const existing = document.querySelector(`.tab[data-section="${sectionId}"]`);
+        if (existing) return;
+
+        const tab = document.createElement('div');
+        tab.className = 'tab';
+        tab.dataset.section = sectionId;
+        tab.innerHTML = `
+            <span class="tab-file-icon file-icon ${meta.ext}">${meta.ext.toUpperCase()}</span>
+            <span class="tab-name">${meta.name}</span>
+            <span class="tab-close">✕</span>
+        `;
+
+        tab.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab-close')) {
+                closeTab(sectionId, tab);
+                return;
+            }
+            navigateTo(sectionId);
+        });
+
+        tabbar.appendChild(tab);
+    }
+
+    function closeTab(sectionId, tabEl) {
+        if (state.openTabs.length <= 1) return; // keep at least one
+        const idx = state.openTabs.indexOf(sectionId);
+        state.openTabs.splice(idx, 1);
+        tabEl.remove();
+
+        // Navigate to adjacent tab
+        const newSection = state.openTabs[Math.min(idx, state.openTabs.length - 1)];
+        navigateTo(newSection);
+        updateOpenEditorsList();
+    }
+
+    function updateOpenEditorsList() {
+        const list = document.getElementById('open-editors-list');
+        if (!list) return;
+        list.innerHTML = '';
+        state.openTabs.forEach(sid => {
+            const meta = sectionMeta[sid];
+            if (!meta) return;
+            const div = document.createElement('div');
+            div.className = 'sidebar-file' + (sid === state.activeSection ? ' active' : '');
+            div.dataset.section = sid;
+            div.innerHTML = `<span class="file-dot">●</span><span class="file-icon ${meta.ext}">${meta.ext.toUpperCase()}</span><span>${meta.name}</span>`;
+            div.addEventListener('click', () => navigateTo(sid));
+            list.appendChild(div);
+        });
+    }
+
+    // ── Tree File Clicks ───────────────────────────────────────────
+    document.querySelectorAll('.tree-file').forEach(f => {
+        f.addEventListener('click', () => navigateTo(f.dataset.section));
+    });
+
+    // ── Initial tab click handler (about tab is in HTML) ──────────
+    const initialTab = document.querySelector('.tab[data-section="about"]');
+    if (initialTab) {
+        initialTab.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tab-close')) {
+                closeTab('about', initialTab);
+                return;
+            }
+            navigateTo('about');
+        });
+    }
+
+    // ── Activity Bar Panels ────────────────────────────────────────
+    const abIcons  = document.querySelectorAll('.ab-icon');
+    const panels   = document.querySelectorAll('.panel');
+
+    function switchPanel(panelId) {
+        panels.forEach(p => p.classList.remove('active'));
+        abIcons.forEach(i => i.classList.remove('active'));
+
+        const panel = document.getElementById(`panel-${panelId}`);
+        if (panel) panel.classList.add('active');
+
+        const icon = document.querySelector(`.ab-icon[data-panel="${panelId}"]`);
+        if (icon) icon.classList.add('active');
+
+        state.activePanel = panelId;
+    }
+
+    abIcons.forEach(icon => {
+        icon.addEventListener('click', () => {
+            const panelId = icon.dataset.panel;
+            if (panelId === 'settings') {
+                // Settings toggles theme
+                const newTheme = state.theme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+                return;
+            }
+            if (panelId === 'account') return;
+            if (state.activePanel === panelId) {
+                // Toggle sidebar on same panel click (collapse)
+                sidebar.style.display = sidebar.style.display === 'none' ? '' : '';
+            }
+            switchPanel(panelId);
+        });
+    });
+
+    // ── Extensions panel clicks ────────────────────────────────────
+    document.querySelectorAll('.ext-item').forEach(item => {
+        item.addEventListener('click', () => {
+            navigateTo(item.dataset.section);
+            switchPanel('explorer');
+        });
+    });
+
+    // ── Search ─────────────────────────────────────────────────────
+    const searchInput   = document.getElementById('searchInput');
+    const searchResults = document.getElementById('searchResults');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const q = searchInput.value.trim().toLowerCase();
+            if (q.length < 2) {
+                searchResults.innerHTML = '<p class="search-hint">Type to search across all sections</p>';
                 return;
             }
 
-            // Update active file in sidebar
-            files.forEach(f => f.classList.remove('active'));
-            this.classList.add('active');
-
-            // Simple section switching
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-
-            const targetElement = document.getElementById(targetSection);
-            if (targetElement) {
-                targetElement.classList.add('active');
-            }
-
-            // Update tab
-            const fileName = this.querySelector('.file-name').textContent;
-            const fileIcon = this.querySelector('.file-icon').textContent;
-            const tabName = document.querySelector('.tab-name');
-            const tabIcon = document.querySelector('.tab-icon');
-
-            if (tabName) tabName.textContent = fileName;
-            if (tabIcon) tabIcon.textContent = fileIcon;
-
-            // Smooth scroll to top
-            const editorContent = document.querySelector('.editor-content');
-            if (editorContent) {
-                editorContent.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-            // Close sidebar on mobile after selection
-            if (window.innerWidth <= 768) {
-                const sb = document.querySelector('.sidebar');
-                if (sb) sb.classList.remove('mobile-open');
-            }
-        });
-    });
-
-    // ============================================
-    // ACTIVITY BAR INTERACTIONS - UPDATED
-    // ============================================
-    const activityIcons = document.querySelectorAll('.activity-icon');
-    const sidebar = document.querySelector('.sidebar');
-    const sidebarHeader = document.querySelector('.sidebar-header span');
-
-    activityIcons.forEach(icon => {
-        icon.addEventListener('click', function () {
-            const tab = this.getAttribute('data-tab');
-            const isMobile = window.innerWidth <= 768;
-
-            // Update active state
-            activityIcons.forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-
-            // Handle different tabs
-            if (tab === 'explorer') {
-                showExplorer();
-            } else if (tab === 'search') {
-                showSearch();
-            } else if (tab === 'git') {
-                showSourceControl();
-            } else if (tab === 'extensions') {
-                showExtensions();
-            } else if (tab === 'settings') {
-                themeToggle.click();
-            }
-
-            // Mobile Sidebar Toggle
-            if (isMobile) {
-                sidebar.classList.toggle('mobile-open');
-                console.log('Mobile sidebar toggled');
-            }
-        });
-    });
-
-    // Close sidebar on mobile when clicking on editor content
-    const editor = document.querySelector('.editor');
-    if (editor) {
-        editor.addEventListener('click', function () {
-            if (window.innerWidth <= 768 && sidebar.classList.contains('mobile-open')) {
-                sidebar.classList.remove('mobile-open');
-            }
-        });
-    }
-
-
-    // ============================================
-    // SIDEBAR VIEWS
-    // ============================================
-
-    function showExplorer() {
-        sidebarHeader.textContent = 'EXPLORER';
-        sidebar.innerHTML = `
-            <div class="sidebar-header">
-                <span>EXPLORER</span>
-            </div>
-            <div class="file-tree">
-                <div class="folder open">
-                    <div class="folder-header">
-                        <span class="folder-icon">📁</span>
-                        <span class="folder-name">portfolio</span>
-                    </div>
-                    <div class="folder-content">
-                        <div class="file ${document.getElementById('about').classList.contains('active') ? 'active' : ''}" data-section="about">
-                            <span class="file-icon">📄</span>
-                            <span class="file-name">about.jsx</span>
-                        </div>
-                        <div class="file ${document.getElementById('projects').classList.contains('active') ? 'active' : ''}" data-section="projects">
-                            <span class="file-icon">🚀</span>
-                            <span class="file-name">projects.tsx</span>
-                        </div>
-                        <div class="file ${document.getElementById('skills').classList.contains('active') ? 'active' : ''}" data-section="skills">
-                            <span class="file-icon">⚡</span>
-                            <span class="file-name">skills.json</span>
-                        </div>
-                        <div class="file ${document.getElementById('experience').classList.contains('active') ? 'active' : ''}" data-section="experience">
-                            <span class="file-icon">💼</span>
-                            <span class="file-name">positions.ts</span>
-                        </div>
-                        <div class="file ${document.getElementById('internships').classList.contains('active') ? 'active' : ''}" data-section="internships">
-                            <span class="file-icon">🎯</span>
-                            <span class="file-name">internships.tsx</span>
-                        </div>
-                        <div class="file ${document.getElementById('certifications').classList.contains('active') ? 'active' : ''}" data-section="certifications">
-                            <span class="file-icon">🏆</span>
-                            <span class="file-name">certifications.md</span>
-                        </div>
-                        <div class="file ${document.getElementById('contact').classList.contains('active') ? 'active' : ''}" data-section="contact">
-                            <span class="file-icon">📧</span>
-                            <span class="file-name">contact.css</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // Re-attach file click handlers
-        const newFiles = sidebar.querySelectorAll('.file');
-        newFiles.forEach(file => {
-            file.addEventListener('click', function () {
-                const targetSection = this.getAttribute('data-section');
-                const currentActive = document.querySelector('.code-section.active');
-
-                if (currentActive && currentActive.id === targetSection) return;
-
-                newFiles.forEach(f => f.classList.remove('active'));
-                this.classList.add('active');
-
-                sections.forEach(section => section.classList.remove('active'));
-
-                const targetElement = document.getElementById(targetSection);
-                if (targetElement) {
-                    targetElement.classList.add('active');
-                }
-
-                const fileName = this.querySelector('.file-name').textContent;
-                const fileIcon = this.querySelector('.file-icon').textContent;
-                const tabName = document.querySelector('.tab-name');
-                const tabIcon = document.querySelector('.tab-icon');
-
-                if (tabName) tabName.textContent = fileName;
-                if (tabIcon) tabIcon.textContent = fileIcon;
-
-                const editorContent = document.querySelector('.editor-content');
-                if (editorContent) {
-                    editorContent.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-                // Close sidebar on mobile after selection
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('mobile-open');
+            const sections = document.querySelectorAll('.editor-section');
+            const hits = [];
+            sections.forEach(sec => {
+                if (sec.textContent.toLowerCase().includes(q)) {
+                    hits.push(sec.id);
                 }
             });
-        });
-    }
 
-    function showSearch() {
-        sidebar.innerHTML = `
-            <div class="sidebar-header">
-                <span>SEARCH</span>
-            </div>
-            <div style="padding: 15px;">
-                <input type="text" id="searchInput" placeholder="Search portfolio..." 
-                    style="width: 100%; padding: 8px 12px; background: var(--vscode-editor); 
-                    color: var(--vscode-text); border: 1px solid var(--vscode-border); 
-                    border-radius: 4px; font-family: 'Inter', sans-serif; font-size: 13px;">
-                
-                <div id="searchResults" style="margin-top: 15px; color: var(--vscode-text-muted); font-size: 13px;">
-                    <p style="margin: 10px 0;">🔍 Quick Search:</p>
-                    <div style="display: flex; flex-direction: column; gap: 5px; margin-top: 10px;">
-                        <button class="search-quick-btn" data-section="about" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
-                            📄 About
-                        </button>
-                        <button class="search-quick-btn" data-section="projects" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
-                            🚀 Projects
-                        </button>
-                        <button class="search-quick-btn" data-section="skills" style="text-align: left; padding: 8px 12px; background: rgba(78, 201, 176, 0.15); border: 1px solid rgba(78, 201, 176, 0.3); border-radius: 4px; color: var(--vscode-green); cursor: pointer; font-size: 12px;">
-                            ⚡ Skills
-                        </button>
-                        <button class="search-quick-btn" data-section="experience" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
-                            💼 Experience
-                        </button>
-                        <button class="search-quick-btn" data-section="internships" style="text-align: left; padding: 8px 12px; background: rgba(139, 92, 246, 0.15); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 4px; color: var(--vscode-purple); cursor: pointer; font-size: 12px;">
-                            🎯 Internships
-                        </button>
-                        <button class="search-quick-btn" data-section="certifications" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
-                            🏆 Certifications
-                        </button>
-                        <button class="search-quick-btn" data-section="contact" style="text-align: left; padding: 8px 12px; background: rgba(0, 122, 204, 0.15); border: 1px solid rgba(0, 122, 204, 0.3); border-radius: 4px; color: var(--vscode-blue); cursor: pointer; font-size: 12px;">
-                            📧 Contact
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // Add search functionality
-        const searchInput = document.getElementById('searchInput');
-        const searchResults = document.getElementById('searchResults');
-
-        searchInput.addEventListener('input', function (e) {
-            const query = e.target.value.toLowerCase();
-            if (query.length < 2) {
-                searchResults.innerHTML = '<p style="margin: 10px 0;">Type to search...</p>';
+            if (hits.length === 0) {
+                searchResults.innerHTML = '<p class="search-hint">No results found</p>';
                 return;
             }
 
-            // Search through all sections
-            const results = [];
-            sections.forEach(section => {
-                const text = section.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    results.push({
-                        id: section.id,
-                        name: section.id.charAt(0).toUpperCase() + section.id.slice(1)
-                    });
-                }
-            });
+            searchResults.innerHTML = `<p class="search-hint" style="color:var(--green)">✓ ${hits.length} match${hits.length > 1 ? 'es' : ''}</p>` +
+                hits.map(id => {
+                    const meta = sectionMeta[id] || { name: id, ext: 'jsx' };
+                    return `<div class="search-result-item" data-section="${id}">
+                        <span class="file-icon ${meta.ext}">${meta.ext.toUpperCase()}</span>
+                        <span>${meta.name}</span>
+                    </div>`;
+                }).join('');
 
-            if (results.length > 0) {
-                searchResults.innerHTML = `
-                    <p style="margin: 10px 0; color: var(--vscode-green);">✓ Found ${results.length} result(s):</p>
-                    ${results.map(r => `
-                        <div class="search-result" data-section="${r.id}" 
-                            style="padding: 8px 12px; margin: 5px 0; background: rgba(0, 122, 204, 0.1); 
-                            border-radius: 4px; cursor: pointer; font-size: 12px; color: var(--vscode-text);">
-                            → ${r.name}
-                        </div>
-                    `).join('')}
-                `;
-
-                // Add click handlers to results
-                document.querySelectorAll('.search-result').forEach(result => {
-                    result.addEventListener('click', function () {
-                        const sectionId = this.getAttribute('data-section');
-                        navigateToSection(sectionId);
-                    });
+            document.querySelectorAll('.search-result-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    navigateTo(item.dataset.section);
+                    switchPanel('explorer');
                 });
+            });
+        });
+    }
+
+    // ── Traffic Lights ─────────────────────────────────────────────
+    const tlRed    = document.getElementById('tlRed');
+    const tlYellow = document.getElementById('tlYellow');
+    const tlGreen  = document.getElementById('tlGreen');
+    const app      = document.getElementById('vscodeApp');
+
+    if (tlRed) {
+        tlRed.addEventListener('click', () => {
+            if (confirm('Close portfolio?')) {
+                app.style.transition = 'opacity 0.4s';
+                app.style.opacity = '0';
+                setTimeout(() => app.style.display = 'none', 400);
+            }
+        });
+    }
+
+    if (tlYellow) {
+        tlYellow.addEventListener('click', () => {
+            const scaled = app.style.transform === 'scale(0.92)';
+            app.style.transition = 'transform 0.3s ease';
+            app.style.transform = scaled ? 'scale(1)' : 'scale(0.92)';
+        });
+    }
+
+    if (tlGreen) {
+        tlGreen.addEventListener('click', () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
             } else {
-                searchResults.innerHTML = '<p style="margin: 10px 0; color: var(--vscode-text-muted);">No results found</p>';
-            }
-        });
-
-        // Quick buttons
-        document.querySelectorAll('.search-quick-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const sectionId = this.getAttribute('data-section');
-                navigateToSection(sectionId);
-            });
-        });
-    }
-
-    function showSourceControl() {
-        sidebar.innerHTML = `
-            <div class="sidebar-header">
-                <span>SOURCE CONTROL</span>
-            </div>
-            <div style="padding: 15px; color: var(--vscode-text);">
-                <p style="font-size: 13px; margin-bottom: 15px; color: var(--vscode-text-muted);">
-                    📦 Repository Links
-                </p>
-                
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <a href="https://github.com/rizzit17" target="_blank" 
-                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
-                        transition: all 0.2s; display: block;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 20px;">💻</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 13px;">GitHub Profile</div>
-                                <div style="font-size: 11px; color: var(--vscode-text-muted);">@rizzit17</div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="https://github.com/rizzit17/smartmeeting" target="_blank" 
-                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
-                        transition: all 0.2s; display: block;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 20px;">🎙️</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 13px;">Meetzy</div>
-                                <div style="font-size: 11px; color: var(--vscode-text-muted);">AI Meeting Platform</div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="https://github.com/rizzit17/vakeelapp" target="_blank" 
-                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
-                        transition: all 0.2s; display: block;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 20px;">⚖️</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 13px;">LegalGPT</div>
-                                <div style="font-size: 11px; color: var(--vscode-text-muted);">AI Legal Assistant</div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="https://github.com/rizzit17/amber-essence" target="_blank" 
-                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
-                        transition: all 0.2s; display: block;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 20px;">🍽️</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 13px;">Amber Essence</div>
-                                <div style="font-size: 11px; color: var(--vscode-text-muted);">Restaurant Platform</div>
-                            </div>
-                        </div>
-                    </a>
-                    
-                    <a href="https://github.com/rizzit17/shikshaplay" target="_blank" 
-                        style="padding: 12px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 8px; text-decoration: none; color: var(--vscode-text); 
-                        transition: all 0.2s; display: block;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 20px;">📚</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 13px;">ShikshaPlay</div>
-                                <div style="font-size: 11px; color: var(--vscode-text-muted);">Learning Platform</div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                
-                <div style="margin-top: 20px; padding: 12px; background: rgba(0, 122, 204, 0.1); 
-                    border-radius: 8px; border: 1px solid rgba(0, 122, 204, 0.2);">
-                    <p style="font-size: 11px; color: var(--vscode-text-muted); margin: 0;">
-                        💡 View all repositories on GitHub
-                    </p>
-                </div>
-            </div>
-        `;
-    }
-
-    function showExtensions() {
-        sidebar.innerHTML = `
-            <div class="sidebar-header">
-                <span>EXTENSIONS</span>
-            </div>
-            <div style="padding: 15px; color: var(--vscode-text);">
-                <p style="font-size: 13px; margin-bottom: 15px; color: var(--vscode-text-muted);">
-                    🧩 Installed Skills & Tools
-                </p>
-                
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div class="extension-item" data-section="skills" 
-                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 18px;">⚡</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 12px;">Full-Stack Development</div>
-                                <div style="font-size: 10px; color: var(--vscode-text-muted);">React, Node.js, MongoDB</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-item" data-section="skills" 
-                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 18px;">📱</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 12px;">Android Development</div>
-                                <div style="font-size: 10px; color: var(--vscode-text-muted);">Kotlin, Jetpack Compose</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-item" data-section="skills" 
-                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 18px;">🤖</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 12px;">AI/ML Integration</div>
-                                <div style="font-size: 10px; color: var(--vscode-text-muted);">OpenAI API, ML Kit</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-item" data-section="certifications" 
-                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 18px;">🏆</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 12px;">Certifications</div>
-                                <div style="font-size: 10px; color: var(--vscode-text-muted);">4 Professional Certificates</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-item" data-section="skills" 
-                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 18px;">☁️</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 12px;">Cloud Services</div>
-                                <div style="font-size: 10px; color: var(--vscode-text-muted);">AWS EC2, S3, IAM</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="extension-item" data-section="skills" 
-                        style="padding: 10px; background: var(--glass-bg); border: 1px solid var(--glass-border); 
-                        border-radius: 6px; cursor: pointer; transition: all 0.2s;">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 18px;">🎨</span>
-                            <div>
-                                <div style="font-weight: 600; font-size: 12px;">UI/UX Design</div>
-                                <div style="font-size: 10px; color: var(--vscode-text-muted);">Figma, Tailwind CSS</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 15px; padding: 12px; background: rgba(78, 201, 176, 0.1); 
-                    border-radius: 8px; border: 1px solid rgba(78, 201, 176, 0.2);">
-                    <p style="font-size: 11px; color: var(--vscode-text-muted); margin: 0;">
-                        💡 Click any extension to view details
-                    </p>
-                </div>
-            </div>
-        `;
-
-        // Add click handlers to extension items
-        document.querySelectorAll('.extension-item').forEach(item => {
-            item.addEventListener('click', function () {
-                const sectionId = this.getAttribute('data-section');
-                navigateToSection(sectionId);
-            });
-
-            item.addEventListener('mouseenter', function () {
-                this.style.background = 'rgba(78, 201, 176, 0.15)';
-                this.style.borderColor = 'rgba(78, 201, 176, 0.3)';
-            });
-
-            item.addEventListener('mouseleave', function () {
-                this.style.background = 'var(--glass-bg)';
-                this.style.borderColor = 'var(--glass-border)';
-            });
-        });
-    }
-
-    function navigateToSection(sectionId) {
-        sections.forEach(section => section.classList.remove('active'));
-        const targetElement = document.getElementById(sectionId);
-        if (targetElement) {
-            targetElement.classList.add('active');
-        }
-
-        // Switch back to explorer view
-        activityIcons.forEach(i => i.classList.remove('active'));
-        document.querySelector('[data-tab="explorer"]').classList.add('active');
-        showExplorer();
-
-        // Update active file in explorer
-        setTimeout(() => {
-            const file = document.querySelector(`[data-section="${sectionId}"]`);
-            if (file) {
-                document.querySelectorAll('.file').forEach(f => f.classList.remove('active'));
-                file.classList.add('active');
-
-                const fileName = file.querySelector('.file-name').textContent;
-                const fileIcon = file.querySelector('.file-icon').textContent;
-                const tabName = document.querySelector('.tab-name');
-                const tabIcon = document.querySelector('.tab-icon');
-
-                if (tabName) tabName.textContent = fileName;
-                if (tabIcon) tabIcon.textContent = fileIcon;
-            }
-        }, 100);
-
-        // Smooth scroll to top
-        const editorContent = document.querySelector('.editor-content');
-        if (editorContent) {
-            editorContent.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        // Close sidebar on mobile
-        if (window.innerWidth <= 768) {
-            sidebar.classList.remove('mobile-open');
-        }
-    }
-
-    // ============================================
-    // TRAFFIC LIGHTS
-    // ============================================
-    const redLight = document.querySelector('.light.red');
-    const yellowLight = document.querySelector('.light.yellow');
-    const greenLight = document.querySelector('.light.green');
-
-    if (redLight) {
-        redLight.addEventListener('click', function () {
-            if (confirm('Close window?')) {
-                document.querySelector('.vscode-window').style.opacity = '0';
-                setTimeout(() => {
-                    document.querySelector('.vscode-window').style.display = 'none';
-                }, 300);
+                document.documentElement.requestFullscreen().catch(() => {});
             }
         });
     }
 
-    if (yellowLight) {
-        yellowLight.addEventListener('click', function () {
-            const vscodeWindow = document.querySelector('.vscode-window');
-            if (vscodeWindow.style.transform === 'scale(0.9)') {
-                vscodeWindow.style.transform = 'scale(1)';
-            } else {
-                vscodeWindow.style.transform = 'scale(0.9)';
-            }
-        });
-    }
+    // ── Status Bar — scroll position tracker ─────────────────────
+    editorContent.addEventListener('scroll', () => {
+        const lineHeight = 21;
+        const approxLine = Math.floor(editorContent.scrollTop / lineHeight) + 1;
+        if (sbPos) sbPos.textContent = `Ln ${approxLine}, Col 1`;
+    });
 
-    if (greenLight) {
-        greenLight.addEventListener('click', function () {
-            const vscodeWindow = document.querySelector('.vscode-window');
-            if (vscodeWindow.style.maxWidth === '100%') {
-                vscodeWindow.style.maxWidth = '1600px';
-                vscodeWindow.style.margin = '50px auto 20px';
-            } else {
-                vscodeWindow.style.maxWidth = '100%';
-                vscodeWindow.style.margin = '20px';
-            }
-        });
-    }
-
-    // ============================================
-    // TAB CLOSE BUTTON
-    // ============================================
-    const tabClose = document.querySelector('.tab-close');
-    if (tabClose) {
-        tabClose.addEventListener('click', function (e) {
-            e.stopPropagation();
-            alert('Cannot close the only tab! 🔒');
-        });
-    }
-
-    // ============================================
-    // SMOOTH SCROLL FOR INTERNAL LINKS
-    // ============================================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    // ── Keyboard Shortcuts ─────────────────────────────────────────
+    document.addEventListener('keydown', e => {
+        // Ctrl/Cmd + Shift + T → toggle theme
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+            applyTheme(state.theme === 'dark' ? 'light' : 'dark');
+        }
+        // Ctrl/Cmd + B → toggle sidebar
+        if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
+            e.preventDefault();
+            sidebar.style.display = sidebar.style.display === 'none' ? '' : 'none';
+        }
+        // Ctrl/Cmd + Shift + F → focus search
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'F') {
+            e.preventDefault();
+            switchPanel('search');
+            setTimeout(() => searchInput && searchInput.focus(), 100);
+        }
+        // Ctrl/Cmd + P → show shortcut help
+        if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+            e.preventDefault();
+            const keys = [
+                '1-7         Navigate sections',
+                'Ctrl+Shift+T  Toggle theme',
+                'Ctrl+B        Toggle sidebar',
+                'Ctrl+Shift+F  Search',
+            ];
+            alert('⌨️  Keyboard Shortcuts\n\n' + keys.join('\n'));
+        }
+        // Number keys 1–7 for quick nav
+        if (!e.ctrlKey && !e.metaKey && !e.altKey && e.key >= '1' && e.key <= '7') {
+            const sections = Object.keys(sectionMeta);
+            const target   = sections[parseInt(e.key) - 1];
+            if (target) navigateTo(target);
+        }
     });
 
-    // ============================================
-    // TERMINAL TYPING EFFECT
-    // ============================================
-    const terminalBody = document.querySelector('.terminal-body');
+    // ── Terminal Typing Effect ─────────────────────────────────────
+    const terminalBody = document.getElementById('terminalBody');
     if (terminalBody) {
-        const originalContent = terminalBody.innerHTML;
-        terminalBody.innerHTML = '';
-
-        const commands = [
-            { text: '$ git clone https://github.com/rizzit17/awesome-project.git', delay: 50 },
-            { text: '$ cd awesome-project', delay: 30 },
-            { text: '$ npm install && npm start', delay: 40 },
-            { text: '✓ Ready to collaborate!', delay: 20, isSuccess: true }
+        const lines = [
+            { prompt: true,  text: 'git clone https://github.com/rizzit17/awesome-project.git' },
+            { prompt: true,  text: 'cd awesome-project' },
+            { prompt: true,  text: 'npm install && npm start' },
+            { prompt: false, text: '✓ Ready to collaborate!', success: true },
         ];
 
-        function typeCommand(commandIndex) {
-            if (commandIndex >= commands.length) return;
+        let lineIdx = 0;
 
-            const command = commands[commandIndex];
+        function typeLine() {
+            if (lineIdx >= lines.length) {
+                // Cursor at end
+                const cursor = document.createElement('span');
+                cursor.className = 'terminal-cursor';
+                terminalBody.appendChild(cursor);
+                return;
+            }
+
+            const line = lines[lineIdx];
             const p = document.createElement('p');
-            if (command.isSuccess) {
-                p.className = 'terminal-success';
-            } else {
-                const prompt = document.createElement('span');
-                prompt.className = 'terminal-prompt';
-                prompt.textContent = '$';
-                p.appendChild(prompt);
-                p.appendChild(document.createTextNode(' '));
+            if (line.success) p.className = 'terminal-success';
+
+            if (line.prompt) {
+                const promptSpan = document.createElement('span');
+                promptSpan.className = 'terminal-prompt';
+                promptSpan.textContent = '$ ';
+                p.appendChild(promptSpan);
             }
 
             terminalBody.appendChild(p);
+            lineIdx++;
 
-            let charIndex = 0;
-            const commandText = command.isSuccess ? command.text : command.text.substring(2);
+            let charIdx = 0;
+            const textNode = document.createTextNode('');
+            p.appendChild(textNode);
 
-            const typeInterval = setInterval(() => {
-                if (charIndex < commandText.length) {
-                    p.textContent = (command.isSuccess ? '' : '$ ') + commandText.substring(0, charIndex + 1);
-                    if (command.isSuccess) {
-                        p.className = 'terminal-success';
-                    }
-                    charIndex++;
+            const interval = setInterval(() => {
+                if (charIdx < line.text.length) {
+                    textNode.textContent += line.text[charIdx];
+                    charIdx++;
                 } else {
-                    clearInterval(typeInterval);
-                    setTimeout(() => typeCommand(commandIndex + 1), 500);
+                    clearInterval(interval);
+                    setTimeout(typeLine, 400);
                 }
-            }, command.delay);
+            }, line.prompt ? 28 : 18);
         }
 
-        // Start typing effect after a delay
-        setTimeout(() => typeCommand(0), 1000);
+        setTimeout(typeLine, 800);
     }
 
-    // ============================================
-    // KEYBOARD SHORTCUTS
-    // ============================================
-    document.addEventListener('keydown', function (e) {
-        // Ctrl/Cmd + K for Quick Open
-        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-            e.preventDefault();
-            alert('⌨️ Keyboard Shortcuts:\n\n1-7: Navigate sections\nCtrl+Shift+T: Toggle theme\nCtrl+B: Toggle sidebar\nCtrl+Shift+F: Search');
-        }
-
-        // Ctrl/Cmd + Shift + T for theme toggle
-        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'T') {
-            e.preventDefault();
-            themeToggle.click();
-        }
-
-        // Ctrl/Cmd + Shift + F for search
-        if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'F') {
-            e.preventDefault();
-            document.querySelector('[data-tab="search"]').click();
-        }
-
-        // Number keys for quick navigation
-        if (e.key >= '1' && e.key <= '7') {
-            const fileIndex = parseInt(e.key) - 1;
-            const fileElements = document.querySelectorAll('.file');
-            if (fileElements[fileIndex]) {
-                fileElements[fileIndex].click();
-            }
-        }
-
-        // Ctrl/Cmd + B to toggle sidebar
-        if ((e.ctrlKey || e.metaKey) && e.key === 'b') {
-            e.preventDefault();
-            const sidebar = document.querySelector('.sidebar');
-            if (sidebar) {
-                sidebar.style.display = sidebar.style.display === 'none' ? 'block' : 'none';
-            }
-        }
-    });
-
-    // ============================================
-    // HOVER EFFECTS
-    // ============================================
-
-    // Skill tags hover
-    const skillTags = document.querySelectorAll('.skill-tag');
-    skillTags.forEach(tag => {
+    // ── Hover effects on cards ─────────────────────────────────────
+    document.querySelectorAll('.tag').forEach(tag => {
         tag.addEventListener('mouseenter', function () {
-            this.style.transform = 'translateY(-3px) scale(1.05)';
+            this.style.transform = 'translateY(-1px)';
         });
-
         tag.addEventListener('mouseleave', function () {
-            this.style.transform = 'translateY(0) scale(1)';
+            this.style.transform = '';
         });
     });
 
-    // Glass cards hover
-    const glassCards = document.querySelectorAll('.glass');
-    glassCards.forEach(card => {
-        card.addEventListener('mouseenter', function () {
-            this.style.boxShadow = '0 8px 32px rgba(0, 122, 204, 0.2)';
-        });
+    // ── Console Easter Egg ─────────────────────────────────────────
+    console.log('%c🚀 Rishit Chaudhary — Portfolio', 'font-size:18px; font-weight:bold; color:#007acc;');
+    console.log('%c💻 Full-Stack Developer | React · Node.js · MongoDB', 'font-size:13px; color:#4ec9b0;');
+    console.log('%c📧 rishitwork28@gmail.com | 🐙 github.com/rizzit17', 'font-size:12px; color:#ce9178;');
+    console.log('%c⌨️  Press Ctrl+P for keyboard shortcuts', 'font-size:11px; color:#858585;');
 
-        card.addEventListener('mouseleave', function () {
-            this.style.boxShadow = 'none';
-        });
-    });
+    // ── Init ───────────────────────────────────────────────────────
+    navigateTo('about');
 
-    // ============================================
-    // CONSOLE EASTER EGG
-    // ============================================
-    console.log('%c🚀 Welcome to Rishit\'s Portfolio!', 'font-size: 20px; font-weight: bold; color: #007acc;');
-    console.log('%c💻 Built with VS Code theme + MacBook design', 'font-size: 14px; color: #4ec9b0;');
-    console.log('%c⚡ Full-Stack Developer | React | Node.js | MongoDB', 'font-size: 12px; color: #dcdcaa;');
-    console.log('%c📧 rishitwork28@gmail.com', 'font-size: 12px; color: #ce9178;');
-    console.log('%c🎨 Theme: ' + currentTheme.toUpperCase() + ' | Toggle: Ctrl+Shift+T', 'font-size: 11px; color: #c586c0;');
-    console.log('%c🔍 Search: Ctrl+Shift+F | Sidebar: Ctrl+B', 'font-size: 11px; color: #858585;');
-    console.log('%cHint: Press Ctrl+K for all keyboard shortcuts!', 'font-size: 11px; color: #858585;');
-    console.log('%c✨ Portfolio loaded successfully!', 'font-size: 14px; font-weight: bold; color: #28c840;');
 });
