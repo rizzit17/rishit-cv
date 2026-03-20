@@ -82,10 +82,10 @@ a{text-decoration:none;color:inherit;}
 .sidebar::-webkit-scrollbar{width:4px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-/* FULL WIDTH IMAGE */
+/* FULL WIDTH IMAGE (FIXED VERSION) */
 .profile-top {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 220px;            /* ✅ fallback height (VERY IMPORTANT) */
   overflow: hidden;
   border-radius: 8px;
 }
@@ -95,6 +95,7 @@ a{text-decoration:none;color:inherit;}
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 
   border: none;
   filter: grayscale(20%);
@@ -106,6 +107,8 @@ a{text-decoration:none;color:inherit;}
   transform: scale(1.05);
   filter: grayscale(0%);
 }
+
+/* TEXT */
 .profile-name{
   font-family:var(--sans);
   font-size:17px;
@@ -113,11 +116,23 @@ a{text-decoration:none;color:inherit;}
   color:#f0f0f0;
   letter-spacing:-.02em;
   line-height:1.2;
-
-  margin-top: 10px; /* 👈 this is step 3 */
+  margin-top: 12px;
 }
-.profile-role{font-size:13px;color:var(--green);font-weight:500;margin-top:3px;letter-spacing:.01em;}
-.profile-bio{font-family:var(--sans);font-size:13px;color:var(--text-dim);line-height:1.7;}
+
+.profile-role{
+  font-size:13px;
+  color:var(--green);
+  font-weight:500;
+  margin-top:3px;
+  letter-spacing:.01em;
+}
+
+.profile-bio{
+  font-family:var(--sans);
+  font-size:13px;
+  color:var(--text-dim);
+  line-height:1.7;
+}
 
 .meta-list{display:flex;flex-direction:column;gap:7px;}
 .meta-item{
