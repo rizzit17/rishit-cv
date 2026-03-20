@@ -82,21 +82,20 @@ a{text-decoration:none;color:inherit;}
 .sidebar::-webkit-scrollbar{width:4px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-/* AFTER */
 .profile-top {
   width: 100%;
   height: 220px;
-  min-height: 220px;        /* ← prevents flex from collapsing it */
-  flex-shrink: 0;           /* ← prevents flex from shrinking it */
+  min-height: 220px;
+  flex-shrink: 0;
   overflow: hidden;
   border-radius: 8px;
-  background: #1c1c1c;      /* ← visible placeholder while image loads */
+  background: #1c1c1c;
 }
 
 .profile-img {
   width: 100%;
   height: 100%;
-  min-height: 220px;        /* ← resolves height: 100% in flex context */
+  min-height: 220px;
   object-fit: cover;
   display: block;
   border: none;
@@ -104,13 +103,11 @@ a{text-decoration:none;color:inherit;}
   transition: transform .4s ease, filter .3s;
 }
 
-/* HOVER EFFECT */
 .profile-top:hover .profile-img {
   transform: scale(1.05);
   filter: grayscale(0%);
 }
 
-/* TEXT */
 .profile-name{
   font-family:var(--sans);
   font-size:17px;
@@ -286,8 +283,8 @@ a{text-decoration:none;color:inherit;}
 .pinfo{flex:1;min-width:0;}
 .pname{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--text-bright);margin-bottom:2px;}
 .ptype{font-size:12px;color:var(--text-muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;}
-.plink{font-size:12px;color:var(--blue);font-family:var(--mono);border:1px solid rgba( 96,165,250,.25);background:rgba( 96,165,250,.08);padding:4px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;transition:background .15s;}
-.plink:hover{background:rgba( 96,165,250,.18);}
+.plink{font-size:12px;color:var(--blue);font-family:var(--mono);border:1px solid rgba(96,165,250,.25);background:rgba(96,165,250,.08);padding:4px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;transition:background .15s;}
+.plink:hover{background:rgba(96,165,250,.18);}
 .pbody{padding:14px 18px 16px;}
 .pdesc{font-family:var(--sans);font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:12px;}
 .pimpact{font-size:13px;color:var(--green);font-family:var(--mono);background:rgba(158,206,106,.07);border-left:3px solid var(--green);padding:5px 10px;margin-bottom:12px;border-radius:0 3px 3px 0;}
@@ -314,7 +311,7 @@ a{text-decoration:none;color:inherit;}
 .timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:repeating-linear-gradient(180deg,var(--border) 0,var(--border) 6px,transparent 6px,transparent 12px);}
 .tl-item{position:relative;margin-bottom:20px;}
 .tl-dot{position:absolute;left:-23px;top:18px;width:13px;height:13px;background:var(--bg-deep);border:2px solid var(--blue);border-radius:50%;}
-.tl-dot.on{background:var(--green);box-shadow:0 0 0 4px rgba( 74,222,128,.15);}
+.tl-dot.on{background:var(--green);box-shadow:0 0 0 4px rgba(74,222,128,.15);}
 .tlcard{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:17px 20px;transition:border-color .2s;}
 .tlcard:hover{border-color:var(--border-mid);}
 .tlhdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:4px;}
@@ -411,22 +408,22 @@ a{text-decoration:none;color:inherit;}
   <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="profile-top">
-  <img 
-  src="/profile_pic.jpeg" 
-  alt="Rishit" 
-  class="profile-img"
-  onerror="this.style.background='#1c1c1c'; this.style.display='block';"
->
-</div>
+      <img
+        src="/profile_pic.jpeg"
+        alt="Rishit"
+        class="profile-img"
+        onerror="this.style.background='#1c1c1c';this.style.display='block';"
+      >
+    </div>
 
-<div class="profile-info">
-  <div class="profile-name">Rishit Chaudhary</div>
-  <div class="profile-role">Full-Stack Developer</div>
-</div>
+    <div class="profile-info">
+      <div class="profile-name">Rishit Chaudhary</div>
+      <div class="profile-role">Full-Stack Developer</div>
+    </div>
 
-<p class="profile-bio">
-  3rd year B.Tech CSE (IoT) @ VIT Vellore. Building scalable web apps, AI tools & experiences.
-</p>
+    <p class="profile-bio">
+      3rd year B.Tech CSE (IoT) @ VIT Vellore. Building scalable web apps, AI tools &amp; experiences.
+    </p>
 
     <div class="sdiv"></div>
 
@@ -506,7 +503,7 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="cmt">// 🤖 AI/ML Integration  ·  ☁️ AWS</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">export default</span> <span class="fn">Rishit</span><span class="pct">;</span></div>
-</div>
+          </div>
 
           <div class="about-hero reveal">
             <h1 class="a-h1">Full-Stack<br><span>Developer</span></h1>
@@ -555,9 +552,9 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VeriLex"</span><span class="pct">,</span>       <span class="prop">tech</span><span class="op">:</span>   <span class="str">"Gemini 1.5 Flash"</span>             <span class="pct">},</span></div>
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"Amber Essence"</span><span class="pct">,</span> <span class="prop">impact</span><span class="op">:</span> <span class="str">"60% faster bookings"</span>          <span class="pct">},</span></div>
 <div class="cblk-line"><span class="pct">];</span></div>
-</div>
+          </div>
           <h2 class="sh reveal"><span>//</span> Featured Projects</h2>
-          <p class="ss reveal">Things I've built - AI platforms & full-stack systems.</p>
+          <p class="ss reveal">Things I've built - AI platforms &amp; full-stack systems.</p>
           <div class="pgrid">
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🎙️</span><div class="pinfo"><div class="pname">Meetzy</div><div class="ptype">AI Meeting Platform</div></div><a href="https://github.com/rizzit17/smartmeeting" target="_blank" class="plink">GitHub →</a></div>
@@ -573,7 +570,7 @@ a{text-decoration:none;color:inherit;}
             </div>
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">📚</span><div class="pinfo"><div class="pname">ShikshaPlay</div><div class="ptype">AI-Enabled Learning Platform</div></div><a href="https://github.com/rizzit17/shikshaplay" target="_blank" class="plink">GitHub →</a></div>
-              <div class="pbody"><p class="pdesc">Gamified e-learning platform with interactive quizzes, leaderboards, and progress tracking. Added multilingual support (English & Hindi) for wider accessibility.</p><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">FastAPI</span><span class="tag tp">i18n</span></div></div>
+              <div class="pbody"><p class="pdesc">Gamified e-learning platform with interactive quizzes, leaderboards, and progress tracking. Added multilingual support (English &amp; Hindi) for wider accessibility.</p><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">FastAPI</span><span class="tag tp">i18n</span></div></div>
             </div>
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">💻</span><div class="pinfo"><div class="pname">VS Code Portfolio</div><div class="ptype">VS Code–Themed Website</div></div><a href="https://rishit-cv.vercel.app/" target="_blank" class="plink">Live →</a></div>
@@ -593,23 +590,24 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="cmt">// skills.json - full tech stack</span></div>
 <div class="cblk-line"><span class="pct">{</span></div>
 <div class="cblk-line">  <span class="str">"languages"</span><span class="op">:</span>  <span class="pct">[</span><span class="str">"Python"</span><span class="pct">,</span> <span class="str">"C++"</span><span class="pct">,</span> <span class="str">"Java"</span><span class="pct">,</span> <span class="str">"JavaScript"</span><span class="pct">,</span> <span class="str">"SQL"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"frontend"</span><span class="op">:</span>   <span class="pct">[</span><span class="str">"React.js"</span><span class="pct">,</span> <span class="str">"Tailwind CSS"</span><span class="pct">,</span> <span class="str">"HTML5/CSS3"</span><span class="pct">,</span> </div>
+<div class="cblk-line">  <span class="str">"frontend"</span><span class="op">:</span>   <span class="pct">[</span><span class="str">"React.js"</span><span class="pct">,</span> <span class="str">"Tailwind CSS"</span><span class="pct">,</span> <span class="str">"HTML5/CSS3"</span><span class="pct">,</span> <span class="str">"Context API"</span><span class="pct">],</span></div>
 <div class="cblk-line">  <span class="str">"backend"</span><span class="op">:</span>    <span class="pct">[</span><span class="str">"Node.js"</span><span class="pct">,</span> <span class="str">"Express.js"</span><span class="pct">,</span> <span class="str">"FastAPI"</span><span class="pct">,</span> <span class="str">"REST APIs"</span><span class="pct">,</span> <span class="str">"JWT Auth"</span><span class="pct">],</span></div>
 <div class="cblk-line">  <span class="str">"ai_ml"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"OpenAI GPT-4"</span><span class="pct">,</span> <span class="str">"Gemini API"</span><span class="pct">,</span> <span class="str">"ML Kit"</span><span class="pct">,</span> <span class="str">"OCR"</span><span class="pct">],</span></div>
 <div class="cblk-line">  <span class="str">"databases"</span><span class="op">:</span>  <span class="pct">[</span><span class="str">"MongoDB"</span><span class="pct">,</span> <span class="str">"MySQL"</span><span class="pct">,</span> <span class="str">"Firebase"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"cloud"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"AWS"</span><span class="pct">,</span> <span class="str">"Vercel"</span><span class="pct">,</span> <span class="str">"Railway"</span><span class="pct">,</span> </div>
+<div class="cblk-line">  <span class="str">"cloud"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"AWS"</span><span class="pct">,</span> <span class="str">"Vercel"</span><span class="pct">,</span> <span class="str">"Railway"</span><span class="pct">,</span> <span class="str">"CI/CD"</span><span class="pct">],</span></div>
 <div class="cblk-line">  <span class="str">"tools"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"Git/GitHub"</span><span class="pct">,</span> <span class="str">"Postman"</span><span class="pct">,</span> <span class="str">"Figma"</span><span class="pct">,</span> <span class="str">"VS Code"</span><span class="pct">]</span></div>
 <div class="cblk-line"><span class="pct">}</span></div>
-</div>
+          </div>
           <h2 class="sh reveal"><span>//</span> Skill Tree</h2>
           <p class="ss reveal">Technologies and tools I work with day-to-day.</p>
           <div class="sgrid">
             <div class="scard reveal"><div class="shead"><div class="sico">💻</div><div class="slabel">Languages</div></div><div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">Java</span><span class="sk">JavaScript</span><span class="sk">SQL</span></div></div>
             <div class="scard reveal"><div class="shead"><div class="sico">🎨</div><div class="slabel">Frontend</div></div><div class="sk-tags"><span class="sk">React.js</span><span class="sk">Tailwind CSS</span><span class="sk">HTML5/CSS3</span><span class="sk">Context API</span></div></div>
             <div class="scard reveal"><div class="shead"><div class="sico">⚙️</div><div class="slabel">Backend</div></div><div class="sk-tags"><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">FastAPI</span><span class="sk">REST APIs</span><span class="sk">JWT Auth</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">🤖</div><div class="slabel">AI / ML & LLM</div></div><div class="sk-tags"><span class="sk">OpenAI API (GPT-4)</span><span class="sk">Google Gemini API</span><span class="sk">Google ML Kit</div>
+            <!-- ✅ FIX: was <span class="sk">Google ML Kit</div> — missing </span> and </div></div> -->
+            <div class="scard reveal"><div class="shead"><div class="sico">🤖</div><div class="slabel">AI / ML &amp; LLM</div></div><div class="sk-tags"><span class="sk">OpenAI API (GPT-4)</span><span class="sk">Google Gemini API</span><span class="sk">Google ML Kit</span></div></div>
             <div class="scard reveal"><div class="shead"><div class="sico">💾</div><div class="slabel">Databases</div></div><div class="sk-tags"><span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk">Firebase</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">☁️</div><div class="slabel">Cloud & Tools</div></div><div class="sk-tags"><span class="sk">AWS</span><span class="sk">Vercel</span><span class="sk">Railway</span><span class="sk">Git/GitHub</span><span class="sk">Postman</span><span class="sk">Figma</span><span class="sk">CI/CD</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">☁️</div><div class="slabel">Cloud &amp; Tools</div></div><div class="sk-tags"><span class="sk">AWS</span><span class="sk">Vercel</span><span class="sk">Railway</span><span class="sk">Git/GitHub</span><span class="sk">Postman</span><span class="sk">Figma</span><span class="sk">CI/CD</span></div></div>
             <div class="scard reveal"><div class="shead"><div class="sico">🧠</div><div class="slabel">Core CS</div></div><div class="sk-tags"><span class="sk">DSA</span><span class="sk">OOPs</span><span class="sk">OS</span><span class="sk">Computer Networks</span></div></div>
           </div>
         </div>
@@ -631,13 +629,13 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="pct">}</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">const</span> <span class="prop">positions</span><span class="op">:</span> <span class="cls">Position</span><span class="pct">[]</span> <span class="op">=</span> <span class="pct">[</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Campus Partner"</span><span class="pct">,</span>  <span class="prop">org</span><span class="op">:</span> <span class="str">"Perplexity AI"</span><span class="pct">,</span>   <span class="prop">students</span><span class="op">:</span> <span class="num">180</span> <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Core Committee member"</span><span class="pct">,</span> <span class="prop">org</span><span class="op">:</span> <span class="str">"IEEE CS Chapter"</span><span class="pct">,</span> <span class="prop">students</span><span class="op">:</span> <span class="num">190</span> <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Senior Core member"</span><span class="pct">,</span> <span class="prop">org</span><span class="op">:</span> <span class="str">"Pixelate Design Club"</span><span class="pct">,</span> <span class="prop">students</span><span class="op">:</span> <span class="num">150</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Campus Partner"</span><span class="pct">,</span>       <span class="prop">org</span><span class="op">:</span> <span class="str">"Perplexity AI"</span><span class="pct">,</span>       <span class="prop">students</span><span class="op">:</span> <span class="num">180</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Core Committee member"</span><span class="pct">,</span>  <span class="prop">org</span><span class="op">:</span> <span class="str">"IEEE CS Chapter"</span><span class="pct">,</span>     <span class="prop">students</span><span class="op">:</span> <span class="num">190</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Senior Core member"</span><span class="pct">,</span>     <span class="prop">org</span><span class="op">:</span> <span class="str">"Pixelate Design Club"</span><span class="pct">,</span>  <span class="prop">students</span><span class="op">:</span> <span class="num">150</span> <span class="pct">},</span></div>
 <div class="cblk-line"><span class="pct">];</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="cmt">// Leadership roles that shaped my journey 🚀</span></div>
-</div>
+          </div>
           <h2 class="sh reveal"><span>//</span> Extracurricular Activities</h2>
           <p class="ss reveal">Clubs, communities and leadership roles at VIT Vellore.</p>
           <div class="timeline">
@@ -700,13 +698,9 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line">  <span class="prop">role</span><span class="op">:</span>    <span class="str">"Winter Intern - Space Tech &amp; Remote Sensing"</span><span class="pct">,</span></div>
 <div class="cblk-line">  <span class="prop">period</span><span class="op">:</span>  <span class="str">"Jan 2026 - Feb 2026"</span><span class="pct">,</span></div>
 <div class="cblk-line">  <span class="prop">type</span><span class="op">:</span>    <span class="str">"Remote"</span><span class="pct">,</span></div>
-<div class="cblk-line">  <span class="prop">focus</span><span class="op">:</span>   <span class="pct">[</span></div>
-<div class="cblk-line">    <span class="str">"Satellite Systems"</span><span class="pct">,</span></div>
-<div class="cblk-line">    <span class="str">"Remote Sensing Analytics"</span><span class="pct">,</span></div>
-<div class="cblk-line">    <span class="str">"UAV / Drone Data Pipelines"</span><span class="pct">,</span></div>
-<div class="cblk-line">  <span class="pct">],</span></div>
+<div class="cblk-line">  <span class="prop">focus</span><span class="op">:</span>   <span class="pct">[</span><span class="str">"Satellite Systems"</span><span class="pct">,</span> <span class="str">"Remote Sensing Analytics"</span><span class="pct">,</span> <span class="str">"UAV / Drone Data Pipelines"</span><span class="pct">],</span></div>
 <div class="cblk-line"><span class="pct">}];</span></div>
-</div>
+          </div>
           <h2 class="sh reveal"><span>//</span> Internship Experience</h2>
           <p class="ss reveal">Professional experience beyond the classroom.</p>
           <div class="timeline">
@@ -714,11 +708,11 @@ a{text-decoration:none;color:inherit;}
               <div class="tl-dot on"></div>
               <div class="tlcard">
                 <div class="tlhdr"><div class="tl-title">🛰️ India Space Lab</div><span class="tl-badge">Jan 2026 - Feb 2026</span></div>
-                <div class="tl-org">Winter Intern - Space Technology & Remote Sensing · Remote</div>
+                <div class="tl-org">Winter Intern - Space Technology &amp; Remote Sensing · Remote</div>
                 <ul class="tl-pts">
                   <li>Selected for a <strong>national competitive internship</strong> applying space technologies to real-world engineering challenges</li>
-                  <li>Gaining hands-on experience with <strong>satellite systems, remote sensing analytics, and UAV/drone-based data pipelines</strong></li>
-                  <li>Collaborating with a distributed team to design and evaluate <strong>space-based engineering solutions</strong> through structured technical case studies</li>
+                  <li>Gained hands-on experience with <strong>satellite systems, remote sensing analytics, and UAV/drone-based data pipelines</strong></li>
+                  <li>Collaborated with a distributed team to design and evaluate <strong>space-based engineering solutions</strong> through structured technical case studies</li>
                 </ul>
                 <div class="tl-tags tags">
                   <span class="tag tb">Remote Sensing</span><span class="tag tt">Satellite Systems</span><span class="tag tp">Drone Technology</span><span class="tag tg">Geospatial Analysis</span>
@@ -749,73 +743,66 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="cmt">## Open Source</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="pct">-</span> GSSoC <span class="num">2025</span> Contributor  <span class="op">→</span>  Multiple OSS projects</div>
-</div>
+          </div>
           <h2 class="sh reveal"><span>//</span> Certifications</h2>
           <p class="ss reveal">Courses, credentials and open-source contributions.</p>
           <div class="cgrid">
             <div class="ccard reveal">
-    <span class="cico">🛡️</span>
-    <div class="ctitle">EY Technology Risk Virtual Job Simulation</div>
-    <div class="cby">Forage</div>
-    <p class="cdesc">Completed hands-on tasks involving IT risk assessment, control evaluation, and cybersecurity frameworks in a simulated EY environment</p>
-    <a href="https://www.theforage.com/completion-certificates/Z3pPDqCPapFTSGBgi/25RAqjzJnD3b8YPZv_Z3pPDqCPapFTSGBgi_694e851739ff7eaad9e01e9f_1773940779788_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🔐</span>
-    <div class="ctitle">Mastercard Cybersecurity Job Simulation</div>
-    <div class="cby">Forage</div>
-    <p class="cdesc">Gained practical experience in identifying threats, analyzing vulnerabilities, and implementing cybersecurity measures in real-world scenarios</p>
-    <a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_694e851739ff7eaad9e01e9f_1773941954278_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">📊</span>
-    <div class="ctitle">Deloitte Australia Data Analytics Job Simulation</div>
-    <div class="cby">Forage</div>
-    <p class="cdesc">Worked on data cleaning, visualization, and deriving business insights using analytical tools in a Deloitte-simulated project environment</p>
-    <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_694e851739ff7eaad9e01e9f_1773930285033_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🤖</span>
-    <div class="ctitle">AI Skills Passport</div>
-    <div class="cby">Microsoft & EY</div>
-    <p class="cdesc">Developed foundational AI knowledge including machine learning concepts, ethical AI, and real-world business applications</p>
-    <a href="https://drive.google.com/file/d/177NQqEdiZTolXnbBBlTMIa_CVcgprv36/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🎓</span>
-    <div class="ctitle">Full-Stack Web Development</div>
-    <div class="cby">Udemy · 61.5 hours</div>
-    <p class="cdesc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p>
-    <a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🎨</span>
-    <div class="ctitle">UI/UX Design Masterclass</div>
-    <div class="cby">Udemy · 41.5 hours</div>
-    <p class="cdesc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p>
-    <a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🔧</span>
-    <div class="ctitle">Postman Student Expert</div>
-    <div class="cby">Postman</div>
-    <p class="cdesc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p>
-    <a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="clink">View Badge →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🌟</span>
-    <div class="ctitle">GSSoC 2025 Contributor</div>
-    <div class="cby">GirlScript Summer of Code</div>
-    <p class="cdesc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p>
-    <a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
-</div>
+              <span class="cico">🛡️</span>
+              <div class="ctitle">EY Technology Risk Virtual Job Simulation</div>
+              <div class="cby">Forage</div>
+              <p class="cdesc">Completed hands-on tasks involving IT risk assessment, control evaluation, and cybersecurity frameworks in a simulated EY environment</p>
+              <a href="https://www.theforage.com/completion-certificates/Z3pPDqCPapFTSGBgi/25RAqjzJnD3b8YPZv_Z3pPDqCPapFTSGBgi_694e851739ff7eaad9e01e9f_1773940779788_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">🔐</span>
+              <div class="ctitle">Mastercard Cybersecurity Job Simulation</div>
+              <div class="cby">Forage</div>
+              <p class="cdesc">Gained practical experience in identifying threats, analyzing vulnerabilities, and implementing cybersecurity measures in real-world scenarios</p>
+              <a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_694e851739ff7eaad9e01e9f_1773941954278_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">📊</span>
+              <div class="ctitle">Deloitte Australia Data Analytics Job Simulation</div>
+              <div class="cby">Forage</div>
+              <p class="cdesc">Worked on data cleaning, visualization, and deriving business insights using analytical tools in a Deloitte-simulated project environment</p>
+              <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_694e851739ff7eaad9e01e9f_1773930285033_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">🤖</span>
+              <div class="ctitle">AI Skills Passport</div>
+              <div class="cby">Microsoft &amp; EY</div>
+              <p class="cdesc">Developed foundational AI knowledge including machine learning concepts, ethical AI, and real-world business applications</p>
+              <a href="https://drive.google.com/file/d/177NQqEdiZTolXnbBBlTMIa_CVcgprv36/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">🎓</span>
+              <div class="ctitle">Full-Stack Web Development</div>
+              <div class="cby">Udemy · 61.5 hours</div>
+              <p class="cdesc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p>
+              <a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="clink">View Certificate →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">🎨</span>
+              <div class="ctitle">UI/UX Design Masterclass</div>
+              <div class="cby">Udemy · 41.5 hours</div>
+              <p class="cdesc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p>
+              <a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="clink">View Certificate →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">🔧</span>
+              <div class="ctitle">Postman Student Expert</div>
+              <div class="cby">Postman</div>
+              <p class="cdesc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p>
+              <a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="clink">View Badge →</a>
+            </div>
+            <div class="ccard reveal">
+              <span class="cico">🌟</span>
+              <div class="ctitle">GSSoC 2025 Contributor</div>
+              <div class="cby">GirlScript Summer of Code</div>
+              <p class="cdesc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p>
+              <a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
+            </div>
           </div>
         </div>
       </div>
@@ -837,18 +824,15 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="pct">}</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="cmt">/* Let's build something amazing together! 🚀 */</span></div>
-</div>
+          </div>
           <h2 class="sh reveal"><span>//</span> Let's Connect</h2>
           <p class="ss reveal">I'm always open to discussing new projects, creative ideas, or opportunities.</p>
           <div class="contact-layout reveal">
             <div class="cc-grid">
               <a href="mailto:rishitwork28@gmail.com" class="cccard">
-  <div class="cc-ico">📧</div>
-  <div>
-    <div class="cc-lbl">EMAIL</div>
-    <div class="cc-val">rishitwork28@gmail.com</div>
-  </div>
-</a>
+                <div class="cc-ico">📧</div>
+                <div><div class="cc-lbl">EMAIL</div><div class="cc-val">rishitwork28@gmail.com</div></div>
+              </a>
               <a href="tel:+918076513921" class="cccard"><div class="cc-ico">📱</div><div><div class="cc-lbl">PHONE</div><div class="cc-val">+91-8076513921</div></div></a>
               <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="cccard"><div class="cc-ico">💼</div><div><div class="cc-lbl">LINKEDIN</div><div class="cc-val">rishit-chaudhary17</div></div></a>
               <a href="https://github.com/rizzit17" target="_blank" class="cccard"><div class="cc-ico">💻</div><div><div class="cc-lbl">GITHUB</div><div class="cc-val">@rizzit17</div></div></a>
@@ -887,11 +871,13 @@ a{text-decoration:none;color:inherit;}
   </main>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ── Clock ─────────────────────────────────────────────────────────
 (function tick() {
   const n = new Date(), h = n.getHours(), m = n.getMinutes();
-  const ampm = h >= 12 ? 'PM' : 'AM', hh = (h%12||12).toString().padStart(2,'0'), mm = m.toString().padStart(2,'0');
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const hh = (h%12||12).toString().padStart(2,'0');
+  const mm = m.toString().padStart(2,'0');
   document.getElementById('clock').textContent = `${hh}:${mm} ${ampm}`;
   setTimeout(tick, 10000);
 })();
@@ -906,13 +892,13 @@ Object.entries(gutterLines).forEach(([id,n]) => {
 
 // ── Navigation ────────────────────────────────────────────────────
 const meta = {
-  about:          {file:'about.jsx',         dot:'jsx',  lang:'JSX'},
-  projects:       {file:'projects.tsx',       dot:'tsx',  lang:'TSX'},
-  skills:         {file:'skills.json',        dot:'json', lang:'JSON'},
-  experience:     {file:'extracurriculars.ts',       dot:'ts',   lang:'TypeScript'},
-  internships:    {file:'internships.tsx',    dot:'tsx',  lang:'TSX'},
-  certifications: {file:'certifications.md', dot:'md',   lang:'Markdown'},
-  contact:        {file:'contact.css',        dot:'css',  lang:'CSS'}
+  about:          {file:'about.jsx',          dot:'jsx',  lang:'JSX'},
+  projects:       {file:'projects.tsx',        dot:'tsx',  lang:'TSX'},
+  skills:         {file:'skills.json',         dot:'json', lang:'JSON'},
+  experience:     {file:'extracurriculars.ts', dot:'ts',   lang:'TypeScript'},
+  internships:    {file:'internships.tsx',     dot:'tsx',  lang:'TSX'},
+  certifications: {file:'certifications.md',  dot:'md',   lang:'Markdown'},
+  contact:        {file:'contact.css',         dot:'css',  lang:'CSS'}
 };
 
 let openTabs = ['about'], active = 'about';
@@ -920,15 +906,12 @@ let openTabs = ['about'], active = 'about';
 function navigate(id) {
   if (!meta[id]) return;
   const m = meta[id];
-
   document.querySelectorAll('.ed-sec').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
   active = id;
-
   document.querySelectorAll('.sn-item').forEach(n => n.classList.toggle('active', n.dataset.sec===id));
   document.getElementById('bc').textContent = m.file;
   document.getElementById('sb-lang').textContent = m.lang;
-
   if (!openTabs.includes(id)) { openTabs.push(id); addTab(id, m); }
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.sec===id));
   document.querySelector('.editor-wrap').scrollTo({top:0,behavior:'smooth'});
@@ -951,7 +934,6 @@ function closeTab(id, el) {
   if (active===id) navigate(openTabs[Math.min(idx,openTabs.length-1)]);
 }
 
-// Initial about tab
 document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => {
   if (e.target.classList.contains('t-close')) { closeTab('about',e.currentTarget); return; }
   navigate('about');
@@ -959,10 +941,6 @@ document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => 
 document.querySelectorAll('.sn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
 // ── Scroll reveal ─────────────────────────────────────────────────
-new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:.1}).observe || (() => {})();
-
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold:.1});
