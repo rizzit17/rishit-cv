@@ -31,19 +31,19 @@
 ├──────────┬──────────────────────────────────────────────────────────│
 │          │  about.jsx   projects.tsx   skills.json   contact.css    │
 │ Rishit   ├──────────────────────────────────────────────────────────│
-│ Chaudhry │                                                           │
+│ Chaudhry │                                                          │
 │          │  import Developer from '@vit/students';                  │
-│ ● Open   │                                                           │
+│ ● Open   │                                                          │
 │   to     │  const Rishit = () => (                                  │
 │   Work   │    <Developer                                            │
 │          │      name="Rishit Chaudhary"                             │
-│ 📍 Noida │      role="Full-Stack Developer"                         │
-│          │      cgpa={8.60}                                          │
-│ Explorer │    />                                                     │
-│ ──────── │  );                                                       │
-│ about    │                                                           │
+│ ->Noida  │      role="Full-Stack Developer"                         │
+│          │      cgpa={8.60}                                         │
+│ Explorer │    />                                                    │
+│ ──────── │  );                                                      │
+│ about    │                                                          │
 │ projects │  export default Rishit;                                  │
-│ skills   │                                                           │
+│ skills   │                                                          │
 └──────────┴───────────────────────────────────────────────────────── ┘
 ```
 
