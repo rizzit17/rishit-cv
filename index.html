@@ -82,21 +82,23 @@ a{text-decoration:none;color:inherit;}
 .sidebar::-webkit-scrollbar{width:4px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-/* FULL WIDTH IMAGE (FIXED VERSION) */
+/* AFTER */
 .profile-top {
   width: 100%;
-  height: 220px;            /* ✅ fallback height (VERY IMPORTANT) */
+  height: 220px;
+  min-height: 220px;        /* ← prevents flex from collapsing it */
+  flex-shrink: 0;           /* ← prevents flex from shrinking it */
   overflow: hidden;
   border-radius: 8px;
+  background: #1c1c1c;      /* ← visible placeholder while image loads */
 }
 
-/* IMAGE FILLS COMPLETELY */
 .profile-img {
   width: 100%;
   height: 100%;
+  min-height: 220px;        /* ← resolves height: 100% in flex context */
   object-fit: cover;
   display: block;
-
   border: none;
   filter: grayscale(20%);
   transition: transform .4s ease, filter .3s;
@@ -410,7 +412,7 @@ a{text-decoration:none;color:inherit;}
   <aside class="sidebar">
     <div class="profile-top">
   <img 
-  src="./profile_pic.jpeg" 
+  src="/profile_pic.jpeg" 
   alt="Rishit" 
   class="profile-img"
   onerror="this.style.background='#1c1c1c'; this.style.display='block';"
