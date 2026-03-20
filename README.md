@@ -23,7 +23,7 @@
 
 ## 🖥️ Preview
 
-> A VS Code–inspired developer portfolio built with vanilla HTML, CSS and JavaScript — no frameworks, no build step, just vibes.
+> A VS Code inspired developer portfolio built with vanilla HTML, CSS and JavaScript - no frameworks, no build step, just vibes.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -53,11 +53,11 @@
 
 | Feature | Description |
 |---|---|
-| 🗂️ **File Explorer Sidebar** | Navigate sections like VS Code files — `about.jsx`, `projects.tsx`, `skills.json` and more |
+| 🗂️ **File Explorer Sidebar** | Navigate sections like VS Code files - `about.jsx`, `projects.tsx`, `skills.json` and more |
 | 🗄️ **Tab Bar** | Tabs open and close just like an IDE, with language-colored dot indicators |
 | 🔢 **Line Gutter** | Numbered line gutters on every "file" for that authentic editor feel |
 | 🍞 **Breadcrumb Bar** | Always shows your current location in the "codebase" |
-| 🎨 **Syntax Highlighting** | Hand-crafted CSS token highlighting — keywords, strings, comments, operators |
+| 🎨 **Syntax Highlighting** | Hand-crafted CSS token highlighting - keywords, strings, comments, operators |
 | 📺 **Live Terminal** | Animated typewriter terminal in the Contact section |
 | 📣 **Marquee Topbar** | Scrolling status bar with real-time clock |
 | 🌊 **Scroll Reveal** | Sections animate in smoothly on scroll using IntersectionObserver |
@@ -192,13 +192,13 @@ npx vercel --prod
 # OR drag-and-drop the folder at vercel.com/new
 ```
 
-> ⚠️ Make sure `profile_pic.jpeg` and `rishit_cv.pdf` are in the **same folder** as `index.html` before deploying — they're referenced with relative paths.
+> ⚠️ Make sure `profile_pic.jpeg` and `rishit_cv.pdf` are in the **same folder** as `index.html` before deploying - they're referenced with relative paths.
 
 ---
 
 ## 📄 License
 
-This project is open-source under the [MIT License](LICENSE). Feel free to fork, remix and make it your own — a credit or a ⭐ star is always appreciated!
+This project is open-source under the [MIT License](LICENSE). Feel free to fork, remix and make it your own - a credit or a ⭐ star is always appreciated!
 
 ---
 
