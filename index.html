@@ -2,11 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#080808">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>rishit_chaudhary17</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>rishit.dev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -55,7 +52,6 @@ a{text-decoration:none;color:inherit;}
 }
 .tb-marquee{
   overflow:hidden;flex:1;
-  -webkit-mask-image:linear-gradient(90deg,transparent,black 60px,black calc(100% - 60px),transparent);
   mask-image:linear-gradient(90deg,transparent,black 60px,black calc(100% - 60px),transparent);
 }
 .marquee-track{
@@ -80,63 +76,29 @@ a{text-decoration:none;color:inherit;}
   position:fixed;top:var(--top-h);left:0;bottom:0;
   background:var(--bg-sidebar);border-right:1px solid var(--border);
   overflow-y:auto;overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
   display:flex;flex-direction:column;padding:28px 22px 80px;gap:22px;
   scrollbar-width:thin;scrollbar-color:var(--border) transparent;
 }
 .sidebar::-webkit-scrollbar{width:4px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 
-.profile-top {
-  width: 100%;
-  height: 220px;
-  min-height: 220px;
-  flex-shrink: 0;
-  overflow: hidden;
-  border-radius: 8px;
-  background: #1c1c1c;
+.profile-row{display:flex;align-items:center;gap:14px;}
+.profile-img{
+  width:72px;height:72px;border-radius:5px;object-fit:cover;
+  border:2px solid var(--border-mid);flex-shrink:0;
+  filter:grayscale(20%);transition:filter .3s,border-color .3s;
 }
-
-.profile-img {
-  width: 100%;
-  height: 100%;
-  min-height: 220px;
-  object-fit: cover;
-  display: block;
-  border: none;
-  filter: grayscale(20%);
-  transition: transform .4s ease, filter .3s;
-}
-
-.profile-top:hover .profile-img {
-  transform: scale(1.05);
-  filter: grayscale(0%);
-}
-
-.profile-name{
+.profile-img:hover{filter:grayscale(0%);border-color:var(--accent);}
+.profile-initials{
+  width:72px;height:72px;border-radius:5px;
+  background:var(--bg-card);border:2px solid var(--border-mid);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;font-weight:700;color:var(--purple);flex-shrink:0;
   font-family:var(--sans);
-  font-size:17px;
-  font-weight:700;
-  color:#f0f0f0;
-  letter-spacing:-.02em;
-  line-height:1.2;
-  margin-top: 12px;
 }
-
-.profile-role{
-  font-size:13px;
-  color:var(--green);
-  font-weight:500;
-  margin-top:3px;
-  letter-spacing:.01em;
-}
-
-.profile-bio{
-  font-family:var(--sans);
-  font-size:13px;
-  color:var(--text-dim);
-  line-height:1.7;
-}
+.profile-name{font-family:var(--sans);font-size:17px;font-weight:700;color:#f0f0f0;letter-spacing:-.02em;line-height:1.2;}
+.profile-role{font-size:13px;color:var(--green);font-weight:500;margin-top:3px;letter-spacing:.01em;}
+.profile-bio{font-family:var(--sans);font-size:13px;color:var(--text-dim);line-height:1.7;}
 
 .meta-list{display:flex;flex-direction:column;gap:7px;}
 .meta-item{
@@ -156,7 +118,6 @@ a{text-decoration:none;color:inherit;}
   padding:9px 16px;border-radius:4px;font-size:11px;
   font-family:var(--sans);font-weight:600;cursor:pointer;
   transition:all .2s;border:1px solid transparent;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
 }
 .sbtn-primary{background:var(--accent);color:#0a0a18;border-color:var(--accent);}
 .sbtn-primary:hover{background:#91b4ff;}
@@ -169,8 +130,6 @@ a{text-decoration:none;color:inherit;}
   display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:4px;
   font-size:13px;color:var(--text-dim);cursor:pointer;font-family:var(--sans);
   transition:background .15s,color .15s;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
-  user-select:none;-webkit-user-select:none;
 }
 .sn-item:hover{background:var(--bg-hover);color:var(--text);}
 .sn-item.active{background:var(--bg-active);color:var(--text-bright);}
@@ -181,7 +140,7 @@ a{text-decoration:none;color:inherit;}
 
 /* Tab bar */
 .tabbar{
-  position:-webkit-sticky;position:sticky;top:var(--top-h);z-index:100;
+  position:sticky;top:var(--top-h);z-index:100;
   background:var(--bg-deep);border-bottom:1px solid var(--border);
   display:flex;align-items:stretch;height:35px;overflow-x:auto;scrollbar-width:none;
 }
@@ -207,7 +166,7 @@ a{text-decoration:none;color:inherit;}
   height:24px;background:var(--bg);border-bottom:1px solid var(--border);
   padding:0 20px;display:flex;align-items:center;gap:6px;
   font-size:11px;color:var(--text-muted);
-  position:-webkit-sticky;position:sticky;top:calc(var(--top-h) + 35px);z-index:99;
+  position:sticky;top:calc(var(--top-h) + 35px);z-index:99;
 }
 .bc-sep{color:var(--text-muted);}
 .bc-cur{color:var(--text);}
@@ -269,7 +228,7 @@ a{text-decoration:none;color:inherit;}
 .sv{font-size:20px;font-weight:700;color:var(--purple);font-family:var(--mono);display:block;line-height:1;}
 .sl{font-size:12px;color:var(--text-dim);font-family:var(--sans);display:block;margin-top:3px;}
 .act-row{display:flex;gap:10px;flex-wrap:wrap;}
-.abtn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:4px;font-size:13px;font-family:var(--sans);font-weight:600;cursor:pointer;transition:all .2s;border:1px solid transparent;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.abtn{display:inline-flex;align-items:center;gap:7px;padding:10px 18px;border-radius:4px;font-size:13px;font-family:var(--sans);font-weight:600;cursor:pointer;transition:all .2s;border:1px solid transparent;}
 .abtn.primary{background:var(--accent);color:#0a0a18;border-color:var(--accent);}
 .abtn.primary:hover{background:#91b4ff;}
 .abtn.ghost{background:transparent;color:var(--text);border-color:var(--border-mid);}
@@ -291,8 +250,8 @@ a{text-decoration:none;color:inherit;}
 .pinfo{flex:1;min-width:0;}
 .pname{font-family:var(--sans);font-size:16px;font-weight:700;color:var(--text-bright);margin-bottom:2px;}
 .ptype{font-size:12px;color:var(--text-muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;}
-.plink{font-size:12px;color:var(--blue);font-family:var(--mono);border:1px solid rgba(96,165,250,.25);background:rgba(96,165,250,.08);padding:4px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;transition:background .15s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
-.plink:hover{background:rgba(96,165,250,.18);}
+.plink{font-size:12px;color:var(--blue);font-family:var(--mono);border:1px solid rgba( 96,165,250,.25);background:rgba( 96,165,250,.08);padding:4px 10px;border-radius:3px;white-space:nowrap;flex-shrink:0;transition:background .15s;}
+.plink:hover{background:rgba( 96,165,250,.18);}
 .pbody{padding:14px 18px 16px;}
 .pdesc{font-family:var(--sans);font-size:14px;color:var(--text-dim);line-height:1.7;margin-bottom:12px;}
 .pimpact{font-size:13px;color:var(--green);font-family:var(--mono);background:rgba(158,206,106,.07);border-left:3px solid var(--green);padding:5px 10px;margin-bottom:12px;border-radius:0 3px 3px 0;}
@@ -319,7 +278,7 @@ a{text-decoration:none;color:inherit;}
 .timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:repeating-linear-gradient(180deg,var(--border) 0,var(--border) 6px,transparent 6px,transparent 12px);}
 .tl-item{position:relative;margin-bottom:20px;}
 .tl-dot{position:absolute;left:-23px;top:18px;width:13px;height:13px;background:var(--bg-deep);border:2px solid var(--blue);border-radius:50%;}
-.tl-dot.on{background:var(--green);box-shadow:0 0 0 4px rgba(74,222,128,.15);}
+.tl-dot.on{background:var(--green);box-shadow:0 0 0 4px rgba( 74,222,128,.15);}
 .tlcard{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:17px 20px;transition:border-color .2s;}
 .tlcard:hover{border-color:var(--border-mid);}
 .tlhdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:4px;}
@@ -334,7 +293,7 @@ a{text-decoration:none;color:inherit;}
 
 /* ── CERTS ── */
 .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;}
-.ccard{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent;}
+.ccard{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:7px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden;}
 .ccard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink),var(--blue),var(--green));opacity:0;transition:opacity .2s;}
 .ccard:hover{border-color:var(--border-mid);transform:translateY(-3px);}
 .ccard:hover::before{opacity:1;}
@@ -342,13 +301,13 @@ a{text-decoration:none;color:inherit;}
 .ctitle{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--text-bright);line-height:1.4;}
 .cby{font-size:13px;color:var(--blue);font-family:var(--mono);}
 .cdesc{font-family:var(--sans);font-size:13px;color:var(--text-dim);line-height:1.6;flex:1;}
-.clink{font-size:13px;font-family:var(--mono);color:#22d3ee;border-bottom:1px solid rgba(115,218,202,.3);padding-bottom:1px;transition:color .2s;touch-action:manipulation;-webkit-tap-highlight-color:rgba(34,211,238,0.2);display:inline-block;padding:4px 0;}
+.clink{font-size:13px;font-family:var(--mono);color:#22d3ee;border-bottom:1px solid rgba(115,218,202,.3);padding-bottom:1px;transition:color .2s;}
 .clink:hover{color:var(--text-bright);}
 
 /* ── CONTACT ── */
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .cc-grid{display:flex;flex-direction:column;gap:9px;}
-.cccard{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:13px 16px;display:flex;align-items:center;gap:13px;color:var(--text);transition:border-color .2s,background .2s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.cccard{background:var(--bg-card);border:1px solid var(--border);border-radius:6px;padding:13px 16px;display:flex;align-items:center;gap:13px;color:var(--text);transition:border-color .2s,background .2s;}
 .cccard:hover{border-color:var(--blue);background:var(--bg-hover);}
 .cc-ico{width:34px;height:34px;background:var(--bg-hover);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
 .cc-lbl{font-size:12px;color:var(--text-muted);font-family:var(--mono);letter-spacing:.06em;margin-bottom:2px;}
@@ -381,152 +340,16 @@ a{text-decoration:none;color:inherit;}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ── HAMBURGER BUTTON (mobile only) ── */
-.hamburger{
-  display:none;flex-direction:column;justify-content:center;gap:5px;
-  width:34px;height:34px;background:transparent;border:1px solid var(--border);
-  border-radius:4px;cursor:pointer;padding:7px;flex-shrink:0;
-  transition:border-color .2s,background .2s;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
-  -webkit-appearance:none;appearance:none;
-}
-.hamburger:hover{border-color:var(--border-mid);background:var(--bg-hover);}
-.hamburger span{display:block;height:1.5px;background:var(--text);border-radius:2px;transition:all .3s ease;}
-.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
-.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
-.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
-
-/* ── SIDEBAR OVERLAY ── */
-.sidebar-overlay{
-  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,.7);
-  z-index:149;
-  -webkit-backdrop-filter:blur(2px);
-  backdrop-filter:blur(2px);
-  opacity:0;
-  pointer-events:none;           /* ← CRITICAL: never block taps when hidden */
-  transition:opacity .3s ease;
-}
-.sidebar-overlay.visible{opacity:1;pointer-events:auto;}
-
-/* ── MOBILE BOTTOM NAV ── */
-.mobile-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;
-  background:var(--bg-sidebar);border-top:1px solid var(--border);
-  z-index:201;
-  padding:8px 4px;
-  padding-bottom:calc(8px + env(safe-area-inset-bottom));
-  overflow-x:auto;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-}
-.mobile-nav::-webkit-scrollbar{display:none;}
-.mobile-nav-inner{
-  display:flex;gap:2px;min-width:max-content;padding:0 4px;
-}
-.mnav-item{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:6px 10px;border-radius:6px;cursor:pointer;
-  font-family:var(--sans);font-size:10px;color:var(--text-dim);
-  transition:background .15s,color .15s;white-space:nowrap;min-width:52px;
-  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
-  user-select:none;-webkit-user-select:none;
-}
-.mnav-item:hover{background:var(--bg-hover);color:var(--text);}
-.mnav-item.active{background:var(--bg-active);color:var(--green);}
-.mnav-icon{font-size:16px;line-height:1;}
-.mnav-label{font-size:9px;letter-spacing:.02em;}
-
-/* ── TABLET ── */
-@media(max-width:900px){
-  :root{--sb-w:260px;}
-  .content{padding:22px 22px 60px 18px;}
-  .sgrid{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
-  .cgrid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
-}
-
-/* ── MOBILE ── */
+/* ── RESPONSIVE ── */
+@media(max-width:900px){:root{--sb-w:250px;}.content{padding:22px 22px 60px 18px;}}
 @media(max-width:680px){
-  :root{--sb-w:280px;--top-h:48px;}
-
-  /* Topbar mobile */
-  .hamburger{display:flex;}
-  .tb-marquee{display:none;}
-  .tb-status:last-of-type{display:none;}
-
-  /* Sidebar becomes a slide-in drawer */
-  .sidebar{
-    transform:translateX(-100%);
-    transition:transform .3s ease;
-    z-index:150;
-    top:var(--top-h);
-    padding-bottom:100px;
-  }
-  .sidebar.open{transform:translateX(0);}
-  .sidebar-overlay{display:block;pointer-events:none;}
-  .sidebar-overlay.visible{pointer-events:auto;}
-
-  /* Main takes full width */
-  .main{margin-left:0;}
-  .statusbar{display:none;}
-
-  /* Bottom mobile nav */
-  .mobile-nav{display:block;}
-
-  /* Content padding — account for mobile nav + iOS safe area */
-  .content{padding:18px 14px calc(90px + env(safe-area-inset-bottom));}
-
-  /* Typography */
-  .a-h1{font-size:28px;}
-  .a-desc{font-size:14px;}
-
-  /* Stats row — wrap nicely */
-  .stats-row{gap:8px;}
-  .stat{padding:8px 12px;min-width:68px;}
-  .sv{font-size:17px;}
-
-  /* Action buttons stack on very small screens */
-  .act-row{gap:8px;}
-  .abtn{padding:8px 14px;font-size:12px;}
-
-  /* Grids → single column */
+  :root{--sb-w:0px;}
+  .sidebar{display:none;}
+  .statusbar{left:0;}
+  .content{padding:18px 16px 60px;}
+  .a-h1{font-size:26px;}
   .pgrid{grid-template-columns:1fr;}
-  .sgrid{grid-template-columns:1fr 1fr;}
-  .cgrid{grid-template-columns:1fr 1fr;}
-  .icards{grid-template-columns:1fr;}
   .contact-layout{grid-template-columns:1fr;}
-
-  /* Code block smaller on mobile */
-  .cblk{font-size:12px;padding:12px 14px;}
-
-  /* Section headings */
-  .sh{font-size:20px;}
-
-  /* Timeline */
-  .timeline{padding-left:20px;}
-  .tl-dot{left:-18px;width:11px;height:11px;}
-  .tlcard{padding:14px 16px;}
-  .tlhdr{flex-direction:column;gap:6px;}
-  .tl-badge{align-self:flex-start;}
-
-  /* Cert cards — show as 1 col on very narrow */
-  .cgrid{grid-template-columns:1fr;}
-
-  /* Gutter hidden on mobile */
-  .gutter{display:none;}
-
-  /* Breadcrumb */
-  .breadcrumb{padding:0 14px;}
-
-  /* Tab bar — smaller */
-  .tab{padding:0 10px;font-size:10px;}
-}
-
-/* Very small phones */
-@media(max-width:380px){
-  .sgrid{grid-template-columns:1fr;}
-  .abtn{padding:8px 10px;font-size:11px;}
-  .stats-row{gap:6px;}
-  .stat{min-width:60px;padding:7px 10px;}
 }
 </style>
 </head>
@@ -534,13 +357,10 @@ a{text-decoration:none;color:inherit;}
 
 <!-- TOP BAR -->
 <div class="topbar">
-  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
   <div class="tb-marquee">
     <div class="marquee-track">
-      <span>Welcome to my world! &nbsp;✦&nbsp; <b>rishit_chaudhary.dev</b> &nbsp;✦&nbsp; Full-Stack Developer &nbsp;✦&nbsp; VIT Vellore &nbsp;✦&nbsp; Open to opportunities &nbsp;✦&nbsp; React · Node.js · AI/ML &nbsp;✦&nbsp;</span>
-      <span>Welcome to my world! &nbsp;✦&nbsp; <b>rishit_chaudhary.dev</b> &nbsp;✦&nbsp; Full-Stack Developer &nbsp;✦&nbsp; VIT Vellore &nbsp;✦&nbsp; Open to opportunities &nbsp;✦&nbsp; React · Node.js · AI/ML &nbsp;✦&nbsp;</span>
+      <span>Welcome to my world! &nbsp;✦&nbsp; <b>rishit.dev</b> &nbsp;✦&nbsp; Full-Stack Developer &nbsp;✦&nbsp; VIT Vellore &nbsp;✦&nbsp; Open to opportunities &nbsp;✦&nbsp; React · Node.js · AI/ML &nbsp;✦&nbsp;</span>
+      <span>Welcome to my world! &nbsp;✦&nbsp; <b>rishit.dev</b> &nbsp;✦&nbsp; Full-Stack Developer &nbsp;✦&nbsp; VIT Vellore &nbsp;✦&nbsp; Open to opportunities &nbsp;✦&nbsp; React · Node.js · AI/ML &nbsp;✦&nbsp;</span>
     </div>
   </div>
   <div class="tb-right">
@@ -550,64 +370,39 @@ a{text-decoration:none;color:inherit;}
   </div>
 </div>
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-<!-- Mobile bottom nav -->
-<nav class="mobile-nav" id="mobileNav">
-  <div class="mobile-nav-inner">
-    <div class="mnav-item active" data-sec="about"><span class="mnav-icon">📄</span><span class="mnav-label">About</span></div>
-    <div class="mnav-item" data-sec="projects"><span class="mnav-icon">🚀</span><span class="mnav-label">Projects</span></div>
-    <div class="mnav-item" data-sec="skills"><span class="mnav-icon">⚡</span><span class="mnav-label">Skills</span></div>
-    <div class="mnav-item" data-sec="experience"><span class="mnav-icon">💼</span><span class="mnav-label">Activities</span></div>
-    <div class="mnav-item" data-sec="internships"><span class="mnav-icon">🎯</span><span class="mnav-label">Internships</span></div>
-    <div class="mnav-item" data-sec="certifications"><span class="mnav-icon">🏆</span><span class="mnav-label">Certs</span></div>
-    <div class="mnav-item" data-sec="contact"><span class="mnav-icon">📧</span><span class="mnav-label">Contact</span></div>
-  </div>
-</nav>
-
 <div class="layout">
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="profile-top">
-      <img
-        src="/profile_pic.jpeg"
-        alt="Rishit"
-        class="profile-img"
-        onerror="this.style.background='#1c1c1c';this.style.display='block';"
-      >
+    <div class="profile-row">
+      <img src="profile_pic.jpeg" alt="Rishit" class="profile-img"
+           onerror="this.outerHTML='<div class=\'profile-initials\'>RC</div>'">
+      <div>
+        <div class="profile-name">Rishit Chaudhary</div>
+        <div class="profile-role">Full-Stack Developer</div>
+      </div>
     </div>
 
-    <div class="profile-info">
-      <div class="profile-name">Rishit Chaudhary</div>
-      <div class="profile-role">Full-Stack Developer</div>
-    </div>
-
-    <p class="profile-bio">
-      3rd year B.Tech CSE (IoT) @ VIT Vellore. Building scalable web apps, AI tools &amp; experiences.
-    </p>
+    <p class="profile-bio">3rd year B.Tech CSE @ VIT Vellore. Building scalable web apps & AI tools.</p>
 
     <div class="sdiv"></div>
 
     <div class="meta-list">
       <div class="meta-item"><span class="mi">🎓</span>VIT Vellore · CGPA 8.60</div>
       <div class="meta-item"><span class="mi">📍</span>Noida, India</div>
-      <a href="#" class="sbtn sbtn-ghost" onclick="window.location.href='mailto:' + 'rishitwork28' + '@gmail.com'">
-  ✉ Contact Me
-</a>
+      <div class="meta-item"><span class="mi">🌐</span>EN · HI · PA · FR</div>
+      <a href="mailto:rishitwork28@gmail.com" class="meta-item"><span class="mi">📧</span>rishitwork28@gmail.com</a>
       <a href="tel:+918076513921" class="meta-item"><span class="mi">📱</span>+91-8076513921</a>
-      <a href="https://github.com/rizzit17" target="_blank" class="meta-item"><span class="mi">⌥</span>GitHub</a>
-      <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="meta-item"><span class="mi">◈</span>LinkedIn</a>
+      <a href="https://github.com/rizzit17" target="_blank" class="meta-item"><span class="mi">⌥</span>github.com/rizzit17</a>
+      <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="meta-item"><span class="mi">◈</span>rishit-chaudhary17</a>
     </div>
 
     <div class="sdiv"></div>
 
     <div class="sb-btns">
-      <a href="current_resume.pdf" download class="sbtn sbtn-primary">⬇&nbsp; Download My Resume</a>
-      <a href="mailto:rishitwork28@gmail.com" class="sbtn sbtn-ghost" title="Send me an email">
-  ✉ <span>Contact Me</span>
-</a>
-      <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="sbtn sbtn-ghost">◈&nbsp; Connect With Me</a>
+      <a href="rishit_cv.pdf" download class="sbtn sbtn-primary">⬇&nbsp; Download Resume</a>
+      <a href="mailto:rishitwork28@gmail.com" class="sbtn sbtn-ghost">✉  Contact Me</a>
+      <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="sbtn sbtn-ghost">◈&nbsp; Work With Me</a>
     </div>
 
     <div class="sdiv"></div>
@@ -669,7 +464,7 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="cmt">// 🤖 AI/ML Integration  ·  ☁️ AWS</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">export default</span> <span class="fn">Rishit</span><span class="pct">;</span></div>
-          </div>
+</div>
 
           <div class="about-hero reveal">
             <h1 class="a-h1">Full-Stack<br><span>Developer</span></h1>
@@ -677,24 +472,23 @@ a{text-decoration:none;color:inherit;}
               <span class="rbadge">● OPEN TO WORK</span>
               VIT Vellore · 3rd Year CSE (IoT)
             </div>
-            <p class="a-desc">I design and develop end-to-end systems using modern web technologies - turning ideas into scalable, production-ready products. From architecture to deployment, I focus on clean, maintainable code and thoughtful system design. I also integrate AI-powered features that add real value.</p>
+            <p class="a-desc">I design and develop end-to-end systems using modern web technologies — turning ideas into scalable, production-ready products. From architecture to deployment, I focus on clean, maintainable code and thoughtful system design. I also integrate AI-powered features that add real value.</p>
             <div class="stats-row">
               <div class="stat"><span class="sv">8.60</span><span class="sl">CGPA</span></div>
-              <div class="stat"><span class="sv">7+</span><span class="sl">Projects</span></div>
-              <div class="stat"><span class="sv">180+</span><span class="sl">Impacted</span></div>
-              <div class="stat"><span class="sv">2027</span><span class="sl">Batch</span></div>
+              <div class="stat"><span class="sv">6+</span><span class="sl">Projects</span></div>
+              <div class="stat"><span class="sv">200+</span><span class="sl">Impacted</span></div>
+              <div class="stat"><span class="sv">'27</span><span class="sl">Batch</span></div>
             </div>
             <div class="act-row">
-              <a href="current_resume.pdf" target="_blank" class="abtn primary">👀 View Resume</a>
-              <a href="current_resume.pdf" download class="abtn ghost">⬇ Download PDF</a>
+              <a href="rishit_cv.pdf" target="_blank" class="abtn primary">👀 View Resume</a>
+              <a href="rishit_cv.pdf" download class="abtn ghost">⬇ Download PDF</a>
               <a href="#" class="abtn ghost" onclick="navigate('contact');return false;">✉ Contact</a>
             </div>
           </div>
 
           <div class="icards reveal">
             <div class="icard"><div class="ic-ico">👨‍💻</div><div class="ic-t">Full-Stack Developer</div><div class="ic-d">Specializing in React, Node.js, and MongoDB with a passion for scalable web applications</div></div>
-            <div class="icard"><div class="ic-ico">🎓</div><div class="ic-t">VIT Vellore</div><div class="ic-d">B.Tech CSE (IoT) · CGPA: 8.60 · Aug 2023 - 2027</div></div>
-            <div class="icard"><div class="ic-ico">🌟</div><div class="ic-t">Leadership</div><div class="ic-d">IEEE CS · Pixelate Design Club · Perplexity Campus Partner · 180+ students impacted</div></div>
+            <div class="icard"><div class="ic-ico">🎓</div><div class="ic-t">VIT Vellore</div><div class="ic-d">B.Tech CSE (IoT) · CGPA: 8.60 · Aug 2023 – 2027</div></div>
           </div>
         </div>
       </div>
@@ -714,34 +508,67 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="pct">}</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">const</span> <span class="prop">projects</span><span class="op">:</span> <span class="cls">Project</span><span class="pct">[]</span> <span class="op">=</span> <span class="pct">[</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"Meetzy"</span><span class="pct">,</span>        <span class="prop">impact</span><span class="op">:</span> <span class="str">"70% reduction in note-taking"</span> <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VeriLex"</span><span class="pct">,</span>       <span class="prop">tech</span><span class="op">:</span>   <span class="str">"Gemini 1.5 Flash"</span>             <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"Amber Essence"</span><span class="pct">,</span> <span class="prop">impact</span><span class="op">:</span> <span class="str">"60% faster bookings"</span>          <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VoidCheck"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"Groq LLaMA 3.3 70B"</span>           <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"BreakBias"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"Gemini API"</span>                   <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"SmartAgri"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"MQTT + scikit-learn"</span>          <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"Meetzy"</span><span class="pct">,</span>         <span class="prop">impact</span><span class="op">:</span> <span class="str">"70% reduction in note-taking"</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VeriLex"</span><span class="pct">,</span>        <span class="prop">tech</span><span class="op">:</span>   <span class="str">"Gemini 1.5 Flash"</span>             <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"ModelGuard"</span><span class="pct">,</span>     <span class="prop">security</span><span class="op">:</span> <span class="str">"AI Model Scanner"</span>           <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"DupSense"</span><span class="pct">,</span>       <span class="prop">feature</span><span class="op">:</span>  <span class="str">"Smart File Detection"</span>        <span class="pct">},</span></div>
 <div class="cblk-line"><span class="pct">];</span></div>
-          </div>
+</div>
           <h2 class="sh reveal"><span>//</span> Featured Projects</h2>
-          <p class="ss reveal">Things I've built - AI platforms &amp; full-stack systems.</p>
+          <p class="ss reveal">Things I've built - AI platforms and full-stack systems.</p>
           <div class="pgrid">
+
+            <!-- ── NEW: VoidCheck ── -->
+            <div class="pcard reveal">
+              <div class="ptop"><span class="pem">🔍</span><div class="pinfo"><div class="pname">VoidCheck</div><div class="ptype">AI Code Review Platform</div></div><a href="https://github.com/rizzit17/VoidCheck" target="_blank" class="plink">GitHub →</a></div>
+              <div class="pbody"><p class="pdesc">Full-stack AI code review platform with an integrated Monaco Editor supporting 6 languages and GitHub URL ingestion, powered by Groq LLaMA 3.3 70B via LangChain for real-time code analysis. Engineered structured JSON prompting to extract health scores, categorized issues, and multi-dimensional code metrics.</p><div class="pimpact">▸ <a href="https://void-check.vercel.app/" target="_blank" style="color:inherit;">Live Demo ↗</a></div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">Express.js</span><span class="tag tp">Groq LLaMA 3.3 70B</span><span class="tag tp">LangChain</span><span class="tag tb">Vite</span><span class="tag tb">Vercel</span></div></div>
+            </div>
+
+            <!-- ── NEW: BreakBias ── -->
+            <div class="pcard reveal">
+              <div class="ptop"><span class="pem">⚡</span><div class="pinfo"><div class="pname">BreakBias</div><div class="ptype">AI Workplace Bias Awareness App</div></div><a href="https://github.com/rizzit17/BreakBias" target="_blank" class="plink">GitHub →</a></div>
+              <div class="pbody"><p class="pdesc">Dual-mode interactive simulator with AI-generated, role-personalized workplace bias scenarios via the Gemini API, secured with Firebase Auth and served through Vercel Serverless Functions. Multi-axis rubric-based AI evaluator with Framer Motion animations and a graceful local fallback engine.</p><div class="pimpact">▸ <a href="https://break-bias.vercel.app/" target="_blank" style="color:inherit;">Live Demo ↗</a></div><div class="tags"><span class="tag tb">React 18</span><span class="tag tb">Vite</span><span class="tag tg">Tailwind CSS</span><span class="tag tp">Gemini API</span><span class="tag tb">Firebase Auth</span><span class="tag tg">Framer Motion</span></div></div>
+            </div>
+
+            <!-- ── NEW: Smart Agriculture IoT System ── -->
+            <div class="pcard reveal">
+              <div class="ptop"><span class="pem">🌾</span><div class="pinfo"><div class="pname">SmartAgri</div><div class="ptype">Smart Agriculture IoT System</div></div><a href="https://github.com/rizzit17/SmartAgri" target="_blank" class="plink">GitHub →</a></div>
+              <div class="pbody"><p class="pdesc">End-to-end IoT smart farming system with real-time MQTT-based sensor ingestion (soil temp, humidity, moisture) via HiveMQ Cloud, enriched with live weather data from the Open-Meteo API. Random Forest crop recommendation model (300 estimators) on a 2200+ sample dataset with top-3 confidence-ranked predictions and an interactive rule-based farming chatbot.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">scikit-learn</span><span class="tag tt">MQTT</span><span class="tag tg">HiveMQ</span><span class="tag tt">Open-Meteo API</span></div></div>
+            </div>
+
+            <!-- ── EXISTING: Meetzy ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🎙️</span><div class="pinfo"><div class="pname">Meetzy</div><div class="ptype">AI Meeting Platform</div></div><a href="https://github.com/rizzit17/smartmeeting" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Full-stack AI meeting platform enabling real-time transcription and automated summaries. Integrated OpenAI API to extract key insights and action items.</p><div class="pimpact">▸ 70% reduction in manual note-taking</div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">Express.js</span><span class="tag tp">OpenAI API</span><span class="tag tg">MongoDB</span><span class="tag tb">JWT</span></div></div>
             </div>
+
+            <!-- ── EXISTING: VeriLex ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">📜</span><div class="pinfo"><div class="pname">VeriLex</div><div class="ptype">AI Legal Document Analyzer</div></div><a href="https://github.com/rizzit17/VeriLex" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Full-stack AI platform to upload, parse, and analyze complex legal PDFs in real time. Used Google Gemini 1.5 Flash for risk classification and missing clause detection.</p><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tp">Gemini 1.5 Flash</span><span class="tag tg">Tailwind CSS</span><span class="tag tb">Vercel</span></div></div>
             </div>
+
+            <!-- ── EXISTING: ModelGuard ── -->
             <div class="pcard reveal">
-              <div class="ptop"><span class="pem">🍽️</span><div class="pinfo"><div class="pname">Amber Essence</div><div class="ptype">Full-Stack Restaurant Platform</div></div><a href="https://github.com/rizzit17/amber-essence" target="_blank" class="plink">GitHub →</a></div>
-              <div class="pbody"><p class="pdesc">Responsive restaurant platform with table booking, authentication, and reviews. Reduced booking time by 60% using React Context API and optimized UI/UX.</p><div class="pimpact">▸ 60% reduction in booking time</div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">FastAPI</span><span class="tag tg">MongoDB</span><span class="tag tg">Tailwind CSS</span></div></div>
+              <div class="ptop"><span class="pem">🛡️</span><div class="pinfo"><div class="pname">ModelGuard</div><div class="ptype">AI Model Supply Chain Security Scanner</div></div><a href="https://github.com/rizzit17/ModelGuard" target="_blank" class="plink">GitHub →</a></div>
+              <div class="pbody"><p class="pdesc">Static analysis security tool to scan AI model files (.pkl, .pt, .bin) for RCE vectors using pickle bytecode disassembly and Trail of Bits' fickling library. Multi-factor risk scoring with YARA rules and HuggingFace integration.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">YARA</span><span class="tag tp">Fickling</span><span class="tag tt">Plotly</span><span class="tag tg">HuggingFace</span></div></div>
             </div>
+
+            <!-- ── EXISTING: DupSense ── -->
             <div class="pcard reveal">
-              <div class="ptop"><span class="pem">📚</span><div class="pinfo"><div class="pname">ShikshaPlay</div><div class="ptype">AI-Enabled Learning Platform</div></div><a href="https://github.com/rizzit17/shikshaplay" target="_blank" class="plink">GitHub →</a></div>
-              <div class="pbody"><p class="pdesc">Gamified e-learning platform with interactive quizzes, leaderboards, and progress tracking. Added multilingual support (English &amp; Hindi) for wider accessibility.</p><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">FastAPI</span><span class="tag tp">i18n</span></div></div>
+              <div class="ptop"><span class="pem">📁</span><div class="pinfo"><div class="pname">DupSense</div><div class="ptype">Smart Duplicate File Finder</div></div><a href="https://github.com/rizzit17/DupSense" target="_blank" class="plink">GitHub →</a></div>
+              <div class="pbody"><p class="pdesc">Automated duplicate detection utility using MD5 hashing for exact matches and perceptual hashing (pHash) for visually similar images. Intelligent file grouping with safe quarantine mode and dark-themed analytics dashboard.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">MD5 Hashing</span><span class="tag tp">ImageHash</span><span class="tag tt">Pandas</span><span class="tag tt">Plotly</span></div></div>
             </div>
+
+            <!-- ── EXISTING: VS Code Portfolio ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">💻</span><div class="pinfo"><div class="pname">VS Code Portfolio</div><div class="ptype">VS Code–Themed Website</div></div><a href="https://rishit-cv.vercel.app/" target="_blank" class="plink">Live →</a></div>
               <div class="pbody"><p class="pdesc">VS Code–inspired portfolio with file explorer sidebar, syntax-highlighted code blocks, and Tokyo Night theme. Tab-based navigation with breadcrumbs and status bar.</p><div class="tags"><span class="tag tb">HTML</span><span class="tag tg">CSS</span><span class="tag to">JavaScript</span></div></div>
             </div>
+
           </div>
         </div>
       </div>
@@ -753,28 +580,61 @@ a{text-decoration:none;color:inherit;}
         <div class="gutter" id="g-skills"></div>
         <div class="content">
           <div class="cblk">
-<div class="cblk-line"><span class="cmt">// skills.json - full tech stack</span></div>
+<div class="cblk-line"><span class="cmt">// skills.json — full tech stack</span></div>
 <div class="cblk-line"><span class="pct">{</span></div>
-<div class="cblk-line">  <span class="str">"languages"</span><span class="op">:</span>  <span class="pct">[</span><span class="str">"Python"</span><span class="pct">,</span> <span class="str">"C++"</span><span class="pct">,</span> <span class="str">"Java"</span><span class="pct">,</span> <span class="str">"JavaScript"</span><span class="pct">,</span> <span class="str">"SQL"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"frontend"</span><span class="op">:</span>   <span class="pct">[</span><span class="str">"React.js"</span><span class="pct">,</span> <span class="str">"Tailwind CSS"</span><span class="pct">,</span> <span class="str">"HTML5/CSS3"</span><span class="pct">,</span> <span class="str">"Context API"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"backend"</span><span class="op">:</span>    <span class="pct">[</span><span class="str">"Node.js"</span><span class="pct">,</span> <span class="str">"Express.js"</span><span class="pct">,</span> <span class="str">"FastAPI"</span><span class="pct">,</span> <span class="str">"REST APIs"</span><span class="pct">,</span> <span class="str">"JWT Auth"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"ai_ml"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"OpenAI GPT-4"</span><span class="pct">,</span> <span class="str">"Gemini API"</span><span class="pct">,</span> <span class="str">"ML Kit"</span><span class="pct">,</span> <span class="str">"OCR"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="str">"languages"</span><span class="op">:</span>  <span class="pct">[</span><span class="str">"Python"</span><span class="pct">,</span> <span class="str">"C++"</span><span class="pct">,</span> <span class="str">"Java"</span><span class="pct">,</span> <span class="str">"JavaScript"</span><span class="pct">,</span> <span class="str">"Kotlin"</span><span class="pct">,</span> <span class="str">"SQL"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="str">"frontend"</span><span class="op">:</span>   <span class="pct">[</span><span class="str">"React.js"</span><span class="pct">,</span> <span class="str">"Vite"</span><span class="pct">,</span> <span class="str">"Tailwind CSS"</span><span class="pct">,</span> <span class="str">"Framer Motion"</span><span class="pct">,</span> <span class="str">"HTML5/CSS3"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="str">"backend"</span><span class="op">:</span>    <span class="pct">[</span><span class="str">"Node.js"</span><span class="pct">,</span> <span class="str">"Express.js"</span><span class="pct">,</span> <span class="str">"FastAPI"</span><span class="pct">,</span> <span class="str">"REST APIs"</span><span class="pct">,</span> <span class="str">"JWT Auth"</span><span class="pct">,</span> <span class="str">"Serverless Functions"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="str">"ai_ml"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"OpenAI GPT-4"</span><span class="pct">,</span> <span class="str">"Gemini API"</span><span class="pct">,</span> <span class="str">"Groq LLaMA 3.3 70B"</span><span class="pct">,</span> <span class="str">"LangChain"</span><span class="pct">,</span> <span class="str">"scikit-learn"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="str">"iot"</span><span class="op">:</span>        <span class="pct">[</span><span class="str">"MQTT"</span><span class="pct">,</span> <span class="str">"HiveMQ"</span><span class="pct">,</span> <span class="str">"Sensor Ingestion"</span><span class="pct">,</span> <span class="str">"Open-Meteo API"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="str">"data"</span><span class="op">:</span>       <span class="pct">[</span><span class="str">"Streamlit"</span><span class="pct">,</span> <span class="str">"Pandas"</span><span class="pct">,</span> <span class="str">"Plotly"</span><span class="pct">,</span> <span class="str">"NumPy"</span><span class="pct">],</span></div>
 <div class="cblk-line">  <span class="str">"databases"</span><span class="op">:</span>  <span class="pct">[</span><span class="str">"MongoDB"</span><span class="pct">,</span> <span class="str">"MySQL"</span><span class="pct">,</span> <span class="str">"Firebase"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"cloud"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"AWS"</span><span class="pct">,</span> <span class="str">"Vercel"</span><span class="pct">,</span> <span class="str">"Railway"</span><span class="pct">,</span> <span class="str">"CI/CD"</span><span class="pct">],</span></div>
-<div class="cblk-line">  <span class="str">"tools"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"Git/GitHub"</span><span class="pct">,</span> <span class="str">"Postman"</span><span class="pct">,</span> <span class="str">"Figma"</span><span class="pct">,</span> <span class="str">"VS Code"</span><span class="pct">]</span></div>
+<div class="cblk-line">  <span class="str">"cloud"</span><span class="op">:</span>      <span class="pct">[</span><span class="str">"AWS"</span><span class="pct">,</span> <span class="str">"Vercel"</span><span class="pct">,</span> <span class="str">"Railway"</span><span class="pct">,</span> <span class="str">"Render"</span><span class="pct">,</span> <span class="str">"CI/CD"</span><span class="pct">],</span></div>
 <div class="cblk-line"><span class="pct">}</span></div>
-          </div>
+</div>
           <h2 class="sh reveal"><span>//</span> Skill Tree</h2>
           <p class="ss reveal">Technologies and tools I work with day-to-day.</p>
           <div class="sgrid">
-            <div class="scard reveal"><div class="shead"><div class="sico">💻</div><div class="slabel">Languages</div></div><div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">Java</span><span class="sk">JavaScript</span><span class="sk">SQL</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">🎨</div><div class="slabel">Frontend</div></div><div class="sk-tags"><span class="sk">React.js</span><span class="sk">Tailwind CSS</span><span class="sk">HTML5/CSS3</span><span class="sk">Context API</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">⚙️</div><div class="slabel">Backend</div></div><div class="sk-tags"><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">FastAPI</span><span class="sk">REST APIs</span><span class="sk">JWT Auth</span></div></div>
-            <!-- ✅ FIX: was <span class="sk">Google ML Kit</div> — missing </span> and </div></div> -->
-            <div class="scard reveal"><div class="shead"><div class="sico">🤖</div><div class="slabel">AI / ML &amp; LLM</div></div><div class="sk-tags"><span class="sk">OpenAI API (GPT-4)</span><span class="sk">Google Gemini API</span><span class="sk">Google ML Kit</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">💾</div><div class="slabel">Databases</div></div><div class="sk-tags"><span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk">Firebase</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">☁️</div><div class="slabel">Cloud &amp; Tools</div></div><div class="sk-tags"><span class="sk">AWS</span><span class="sk">Vercel</span><span class="sk">Railway</span><span class="sk">Git/GitHub</span><span class="sk">Postman</span><span class="sk">Figma</span><span class="sk">CI/CD</span></div></div>
-            <div class="scard reveal"><div class="shead"><div class="sico">🧠</div><div class="slabel">Core CS</div></div><div class="sk-tags"><span class="sk">DSA</span><span class="sk">OOPs</span><span class="sk">OS</span><span class="sk">Computer Networks</span></div></div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">💻</div><div class="slabel">Languages</div></div>
+              <div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">Java</span><span class="sk">JavaScript</span><span class="sk">Kotlin</span><span class="sk">SQL</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">🎨</div><div class="slabel">Frontend</div></div>
+              <div class="sk-tags"><span class="sk">React.js</span><span class="sk">Vite</span><span class="sk">Tailwind CSS</span><span class="sk">Framer Motion</span><span class="sk">HTML5/CSS3</span><span class="sk">Context API</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">⚙️</div><div class="slabel">Backend</div></div>
+              <div class="sk-tags"><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">FastAPI</span><span class="sk">REST APIs</span><span class="sk">JWT Auth</span><span class="sk">Serverless Functions</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">🤖</div><div class="slabel">AI / ML & LLMs</div></div>
+              <div class="sk-tags"><span class="sk">OpenAI API (GPT-4)</span><span class="sk">Google Gemini API</span><span class="sk">Groq LLaMA 3.3 70B</span><span class="sk">LangChain</span><span class="sk">scikit-learn</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">🌾</div><div class="slabel">IoT & Real-Time</div></div>
+              <div class="sk-tags"><span class="sk">MQTT</span><span class="sk">HiveMQ Cloud</span><span class="sk">Sensor Ingestion</span><span class="sk">Open-Meteo API</span><span class="sk">WebSockets</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">📊</div><div class="slabel">Data & Visualization</div></div>
+              <div class="sk-tags"><span class="sk">Streamlit</span><span class="sk">Pandas</span><span class="sk">Plotly</span><span class="sk">NumPy</span><span class="sk">ImageHash</span><span class="sk">MD5 Hashing</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">💾</div><div class="slabel">Databases</div></div>
+              <div class="sk-tags"><span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk">Firebase</span></div>
+            </div>
+
+            <div class="scard reveal">
+              <div class="shead"><div class="sico">☁️</div><div class="slabel">Cloud & DevOps</div></div>
+              <div class="sk-tags"><span class="sk">AWS</span><span class="sk">Vercel</span><span class="sk">Railway</span><span class="sk">Render</span><span class="sk">CI/CD</span><span class="sk">Git/GitHub</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -795,23 +655,23 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="pct">}</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">const</span> <span class="prop">positions</span><span class="op">:</span> <span class="cls">Position</span><span class="pct">[]</span> <span class="op">=</span> <span class="pct">[</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Campus Partner"</span><span class="pct">,</span>       <span class="prop">org</span><span class="op">:</span> <span class="str">"Perplexity AI"</span><span class="pct">,</span>       <span class="prop">students</span><span class="op">:</span> <span class="num">180</span> <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Core Committee member"</span><span class="pct">,</span>  <span class="prop">org</span><span class="op">:</span> <span class="str">"IEEE CS Chapter"</span><span class="pct">,</span>     <span class="prop">students</span><span class="op">:</span> <span class="num">190</span> <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Senior Core member"</span><span class="pct">,</span>     <span class="prop">org</span><span class="op">:</span> <span class="str">"Pixelate Design Club"</span><span class="pct">,</span>  <span class="prop">students</span><span class="op">:</span> <span class="num">150</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Campus Partner"</span><span class="pct">,</span>  <span class="prop">org</span><span class="op">:</span> <span class="str">"Perplexity AI"</span><span class="pct">,</span>   <span class="prop">students</span><span class="op">:</span> <span class="num">200</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Core Committee"</span><span class="pct">,</span> <span class="prop">org</span><span class="op">:</span> <span class="str">"IEEE CS Chapter"</span><span class="pct">,</span> <span class="prop">students</span><span class="op">:</span> <span class="num">180</span> <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">role</span><span class="op">:</span> <span class="str">"Core Committee"</span><span class="pct">,</span> <span class="prop">org</span><span class="op">:</span> <span class="str">"Pixelate Design"</span><span class="pct">,</span> <span class="prop">students</span><span class="op">:</span> <span class="num">150</span> <span class="pct">},</span></div>
 <div class="cblk-line"><span class="pct">];</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="cmt">// Leadership roles that shaped my journey 🚀</span></div>
-          </div>
+</div>
           <h2 class="sh reveal"><span>//</span> Extracurricular Activities</h2>
           <p class="ss reveal">Clubs, communities and leadership roles at VIT Vellore.</p>
           <div class="timeline">
             <div class="tl-item reveal">
               <div class="tl-dot on"></div>
               <div class="tlcard">
-                <div class="tlhdr"><div class="tl-title">📱 Perplexity Campus Partner</div><span class="tl-badge">Aug 2025 - Dec 2025</span></div>
+                <div class="tlhdr"><div class="tl-title">📱 Perplexity Campus Partner</div><span class="tl-badge">Aug 2025 – Dec 2025</span></div>
                 <div class="tl-org">Perplexity AI</div>
                 <ul class="tl-pts">
-                  <li>Led campus outreach initiatives, onboarding <strong>180+ students</strong> through workshops and demos</li>
+                  <li>Led campus outreach initiatives, onboarding <strong>200+ students</strong> through workshops and demos</li>
                   <li>Acted as point of contact for student feedback, influencing product engagement strategies</li>
                   <li>Organized interactive sessions on AI-powered research tools and best practices</li>
                 </ul>
@@ -820,10 +680,10 @@ a{text-decoration:none;color:inherit;}
             <div class="tl-item reveal">
               <div class="tl-dot on"></div>
               <div class="tlcard">
-                <div class="tlhdr"><div class="tl-title">💻 Core Committee Member</div><span class="tl-badge">Mar 2025 - Present</span></div>
+                <div class="tlhdr"><div class="tl-title">💻 Core Committee Member</div><span class="tl-badge">Mar 2025 – Present</span></div>
                 <div class="tl-org">IEEE Computer Society Chapter</div>
                 <ul class="tl-pts">
-                  <li>Organized tech events and hackathons including <strong>HackBattle Hackathon</strong> with <strong>190+ participants</strong></li>
+                  <li>Organized tech events and hackathons including <strong>HackBattle Hackathon</strong> with <strong>180+ participants</strong></li>
                   <li>Led sponsorship coordination and promotional activities for chapter events</li>
                   <li>Facilitated technical workshops and knowledge-sharing sessions on emerging technologies</li>
                 </ul>
@@ -832,7 +692,7 @@ a{text-decoration:none;color:inherit;}
             <div class="tl-item reveal">
               <div class="tl-dot on"></div>
               <div class="tlcard">
-                <div class="tlhdr"><div class="tl-title">🎨 Senior Core Member</div><span class="tl-badge">Feb 2025 - Present</span></div>
+                <div class="tlhdr"><div class="tl-title">🎨 Core Committee Member</div><span class="tl-badge">Feb 2025 – Present</span></div>
                 <div class="tl-org">Pixelate Design Club</div>
                 <ul class="tl-pts">
                   <li>Designed and executed promotional creatives for multiple club events and campaigns</li>
@@ -861,24 +721,28 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">const</span> <span class="prop">internships</span><span class="op">:</span> <span class="cls">Internship</span><span class="pct">[]</span> <span class="op">=</span> <span class="pct">[{</span></div>
 <div class="cblk-line">  <span class="prop">company</span><span class="op">:</span> <span class="str">"India Space Lab"</span><span class="pct">,</span></div>
-<div class="cblk-line">  <span class="prop">role</span><span class="op">:</span>    <span class="str">"Winter Intern - Space Tech &amp; Remote Sensing"</span><span class="pct">,</span></div>
-<div class="cblk-line">  <span class="prop">period</span><span class="op">:</span>  <span class="str">"Jan 2026 - Feb 2026"</span><span class="pct">,</span></div>
+<div class="cblk-line">  <span class="prop">role</span><span class="op">:</span>    <span class="str">"Winter Intern — Space Tech &amp; Remote Sensing"</span><span class="pct">,</span></div>
+<div class="cblk-line">  <span class="prop">period</span><span class="op">:</span>  <span class="str">"Jan 2026 – Present"</span><span class="pct">,</span></div>
 <div class="cblk-line">  <span class="prop">type</span><span class="op">:</span>    <span class="str">"Remote"</span><span class="pct">,</span></div>
-<div class="cblk-line">  <span class="prop">focus</span><span class="op">:</span>   <span class="pct">[</span><span class="str">"Satellite Systems"</span><span class="pct">,</span> <span class="str">"Remote Sensing Analytics"</span><span class="pct">,</span> <span class="str">"UAV / Drone Data Pipelines"</span><span class="pct">],</span></div>
+<div class="cblk-line">  <span class="prop">focus</span><span class="op">:</span>   <span class="pct">[</span></div>
+<div class="cblk-line">    <span class="str">"Satellite Systems"</span><span class="pct">,</span></div>
+<div class="cblk-line">    <span class="str">"Remote Sensing Analytics"</span><span class="pct">,</span></div>
+<div class="cblk-line">    <span class="str">"UAV / Drone Data Pipelines"</span><span class="pct">,</span></div>
+<div class="cblk-line">  <span class="pct">],</span></div>
 <div class="cblk-line"><span class="pct">}];</span></div>
-          </div>
+</div>
           <h2 class="sh reveal"><span>//</span> Internship Experience</h2>
           <p class="ss reveal">Professional experience beyond the classroom.</p>
           <div class="timeline">
             <div class="tl-item reveal">
               <div class="tl-dot on"></div>
               <div class="tlcard">
-                <div class="tlhdr"><div class="tl-title">🛰️ India Space Lab</div><span class="tl-badge">Jan 2026 - Feb 2026</span></div>
-                <div class="tl-org">Winter Intern - Space Technology &amp; Remote Sensing · Remote</div>
+                <div class="tlhdr"><div class="tl-title">🛰️ India Space Lab</div><span class="tl-badge">Jan 2026 – Present</span></div>
+                <div class="tl-org">Winter Intern — Space Technology & Remote Sensing · Remote</div>
                 <ul class="tl-pts">
                   <li>Selected for a <strong>national competitive internship</strong> applying space technologies to real-world engineering challenges</li>
-                  <li>Gained hands-on experience with <strong>satellite systems, remote sensing analytics, and UAV/drone-based data pipelines</strong></li>
-                  <li>Collaborated with a distributed team to design and evaluate <strong>space-based engineering solutions</strong> through structured technical case studies</li>
+                  <li>Gaining hands-on experience with <strong>satellite systems, remote sensing analytics, and UAV/drone-based data pipelines</strong></li>
+                  <li>Collaborating with a distributed team to design and evaluate <strong>space-based engineering solutions</strong> through structured technical case studies</li>
                 </ul>
                 <div class="tl-tags tags">
                   <span class="tag tb">Remote Sensing</span><span class="tag tt">Satellite Systems</span><span class="tag tp">Drone Technology</span><span class="tag tg">Geospatial Analysis</span>
@@ -895,65 +759,87 @@ a{text-decoration:none;color:inherit;}
       <div class="ed-sec" id="sec-certifications">
         <div class="gutter" id="g-certifications"></div>
         <div class="content">
+          <div class="cblk">
+<div class="cblk-line"><span class="cmt"># certifications.md</span></div>
+<div class="cblk-empty"></div>
+<div class="cblk-line"><span class="cmt">## Professional Development</span></div>
+<div class="cblk-empty"></div>
+<div class="cblk-line"><span class="op">|</span> <span class="cls">Certificate</span>                 <span class="op">|</span> <span class="cls">Platform</span> <span class="op">|</span> <span class="cls">Duration</span>    <span class="op">|</span></div>
+<div class="cblk-line"><span class="op">|</span> --------------------------- <span class="op">|</span> -------- <span class="op">|</span> ----------- <span class="op">|</span></div>
+<div class="cblk-line"><span class="op">|</span> Full-Stack Web Development  <span class="op">|</span> Udemy    <span class="op">|</span> <span class="num">61.5</span> hours  <span class="op">|</span></div>
+<div class="cblk-line"><span class="op">|</span> UI/UX Design Masterclass    <span class="op">|</span> Udemy    <span class="op">|</span> <span class="num">41.5</span> hours  <span class="op">|</span></div>
+<div class="cblk-line"><span class="op">|</span> Postman Student Expert      <span class="op">|</span> Postman  <span class="op">|</span> API Testing <span class="op">|</span></div>
+<div class="cblk-empty"></div>
+<div class="cblk-line"><span class="cmt">## Open Source</span></div>
+<div class="cblk-empty"></div>
+<div class="cblk-line"><span class="pct">-</span> GSSoC <span class="num">2025</span> Contributor  <span class="op">→</span>  Multiple OSS projects</div>
+</div>
           <h2 class="sh reveal"><span>//</span> Certifications</h2>
           <p class="ss reveal">Courses, credentials and open-source contributions.</p>
           <div class="cgrid">
             <div class="ccard reveal">
-              <span class="cico">🛡️</span>
-              <div class="ctitle">EY Technology Risk Virtual Job Simulation</div>
-              <div class="cby">Forage</div>
-              <p class="cdesc">Completed hands-on tasks involving IT risk assessment, control evaluation, and cybersecurity frameworks in a simulated EY environment</p>
-              <a href="https://www.theforage.com/completion-certificates/Z3pPDqCPapFTSGBgi/25RAqjzJnD3b8YPZv_Z3pPDqCPapFTSGBgi_694e851739ff7eaad9e01e9f_1773940779788_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">🔐</span>
-              <div class="ctitle">Mastercard Cybersecurity Job Simulation</div>
-              <div class="cby">Forage</div>
-              <p class="cdesc">Gained practical experience in identifying threats, analyzing vulnerabilities, and implementing cybersecurity measures in real-world scenarios</p>
-              <a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_694e851739ff7eaad9e01e9f_1773941954278_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">📊</span>
-              <div class="ctitle">Deloitte Australia Data Analytics Job Simulation</div>
-              <div class="cby">Forage</div>
-              <p class="cdesc">Worked on data cleaning, visualization, and deriving business insights using analytical tools in a Deloitte-simulated project environment</p>
-              <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_694e851739ff7eaad9e01e9f_1773930285033_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">🤖</span>
-              <div class="ctitle">AI Skills Passport</div>
-              <div class="cby">Microsoft &amp; EY</div>
-              <p class="cdesc">Developed foundational AI knowledge including machine learning concepts, ethical AI, and real-world business applications</p>
-              <a href="https://drive.google.com/file/d/177NQqEdiZTolXnbBBlTMIa_CVcgprv36/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">🎓</span>
-              <div class="ctitle">Full-Stack Web Development</div>
-              <div class="cby">Udemy · 61.5 hours</div>
-              <p class="cdesc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p>
-              <a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="clink">View Certificate →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">🎨</span>
-              <div class="ctitle">UI/UX Design Masterclass</div>
-              <div class="cby">Udemy · 41.5 hours</div>
-              <p class="cdesc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p>
-              <a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="clink">View Certificate →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">🔧</span>
-              <div class="ctitle">Postman Student Expert</div>
-              <div class="cby">Postman</div>
-              <p class="cdesc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p>
-              <a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="clink">View Badge →</a>
-            </div>
-            <div class="ccard reveal">
-              <span class="cico">🌟</span>
-              <div class="ctitle">GSSoC 2025 Contributor</div>
-              <div class="cby">GirlScript Summer of Code</div>
-              <p class="cdesc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p>
-              <a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
-            </div>
+    <span class="cico">🛡️</span>
+    <div class="ctitle">EY Technology Risk Virtual Job Simulation</div>
+    <div class="cby">Forage</div>
+    <p class="cdesc">Completed hands-on tasks involving IT risk assessment, control evaluation, and cybersecurity frameworks in a simulated EY environment</p>
+    <a href="https://www.theforage.com/completion-certificates/Z3pPDqCPapFTSGBgi/25RAqjzJnD3b8YPZv_Z3pPDqCPapFTSGBgi_694e851739ff7eaad9e01e9f_1773940779788_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">🔐</span>
+    <div class="ctitle">Mastercard Cybersecurity Job Simulation</div>
+    <div class="cby">Forage</div>
+    <p class="cdesc">Gained practical experience in identifying threats, analyzing vulnerabilities, and implementing cybersecurity measures in real-world scenarios</p>
+    <a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_694e851739ff7eaad9e01e9f_1773941954278_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">📊</span>
+    <div class="ctitle">Deloitte Australia Data Analytics Job Simulation</div>
+    <div class="cby">Forage</div>
+    <p class="cdesc">Worked on data cleaning, visualization, and deriving business insights using analytical tools in a Deloitte-simulated project environment</p>
+    <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_694e851739ff7eaad9e01e9f_1773930285033_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">🤖</span>
+    <div class="ctitle">AI Skills Passport</div>
+    <div class="cby">Microsoft & EY</div>
+    <p class="cdesc">Developed foundational AI knowledge including machine learning concepts, ethical AI, and real-world business applications</p>
+    <a href="https://drive.google.com/file/d/177NQqEdiZTolXnbBBlTMIa_CVcgprv36/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">🎓</span>
+    <div class="ctitle">Full-Stack Web Development</div>
+    <div class="cby">Udemy · 61.5 hours</div>
+    <p class="cdesc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p>
+    <a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="clink">View Certificate →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">🎨</span>
+    <div class="ctitle">UI/UX Design Masterclass</div>
+    <div class="cby">Udemy · 41.5 hours</div>
+    <p class="cdesc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p>
+    <a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="clink">View Certificate →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">🔧</span>
+    <div class="ctitle">Postman Student Expert</div>
+    <div class="cby">Postman</div>
+    <p class="cdesc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p>
+    <a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="clink">View Badge →</a>
+</div>
+
+<div class="ccard reveal">
+    <span class="cico">🌟</span>
+    <div class="ctitle">GSSoC 2025 Contributor</div>
+    <div class="cby">GirlScript Summer of Code</div>
+    <p class="cdesc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p>
+    <a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
+</div>
           </div>
         </div>
       </div>
@@ -975,7 +861,7 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-line"><span class="pct">}</span></div>
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="cmt">/* Let's build something amazing together! 🚀 */</span></div>
-          </div>
+</div>
           <h2 class="sh reveal"><span>//</span> Let's Connect</h2>
           <p class="ss reveal">I'm always open to discussing new projects, creative ideas, or opportunities.</p>
           <div class="contact-layout reveal">
@@ -1029,9 +915,7 @@ a{text-decoration:none;color:inherit;}
 // ── Clock ─────────────────────────────────────────────────────────
 (function tick() {
   const n = new Date(), h = n.getHours(), m = n.getMinutes();
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  const hh = (h%12||12).toString().padStart(2,'0');
-  const mm = m.toString().padStart(2,'0');
+  const ampm = h >= 12 ? 'PM' : 'AM', hh = (h%12||12).toString().padStart(2,'0'), mm = m.toString().padStart(2,'0');
   document.getElementById('clock').textContent = `${hh}:${mm} ${ampm}`;
   setTimeout(tick, 10000);
 })();
@@ -1046,13 +930,13 @@ Object.entries(gutterLines).forEach(([id,n]) => {
 
 // ── Navigation ────────────────────────────────────────────────────
 const meta = {
-  about:          {file:'about.jsx',          dot:'jsx',  lang:'JSX'},
-  projects:       {file:'projects.tsx',        dot:'tsx',  lang:'TSX'},
-  skills:         {file:'skills.json',         dot:'json', lang:'JSON'},
-  experience:     {file:'extracurriculars.ts', dot:'ts',   lang:'TypeScript'},
-  internships:    {file:'internships.tsx',     dot:'tsx',  lang:'TSX'},
-  certifications: {file:'certifications.md',  dot:'md',   lang:'Markdown'},
-  contact:        {file:'contact.css',         dot:'css',  lang:'CSS'}
+  about:          {file:'about.jsx',         dot:'jsx',  lang:'JSX'},
+  projects:       {file:'projects.tsx',       dot:'tsx',  lang:'TSX'},
+  skills:         {file:'skills.json',        dot:'json', lang:'JSON'},
+  experience:     {file:'extracurriculars.ts',       dot:'ts',   lang:'TypeScript'},
+  internships:    {file:'internships.tsx',    dot:'tsx',  lang:'TSX'},
+  certifications: {file:'certifications.md', dot:'md',   lang:'Markdown'},
+  contact:        {file:'contact.css',        dot:'css',  lang:'CSS'}
 };
 
 let openTabs = ['about'], active = 'about';
@@ -1060,12 +944,15 @@ let openTabs = ['about'], active = 'about';
 function navigate(id) {
   if (!meta[id]) return;
   const m = meta[id];
+
   document.querySelectorAll('.ed-sec').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
   active = id;
+
   document.querySelectorAll('.sn-item').forEach(n => n.classList.toggle('active', n.dataset.sec===id));
   document.getElementById('bc').textContent = m.file;
   document.getElementById('sb-lang').textContent = m.lang;
+
   if (!openTabs.includes(id)) { openTabs.push(id); addTab(id, m); }
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.sec===id));
   document.querySelector('.editor-wrap').scrollTo({top:0,behavior:'smooth'});
@@ -1088,13 +975,18 @@ function closeTab(id, el) {
   if (active===id) navigate(openTabs[Math.min(idx,openTabs.length-1)]);
 }
 
+// Initial about tab
 document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => {
   if (e.target.classList.contains('t-close')) { closeTab('about',e.currentTarget); return; }
   navigate('about');
 });
-// sn-item clicks handled below with mobile close + sync
+document.querySelectorAll('.sn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
 // ── Scroll reveal ─────────────────────────────────────────────────
+new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:.1}).observe || (() => {})();
+
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold:.1});
@@ -1137,52 +1029,6 @@ document.addEventListener('keydown', e => {
     const keys = Object.keys(meta);
     if (keys[+e.key-1]) navigate(keys[+e.key-1]);
   }
-});
-
-// ── Mobile hamburger & drawer ─────────────────────────────────────
-const hamburger   = document.getElementById('hamburger');
-const sidebar     = document.querySelector('.sidebar');
-const overlay     = document.getElementById('sidebarOverlay');
-
-function openSidebar() {
-  sidebar.classList.add('open');
-  overlay.classList.add('visible');
-  hamburger.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeSidebar() {
-  sidebar.classList.remove('open');
-  overlay.classList.remove('visible');
-  hamburger.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-hamburger.addEventListener('click', () => {
-  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
-});
-overlay.addEventListener('click', closeSidebar);
-
-// ── Mobile bottom nav ─────────────────────────────────────────────
-function syncMobileNav(id) {
-  document.querySelectorAll('.mnav-item').forEach(i => {
-    i.classList.toggle('active', i.dataset.sec === id);
-  });
-}
-
-document.querySelectorAll('.mnav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    navigate(item.dataset.sec);
-    syncMobileNav(item.dataset.sec);
-  });
-});
-
-// Re-bind sidebar nav items to also close drawer + sync bottom nav on mobile
-document.querySelectorAll('.sn-item').forEach(n => {
-  n.onclick = () => {
-    navigate(n.dataset.sec);
-    syncMobileNav(n.dataset.sec);
-    if (window.innerWidth <= 680) closeSidebar();
-  };
 });
 
 navigate('about');
