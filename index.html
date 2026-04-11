@@ -509,10 +509,10 @@ a{text-decoration:none;color:inherit;}
 <div class="cblk-empty"></div>
 <div class="cblk-line"><span class="kw">const</span> <span class="prop">projects</span><span class="op">:</span> <span class="cls">Project</span><span class="pct">[]</span> <span class="op">=</span> <span class="pct">[</span></div>
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VoidCheck"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"Groq LLaMA 3.3 70B"</span>           <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"BreakBias"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"Gemini API"</span>                   <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"BreakBias"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"Groq API"</span>                   <span class="pct">},</span></div>
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"SmartAgri"</span><span class="pct">,</span>      <span class="prop">tech</span><span class="op">:</span>    <span class="str">"MQTT + scikit-learn"</span>          <span class="pct">},</span></div>
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"Meetzy"</span><span class="pct">,</span>         <span class="prop">impact</span><span class="op">:</span> <span class="str">"70% reduction in note-taking"</span> <span class="pct">},</span></div>
-<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VeriLex"</span><span class="pct">,</span>        <span class="prop">tech</span><span class="op">:</span>   <span class="str">"Gemini 1.5 Flash"</span>             <span class="pct">},</span></div>
+<div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"VeriLex"</span><span class="pct">,</span>        <span class="prop">tech</span><span class="op">:</span>   <span class="str">"Groq API"</span>             <span class="pct">},</span></div>
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"ModelGuard"</span><span class="pct">,</span>     <span class="prop">security</span><span class="op">:</span> <span class="str">"AI Model Scanner"</span>           <span class="pct">},</span></div>
 <div class="cblk-line">  <span class="pct">{</span> <span class="prop">name</span><span class="op">:</span> <span class="str">"DupSense"</span><span class="pct">,</span>       <span class="prop">feature</span><span class="op">:</span>  <span class="str">"Smart File Detection"</span>        <span class="pct">},</span></div>
 <div class="cblk-line"><span class="pct">];</span></div>
@@ -539,16 +539,16 @@ a{text-decoration:none;color:inherit;}
               <div class="pbody"><p class="pdesc">End-to-end IoT smart farming system with real-time MQTT-based sensor ingestion (soil temp, humidity, moisture) via HiveMQ Cloud, enriched with live weather data from the Open-Meteo API. Random Forest crop recommendation model (300 estimators) on a 2200+ sample dataset with top-3 confidence-ranked predictions and an interactive rule-based farming chatbot.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">scikit-learn</span><span class="tag tt">MQTT</span><span class="tag tg">HiveMQ</span><span class="tag tt">Open-Meteo API</span></div></div>
             </div>
 
+            <!-- ── EXISTING: VeriLex ── -->
+            <div class="pcard reveal">
+              <div class="ptop"><span class="pem">📜</span><div class="pinfo"><div class="pname">VeriLex</div><div class="ptype">AI Legal Document Analyzer</div></div><a href="https://github.com/rizzit17/VeriLex" target="_blank" class="plink">GitHub →</a></div>
+              <div class="pbody"><p class="pdesc">Full-stack AI platform to upload, parse, and analyze complex legal PDFs in real time. Used Groq for risk classification and missing clause detection.</p><div class="pimpact">▸ <a href="https://veri-lex.vercel.app/" target="_blank" style="color:inherit;">Live Demo ↗</a><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tp">Groq API</span><span class="tag tg">Tailwind CSS</span><span class="tag tb">Vercel</span></div></div>
+            </div>
+               
             <!-- ── EXISTING: Meetzy ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🎙️</span><div class="pinfo"><div class="pname">Meetzy</div><div class="ptype">AI Meeting Platform</div></div><a href="https://github.com/rizzit17/smartmeeting" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Full-stack AI meeting platform enabling real-time transcription and automated summaries. Integrated OpenAI API to extract key insights and action items.</p><div class="pimpact">▸ 70% reduction in manual note-taking</div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">Express.js</span><span class="tag tp">OpenAI API</span><span class="tag tg">MongoDB</span><span class="tag tb">JWT</span></div></div>
-            </div>
-
-            <!-- ── EXISTING: VeriLex ── -->
-            <div class="pcard reveal">
-              <div class="ptop"><span class="pem">📜</span><div class="pinfo"><div class="pname">VeriLex</div><div class="ptype">AI Legal Document Analyzer</div></div><a href="https://github.com/rizzit17/VeriLex" target="_blank" class="plink">GitHub →</a></div>
-              <div class="pbody"><p class="pdesc">Full-stack AI platform to upload, parse, and analyze complex legal PDFs in real time. Used Google Gemini 1.5 Flash for risk classification and missing clause detection.</p><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tp">Gemini 1.5 Flash</span><span class="tag tg">Tailwind CSS</span><span class="tag tb">Vercel</span></div></div>
             </div>
 
             <!-- ── EXISTING: ModelGuard ── -->
