@@ -67,6 +67,39 @@ a{text-decoration:none;color:inherit;}
 @keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(158,206,106,.5);}50%{box-shadow:0 0 0 5px rgba(158,206,106,0);}}
 .tb-clock{font-size:12px;color:var(--text-dim);font-variant-numeric:tabular-nums;min-width:70px;text-align:right;}
 
+/* ── HAMBURGER ── */
+.hamburger{
+  display:none;
+  flex-direction:column;
+  justify-content:space-between;
+  width:22px;height:16px;
+  background:transparent;border:none;
+  cursor:pointer;padding:0;flex-shrink:0;
+  z-index:210;
+}
+.hamburger span{
+  display:block;width:100%;height:2px;
+  background:var(--text);border-radius:2px;
+  transition:all .3s ease;
+  transform-origin:center;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ── OVERLAY ── */
+.overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:155;
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.overlay.active{display:block;opacity:1;}
+
 /* ── LAYOUT ── */
 .layout{display:flex;padding-top:var(--top-h);min-height:100vh;}
 
@@ -78,6 +111,7 @@ a{text-decoration:none;color:inherit;}
   overflow-y:auto;overflow-x:hidden;
   display:flex;flex-direction:column;padding:28px 22px 80px;gap:22px;
   scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+  transition:transform .3s ease;
 }
 .sidebar::-webkit-scrollbar{width:4px;}
 .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
@@ -220,7 +254,7 @@ a{text-decoration:none;color:inherit;}
 .about-hero{margin-bottom:32px;}
 .a-h1{font-family:var(--sans);font-size:clamp(32px,4vw,52px);font-weight:800;color:var(--text-bright);line-height:1.15;letter-spacing:-.03em;margin-bottom:10px;}
 .a-h1 span{color:var(--purple);}
-.a-role{display:flex;align-items:center;gap:8px;font-size:15px;color:#34d399;font-weight:500;margin-bottom:14px;font-family:var(--sans);}
+.a-role{display:flex;align-items:center;gap:8px;font-size:15px;color:#34d399;font-weight:500;margin-bottom:14px;font-family:var(--sans);flex-wrap:wrap;}
 .rbadge{background:rgba(158,206,106,.1);border:1px solid rgba(158,206,106,.3);color:var(--green);font-size:12px;padding:2px 8px;border-radius:2px;font-family:var(--mono);}
 .a-desc{font-family:var(--sans);font-size:15px;color:var(--text-dim);line-height:1.8;max-width:560px;margin-bottom:22px;}
 .stats-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;}
@@ -340,16 +374,117 @@ a{text-decoration:none;color:inherit;}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){:root{--sb-w:250px;}.content{padding:22px 22px 60px 18px;}}
+/* ================================================================
+   RESPONSIVE — TABLET (≤ 900px)
+   ================================================================ */
+@media(max-width:900px){
+  :root{--sb-w:260px;}
+  .content{padding:22px 22px 60px 18px;}
+  .cgrid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
+  .a-h1{font-size:clamp(28px,5vw,44px);}
+  .pgrid{grid-template-columns:repeat(auto-fit,minmax(290px,1fr));}
+}
+
+/* ================================================================
+   RESPONSIVE — MOBILE (≤ 680px)
+   ================================================================ */
 @media(max-width:680px){
   :root{--sb-w:0px;}
-  .sidebar{display:none;}
+
+  /* ── Hamburger ── */
+  .hamburger{display:flex;}
+
+  /* ── Sidebar becomes a slide-in drawer ── */
+  .sidebar{
+    width:290px;
+    transform:translateX(-100%);
+    z-index:160;
+    top:0;
+    padding-top:calc(var(--top-h) + 18px);
+  }
+  .sidebar.open{transform:translateX(0);}
+
+  /* ── Topbar compact ── */
+  .topbar{padding:0 14px;gap:10px;}
+  .tb-marquee{display:none;}
+  .tb-status.loc-status{display:none;}
+  .tb-right{gap:10px;}
+  .tb-clock{min-width:56px;font-size:11px;}
+
+  /* ── Main area: no left margin ── */
+  .main{margin-left:0;}
+
+  /* ── Status bar: full width ── */
   .statusbar{left:0;}
-  .content{padding:18px 16px 60px;}
-  .a-h1{font-size:26px;}
+  .sb-r .sbi:nth-child(n+3){display:none;}/* hide React/Node on tiny screens */
+
+  /* ── Editor content ── */
+  .content{padding:16px 14px 60px 12px;}
+  .gutter{width:36px;font-size:11px;}
+  .gutter span{padding-right:8px;}
+
+  /* ── Code blocks ── */
+  .cblk{font-size:12px;padding:12px 14px;margin-bottom:24px;line-height:1.65;}
+
+  /* ── Section headings ── */
+  .sh{font-size:20px;}
+  .ss{font-size:13px;margin-bottom:20px;}
+
+  /* ── About hero ── */
+  .a-h1{font-size:clamp(24px,8vw,36px);letter-spacing:-.02em;}
+  .a-role{font-size:13px;gap:6px;}
+  .a-desc{font-size:14px;}
+  .stats-row{gap:8px;}
+  .stat{min-width:68px;padding:9px 10px;}
+  .sv{font-size:18px;}
+  .sl{font-size:11px;}
+  .act-row{flex-direction:column;gap:8px;}
+  .abtn{justify-content:center;width:100%;padding:11px 18px;}
+  .icards{grid-template-columns:1fr;}
+
+  /* ── Projects ── */
   .pgrid{grid-template-columns:1fr;}
+  .ptop{flex-wrap:wrap;gap:8px;}
+  .pname{font-size:15px;}
+
+  /* ── Skills ── */
+  .sgrid{grid-template-columns:1fr;}
+
+  /* ── Timeline ── */
+  .timeline{padding-left:20px;}
+  .tl-dot{left:-17px;width:11px;height:11px;}
+  .tlcard{padding:14px 14px;}
+  .tlhdr{flex-direction:column;gap:5px;align-items:flex-start;}
+  .tl-title{font-size:14px;}
+  .tl-badge{font-size:11px;padding:2px 7px;}
+  .tl-org{font-size:13px;}
+  .tl-pts li{font-size:13px;}
+
+  /* ── Certs ── */
+  .cgrid{grid-template-columns:1fr;}
+
+  /* ── Contact ── */
   .contact-layout{grid-template-columns:1fr;}
+  .ctbody{font-size:12px;padding:14px;}
+
+  /* ── Tabs ── */
+  .tab{padding:0 10px;font-size:10px;gap:5px;}
+  .t-close{display:none;}
+
+  /* ── Breadcrumb ── */
+  .breadcrumb{font-size:10px;padding:0 12px;}
+}
+
+/* ================================================================
+   RESPONSIVE — SMALL MOBILE (≤ 400px)
+   ================================================================ */
+@media(max-width:400px){
+  .tb-clock{display:none;}
+  .tb-status{font-size:11px;}
+  .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .stat{min-width:unset;}
+  .cblk{font-size:11px;padding:10px 10px;}
+  .sidebar{width:260px;}
 }
 </style>
 </head>
@@ -357,6 +492,11 @@ a{text-decoration:none;color:inherit;}
 
 <!-- TOP BAR -->
 <div class="topbar">
+  <!-- Hamburger (visible on mobile only) -->
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
   <div class="tb-marquee">
     <div class="marquee-track">
       <span>Welcome to my world! &nbsp;✦&nbsp; <b>rishit.dev</b> &nbsp;✦&nbsp; Full-Stack Developer &nbsp;✦&nbsp; VIT Vellore &nbsp;✦&nbsp; Open to opportunities &nbsp;✦&nbsp; React · Node.js · AI/ML &nbsp;✦&nbsp;</span>
@@ -365,15 +505,18 @@ a{text-decoration:none;color:inherit;}
   </div>
   <div class="tb-right">
     <div class="tb-status"><span class="s-dot"></span><span style="color:#4ade80;font-size:12px">Open to work</span></div>
-    <div class="tb-status" style="font-size:12px">📍 Noida, India</div>
+    <div class="tb-status loc-status" style="font-size:12px">📍 Noida, India</div>
     <div class="tb-clock" id="clock">--:-- --</div>
   </div>
 </div>
 
+<!-- Overlay (mobile sidebar backdrop) -->
+<div class="overlay" id="overlay" aria-hidden="true"></div>
+
 <div class="layout">
 
   <!-- SIDEBAR -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="profile-row">
       <img src="profile_pic.jpeg" alt="Rishit" class="profile-img"
            onerror="this.outerHTML='<div class=\'profile-initials\'>RC</div>'">
@@ -521,49 +664,41 @@ a{text-decoration:none;color:inherit;}
           <p class="ss reveal">Things I've built - AI platforms and full-stack systems.</p>
           <div class="pgrid">
 
-            <!-- ── NEW: VoidCheck ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🔍</span><div class="pinfo"><div class="pname">VoidCheck</div><div class="ptype">AI Code Review Platform</div></div><a href="https://github.com/rizzit17/VoidCheck" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Full-stack AI code review platform with an integrated Monaco Editor supporting 6 languages and GitHub URL ingestion, powered by Groq LLaMA 3.3 70B via LangChain for real-time code analysis. Engineered structured JSON prompting to extract health scores, categorized issues, and multi-dimensional code metrics.</p><div class="pimpact">▸ <a href="https://void-check.vercel.app/" target="_blank" style="color:inherit;">Live Demo ↗</a></div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">Express.js</span><span class="tag tp">Groq LLaMA 3.3 70B</span><span class="tag tp">LangChain</span><span class="tag tb">Vite</span><span class="tag tb">Vercel</span></div></div>
             </div>
 
-            <!-- ── NEW: BreakBias ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">⚡</span><div class="pinfo"><div class="pname">BreakBias</div><div class="ptype">AI Workplace Bias Awareness App</div></div><a href="https://github.com/rizzit17/BreakBias" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Dual-mode interactive simulator with AI-generated, role-personalized workplace bias scenarios via the Gemini API, secured with Firebase Auth and served through Vercel Serverless Functions. Multi-axis rubric-based AI evaluator with Framer Motion animations and a graceful local fallback engine.</p><div class="pimpact">▸ <a href="https://break-bias.vercel.app/" target="_blank" style="color:inherit;">Live Demo ↗</a></div><div class="tags"><span class="tag tb">React 18</span><span class="tag tb">Vite</span><span class="tag tg">Tailwind CSS</span><span class="tag tp">Gemini API</span><span class="tag tb">Firebase Auth</span><span class="tag tg">Framer Motion</span></div></div>
             </div>
 
-            <!-- ── NEW: Smart Agriculture IoT System ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🌾</span><div class="pinfo"><div class="pname">SmartAgri</div><div class="ptype">Smart Agriculture IoT System</div></div><a href="https://github.com/rizzit17/SmartAgri" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">End-to-end IoT smart farming system with real-time MQTT-based sensor ingestion (soil temp, humidity, moisture) via HiveMQ Cloud, enriched with live weather data from the Open-Meteo API. Random Forest crop recommendation model (300 estimators) on a 2200+ sample dataset with top-3 confidence-ranked predictions and an interactive rule-based farming chatbot.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">scikit-learn</span><span class="tag tt">MQTT</span><span class="tag tg">HiveMQ</span><span class="tag tt">Open-Meteo API</span></div></div>
             </div>
 
-            <!-- ── EXISTING: VeriLex ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">📜</span><div class="pinfo"><div class="pname">VeriLex</div><div class="ptype">AI Legal Document Analyzer</div></div><a href="https://github.com/rizzit17/VeriLex" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Full-stack AI platform to upload, parse, and analyze complex legal PDFs in real time. Used Groq for risk classification and missing clause detection.</p><div class="pimpact">▸ <a href="https://veri-lex.vercel.app/" target="_blank" style="color:inherit;">Live Demo ↗</a></div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tp">Groq API</span><span class="tag tg">Tailwind CSS</span><span class="tag tb">Vercel</span></div></div>
             </div>
-               
-            <!-- ── EXISTING: Meetzy ── -->
+
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🎙️</span><div class="pinfo"><div class="pname">Meetzy</div><div class="ptype">AI Meeting Platform</div></div><a href="https://github.com/rizzit17/smartmeeting" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Full-stack AI meeting platform enabling real-time transcription and automated summaries. Integrated OpenAI API to extract key insights and action items.</p><div class="pimpact">▸ 70% reduction in manual note-taking</div><div class="tags"><span class="tag tb">React.js</span><span class="tag tt">Node.js</span><span class="tag tt">Express.js</span><span class="tag tp">OpenAI API</span><span class="tag tg">MongoDB</span><span class="tag tb">JWT</span></div></div>
             </div>
 
-            <!-- ── EXISTING: ModelGuard ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">🛡️</span><div class="pinfo"><div class="pname">ModelGuard</div><div class="ptype">AI Model Supply Chain Security Scanner</div></div><a href="https://github.com/rizzit17/ModelGuard" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Static analysis security tool to scan AI model files (.pkl, .pt, .bin) for RCE vectors using pickle bytecode disassembly and Trail of Bits' fickling library. Multi-factor risk scoring with YARA rules and HuggingFace integration.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">YARA</span><span class="tag tp">Fickling</span><span class="tag tt">Plotly</span><span class="tag tg">HuggingFace</span></div></div>
             </div>
 
-            <!-- ── EXISTING: DupSense ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">📁</span><div class="pinfo"><div class="pname">DupSense</div><div class="ptype">Smart Duplicate File Finder</div></div><a href="https://github.com/rizzit17/DupSense" target="_blank" class="plink">GitHub →</a></div>
               <div class="pbody"><p class="pdesc">Automated duplicate detection utility using MD5 hashing for exact matches and perceptual hashing (pHash) for visually similar images. Intelligent file grouping with safe quarantine mode and dark-themed analytics dashboard.</p><div class="tags"><span class="tag tp">Python</span><span class="tag tp">Streamlit</span><span class="tag tp">MD5 Hashing</span><span class="tag tp">ImageHash</span><span class="tag tt">Pandas</span><span class="tag tt">Plotly</span></div></div>
             </div>
 
-            <!-- ── EXISTING: VS Code Portfolio ── -->
             <div class="pcard reveal">
               <div class="ptop"><span class="pem">💻</span><div class="pinfo"><div class="pname">VS Code Portfolio</div><div class="ptype">VS Code–Themed Website</div></div><a href="https://rishit-cv.vercel.app/" target="_blank" class="plink">Live →</a></div>
               <div class="pbody"><p class="pdesc">VS Code–inspired portfolio with file explorer sidebar, syntax-highlighted code blocks, and Tokyo Night theme. Tab-based navigation with breadcrumbs and status bar.</p><div class="tags"><span class="tag tb">HTML</span><span class="tag tg">CSS</span><span class="tag to">JavaScript</span></div></div>
@@ -595,46 +730,14 @@ a{text-decoration:none;color:inherit;}
           <h2 class="sh reveal"><span>//</span> Skill Tree</h2>
           <p class="ss reveal">Technologies and tools I work with day-to-day.</p>
           <div class="sgrid">
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">💻</div><div class="slabel">Languages</div></div>
-              <div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">Java</span><span class="sk">JavaScript</span><span class="sk">Kotlin</span><span class="sk">SQL</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">🎨</div><div class="slabel">Frontend</div></div>
-              <div class="sk-tags"><span class="sk">React.js</span><span class="sk">Vite</span><span class="sk">Tailwind CSS</span><span class="sk">Framer Motion</span><span class="sk">HTML5/CSS3</span><span class="sk">Context API</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">⚙️</div><div class="slabel">Backend</div></div>
-              <div class="sk-tags"><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">FastAPI</span><span class="sk">REST APIs</span><span class="sk">JWT Auth</span><span class="sk">Serverless Functions</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">🤖</div><div class="slabel">AI / ML & LLMs</div></div>
-              <div class="sk-tags"><span class="sk">OpenAI API (GPT-4)</span><span class="sk">Google Gemini API</span><span class="sk">Groq LLaMA 3.3 70B</span><span class="sk">LangChain</span><span class="sk">scikit-learn</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">🌾</div><div class="slabel">IoT & Real-Time</div></div>
-              <div class="sk-tags"><span class="sk">MQTT</span><span class="sk">HiveMQ Cloud</span><span class="sk">Sensor Ingestion</span><span class="sk">Open-Meteo API</span><span class="sk">WebSockets</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">📊</div><div class="slabel">Data & Visualization</div></div>
-              <div class="sk-tags"><span class="sk">Streamlit</span><span class="sk">Pandas</span><span class="sk">Plotly</span><span class="sk">NumPy</span><span class="sk">ImageHash</span><span class="sk">MD5 Hashing</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">💾</div><div class="slabel">Databases</div></div>
-              <div class="sk-tags"><span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk">Firebase</span></div>
-            </div>
-
-            <div class="scard reveal">
-              <div class="shead"><div class="sico">☁️</div><div class="slabel">Cloud & DevOps</div></div>
-              <div class="sk-tags"><span class="sk">AWS</span><span class="sk">Vercel</span><span class="sk">Railway</span><span class="sk">Render</span><span class="sk">CI/CD</span><span class="sk">Git/GitHub</span></div>
-            </div>
+            <div class="scard reveal"><div class="shead"><div class="sico">💻</div><div class="slabel">Languages</div></div><div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">Java</span><span class="sk">JavaScript</span><span class="sk">Kotlin</span><span class="sk">SQL</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">🎨</div><div class="slabel">Frontend</div></div><div class="sk-tags"><span class="sk">React.js</span><span class="sk">Vite</span><span class="sk">Tailwind CSS</span><span class="sk">Framer Motion</span><span class="sk">HTML5/CSS3</span><span class="sk">Context API</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">⚙️</div><div class="slabel">Backend</div></div><div class="sk-tags"><span class="sk">Node.js</span><span class="sk">Express.js</span><span class="sk">FastAPI</span><span class="sk">REST APIs</span><span class="sk">JWT Auth</span><span class="sk">Serverless Functions</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">🤖</div><div class="slabel">AI / ML & LLMs</div></div><div class="sk-tags"><span class="sk">OpenAI API (GPT-4)</span><span class="sk">Google Gemini API</span><span class="sk">Groq LLaMA 3.3 70B</span><span class="sk">LangChain</span><span class="sk">scikit-learn</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">🌾</div><div class="slabel">IoT & Real-Time</div></div><div class="sk-tags"><span class="sk">MQTT</span><span class="sk">HiveMQ Cloud</span><span class="sk">Sensor Ingestion</span><span class="sk">Open-Meteo API</span><span class="sk">WebSockets</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">📊</div><div class="slabel">Data & Visualization</div></div><div class="sk-tags"><span class="sk">Streamlit</span><span class="sk">Pandas</span><span class="sk">Plotly</span><span class="sk">NumPy</span><span class="sk">ImageHash</span><span class="sk">MD5 Hashing</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">💾</div><div class="slabel">Databases</div></div><div class="sk-tags"><span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk">Firebase</span></div></div>
+            <div class="scard reveal"><div class="shead"><div class="sico">☁️</div><div class="slabel">Cloud & DevOps</div></div><div class="sk-tags"><span class="sk">AWS</span><span class="sk">Vercel</span><span class="sk">Railway</span><span class="sk">Render</span><span class="sk">CI/CD</span><span class="sk">Git/GitHub</span></div></div>
           </div>
         </div>
       </div>
@@ -777,69 +880,14 @@ a{text-decoration:none;color:inherit;}
           <h2 class="sh reveal"><span>//</span> Certifications</h2>
           <p class="ss reveal">Courses, credentials and open-source contributions.</p>
           <div class="cgrid">
-            <div class="ccard reveal">
-    <span class="cico">🛡️</span>
-    <div class="ctitle">EY Technology Risk Virtual Job Simulation</div>
-    <div class="cby">Forage</div>
-    <p class="cdesc">Completed hands-on tasks involving IT risk assessment, control evaluation, and cybersecurity frameworks in a simulated EY environment</p>
-    <a href="https://www.theforage.com/completion-certificates/Z3pPDqCPapFTSGBgi/25RAqjzJnD3b8YPZv_Z3pPDqCPapFTSGBgi_694e851739ff7eaad9e01e9f_1773940779788_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🔐</span>
-    <div class="ctitle">Mastercard Cybersecurity Job Simulation</div>
-    <div class="cby">Forage</div>
-    <p class="cdesc">Gained practical experience in identifying threats, analyzing vulnerabilities, and implementing cybersecurity measures in real-world scenarios</p>
-    <a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_694e851739ff7eaad9e01e9f_1773941954278_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">📊</span>
-    <div class="ctitle">Deloitte Australia Data Analytics Job Simulation</div>
-    <div class="cby">Forage</div>
-    <p class="cdesc">Worked on data cleaning, visualization, and deriving business insights using analytical tools in a Deloitte-simulated project environment</p>
-    <a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_694e851739ff7eaad9e01e9f_1773930285033_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🤖</span>
-    <div class="ctitle">AI Skills Passport</div>
-    <div class="cby">Microsoft & EY</div>
-    <p class="cdesc">Developed foundational AI knowledge including machine learning concepts, ethical AI, and real-world business applications</p>
-    <a href="https://drive.google.com/file/d/177NQqEdiZTolXnbBBlTMIa_CVcgprv36/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🎓</span>
-    <div class="ctitle">Full-Stack Web Development</div>
-    <div class="cby">Udemy · 61.5 hours</div>
-    <p class="cdesc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p>
-    <a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🎨</span>
-    <div class="ctitle">UI/UX Design Masterclass</div>
-    <div class="cby">Udemy · 41.5 hours</div>
-    <p class="cdesc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p>
-    <a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="clink">View Certificate →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🔧</span>
-    <div class="ctitle">Postman Student Expert</div>
-    <div class="cby">Postman</div>
-    <p class="cdesc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p>
-    <a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="clink">View Badge →</a>
-</div>
-
-<div class="ccard reveal">
-    <span class="cico">🌟</span>
-    <div class="ctitle">GSSoC 2025 Contributor</div>
-    <div class="cby">GirlScript Summer of Code</div>
-    <p class="cdesc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p>
-    <a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="clink">View Certificate →</a>
-</div>
+            <div class="ccard reveal"><span class="cico">🛡️</span><div class="ctitle">EY Technology Risk Virtual Job Simulation</div><div class="cby">Forage</div><p class="cdesc">Completed hands-on tasks involving IT risk assessment, control evaluation, and cybersecurity frameworks in a simulated EY environment</p><a href="https://www.theforage.com/completion-certificates/Z3pPDqCPapFTSGBgi/25RAqjzJnD3b8YPZv_Z3pPDqCPapFTSGBgi_694e851739ff7eaad9e01e9f_1773940779788_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a></div>
+            <div class="ccard reveal"><span class="cico">🔐</span><div class="ctitle">Mastercard Cybersecurity Job Simulation</div><div class="cby">Forage</div><p class="cdesc">Gained practical experience in identifying threats, analyzing vulnerabilities, and implementing cybersecurity measures in real-world scenarios</p><a href="https://www.theforage.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_694e851739ff7eaad9e01e9f_1773941954278_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a></div>
+            <div class="ccard reveal"><span class="cico">📊</span><div class="ctitle">Deloitte Australia Data Analytics Job Simulation</div><div class="cby">Forage</div><p class="cdesc">Worked on data cleaning, visualization, and deriving business insights using analytical tools in a Deloitte-simulated project environment</p><a href="https://www.theforage.com/completion-certificates/9PBTqmSxAf6zZTseP/io9DzWKe3PTsiS6GG_9PBTqmSxAf6zZTseP_694e851739ff7eaad9e01e9f_1773930285033_completion_certificate.pdf" target="_blank" class="clink">View Certificate →</a></div>
+            <div class="ccard reveal"><span class="cico">🤖</span><div class="ctitle">AI Skills Passport</div><div class="cby">Microsoft & EY</div><p class="cdesc">Developed foundational AI knowledge including machine learning concepts, ethical AI, and real-world business applications</p><a href="https://drive.google.com/file/d/177NQqEdiZTolXnbBBlTMIa_CVcgprv36/view?usp=sharing" target="_blank" class="clink">View Certificate →</a></div>
+            <div class="ccard reveal"><span class="cico">🎓</span><div class="ctitle">Full-Stack Web Development</div><div class="cby">Udemy · 61.5 hours</div><p class="cdesc">Comprehensive course covering HTML, CSS, JavaScript, Node.js, Express, MongoDB, and REST APIs</p><a href="https://www.udemy.com/certificate/UC-f2327a15-89cf-46f0-afce-4087c468bd20/" target="_blank" class="clink">View Certificate →</a></div>
+            <div class="ccard reveal"><span class="cico">🎨</span><div class="ctitle">UI/UX Design Masterclass</div><div class="cby">Udemy · 41.5 hours</div><p class="cdesc">UI/UX fundamentals, wireframing, prototyping, and design systems using Figma</p><a href="https://www.udemy.com/certificate/UC-9a662417-5f63-49bd-9c0c-b9df3be54843/" target="_blank" class="clink">View Certificate →</a></div>
+            <div class="ccard reveal"><span class="cico">🔧</span><div class="ctitle">Postman Student Expert</div><div class="cby">Postman</div><p class="cdesc">Certified in API fundamentals, RESTful APIs, and comprehensive API testing using Postman</p><a href="https://badgr.com/public/assertions/TQdDdQMNRs6LsuuO7lIdIQ" target="_blank" class="clink">View Badge →</a></div>
+            <div class="ccard reveal"><span class="cico">🌟</span><div class="ctitle">GSSoC 2025 Contributor</div><div class="cby">GirlScript Summer of Code</div><p class="cdesc">Contributed to open-source projects by improving features, fixing issues, and enhancing documentation</p><a href="https://drive.google.com/file/d/1H8_ZUnTRjRYufEb-tR87EEL-1gfAjL6L/view?usp=sharing" target="_blank" class="clink">View Certificate →</a></div>
           </div>
         </div>
       </div>
@@ -866,13 +914,7 @@ a{text-decoration:none;color:inherit;}
           <p class="ss reveal">I'm always open to discussing new projects, creative ideas, or opportunities.</p>
           <div class="contact-layout reveal">
             <div class="cc-grid">
-              <a href="mailto:rishitwork28@gmail.com" class="cccard">
-  <div class="cc-ico">📧</div>
-  <div>
-    <div class="cc-lbl">EMAIL</div>
-    <div class="cc-val">rishitwork28@gmail.com</div>
-  </div>
-</a>
+              <a href="mailto:rishitwork28@gmail.com" class="cccard"><div class="cc-ico">📧</div><div><div class="cc-lbl">EMAIL</div><div class="cc-val">rishitwork28@gmail.com</div></div></a>
               <a href="tel:+918076513921" class="cccard"><div class="cc-ico">📱</div><div><div class="cc-lbl">PHONE</div><div class="cc-val">+91-8076513921</div></div></a>
               <a href="https://www.linkedin.com/in/rishit-chaudhary17" target="_blank" class="cccard"><div class="cc-ico">💼</div><div><div class="cc-lbl">LINKEDIN</div><div class="cc-val">rishit-chaudhary17</div></div></a>
               <a href="https://github.com/rizzit17" target="_blank" class="cccard"><div class="cc-ico">💻</div><div><div class="cc-lbl">GITHUB</div><div class="cc-val">@rizzit17</div></div></a>
@@ -911,7 +953,8 @@ a{text-decoration:none;color:inherit;}
   </main>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
 // ── Clock ─────────────────────────────────────────────────────────
 (function tick() {
   const n = new Date(), h = n.getHours(), m = n.getMinutes();
@@ -928,12 +971,45 @@ Object.entries(gutterLines).forEach(([id,n]) => {
   for (let i=1;i<=n;i++) { const s=document.createElement('span'); s.textContent=i; el.appendChild(s); }
 });
 
+// ── Hamburger / Sidebar drawer ────────────────────────────────────
+const hamburger = document.getElementById('hamburger');
+const sidebar   = document.getElementById('sidebar');
+const overlay   = document.getElementById('overlay');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  overlay.classList.add('active');
+  hamburger.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('active');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+function toggleSidebar() {
+  sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+}
+
+hamburger.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', closeSidebar);
+
+// Close sidebar with Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && sidebar.classList.contains('open')) closeSidebar();
+});
+
 // ── Navigation ────────────────────────────────────────────────────
 const meta = {
   about:          {file:'about.jsx',         dot:'jsx',  lang:'JSX'},
   projects:       {file:'projects.tsx',       dot:'tsx',  lang:'TSX'},
   skills:         {file:'skills.json',        dot:'json', lang:'JSON'},
-  experience:     {file:'extracurriculars.ts',       dot:'ts',   lang:'TypeScript'},
+  experience:     {file:'extracurriculars.ts',dot:'ts',   lang:'TypeScript'},
   internships:    {file:'internships.tsx',    dot:'tsx',  lang:'TSX'},
   certifications: {file:'certifications.md', dot:'md',   lang:'Markdown'},
   contact:        {file:'contact.css',        dot:'css',  lang:'CSS'}
@@ -956,6 +1032,9 @@ function navigate(id) {
   if (!openTabs.includes(id)) { openTabs.push(id); addTab(id, m); }
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.sec===id));
   document.querySelector('.editor-wrap').scrollTo({top:0,behavior:'smooth'});
+
+  // Auto-close sidebar on mobile after navigation
+  if (window.innerWidth <= 680) closeSidebar();
 }
 
 function addTab(id, m) {
@@ -983,10 +1062,6 @@ document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => 
 document.querySelectorAll('.sn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
 // ── Scroll reveal ─────────────────────────────────────────────────
-new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:.1}).observe || (() => {})();
-
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold:.1});
