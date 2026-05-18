@@ -2624,10 +2624,7 @@ document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => 
 document.querySelectorAll('.sn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
 // Mobile bottom nav
-document.getElementById('mobileNav').addEventListener('click', e => {
-  const item = e.target.closest('.mn-item');
-  if (item && item.dataset.sec) navigate(item.dataset.sec);
-});
+document.querySelectorAll('.mn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
 // ── Scroll reveal ─────────────────────────────────────────────────
 const obs = new IntersectionObserver(entries => {
