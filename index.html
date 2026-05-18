@@ -1431,45 +1431,160 @@
       transform: translateY(0);
     }
 
-    /* ── RESPONSIVE ── */
-    @media(max-width:900px) {
-      :root {
-        --sb-w: 250px;
-      }
+    /* ── MOBILE BOTTOM NAV ── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 58px;
+  background: #0a0a0a;
+  border-top: 1px solid #222;
+  z-index: 300;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.mobile-nav::-webkit-scrollbar { display: none; }
+.mn-inner {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  min-width: max-content;
+  padding: 0 4px;
+}
+.mn-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 16px;
+  cursor: pointer;
+  color: #666680;
+  font-family: var(--mono);
+  transition: color .15s;
+  position: relative;
+  flex-shrink: 0;
+}
+.mn-item::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 2px;
+  background: var(--green);
+  border-radius: 0 0 3px 3px;
+  opacity: 0;
+  transition: opacity .15s;
+}
+.mn-item.active { color: var(--green); }
+.mn-item.active::after { opacity: 1; }
+.mn-ico { font-size: 17px; line-height: 1; }
+.mn-lbl { font-size: 9px; letter-spacing: .04em; white-space: nowrap; }
 
-      .content {
-        padding: 22px 22px 60px 18px;
-      }
-    }
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  :root { --sb-w: 250px; }
+  .content { padding: 22px 22px 60px 18px; }
+}
 
-    @media(max-width:680px) {
-      :root {
-        --sb-w: 0px;
-      }
+@media(max-width:680px) {
+  :root { --sb-w: 0px; }
 
-      .sidebar {
-        display: none;
-      }
+  /* Sidebar + statusbar */
+  .sidebar { display: none; }
+  .statusbar { display: none; }
 
-      .statusbar {
-        left: 0;
-      }
+  /* Mobile bottom nav */
+  .mobile-nav { display: block; }
 
-      .content {
-        padding: 18px 16px 60px;
-      }
+  /* Top bar */
+  .tb-marquee { display: none; }
+  .topbar { padding: 0 14px; }
+  .tb-right { gap: 10px; }
+  .tb-clock { min-width: 55px; font-size: 11px; }
 
-      .a-h1 {
-        font-size: 26px;
-      }
+  /* Tab bar + breadcrumb */
+  .tabbar { display: none; }
+  .breadcrumb {
+    top: var(--top-h);
+    font-size: 10px;
+    padding: 0 12px;
+    gap: 4px;
+  }
 
-      .pgrid {
-        grid-template-columns: 1fr;
-      }
+  /* Gutter */
+  .gutter { display: none; }
 
-      .contact-layout {
-        grid-template-columns: 1fr;
-      }
+  /* Content */
+  .content { padding: 16px 14px 76px; }
+
+  /* Code blocks */
+  .cblk {
+    font-size: 11.5px;
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    line-height: 1.65;
+  }
+  .cblk-line { word-break: break-all; }
+
+  /* About hero */
+  .a-h1 { font-size: 28px; }
+  .a-desc { font-size: 13px; }
+  .stats-row { gap: 8px; }
+  .stat { padding: 8px 10px; min-width: 60px; }
+  .sv { font-size: 17px; }
+  .sl { font-size: 11px; }
+  .act-row { gap: 8px; }
+  .abtn { padding: 9px 14px; font-size: 12px; }
+  .rbadge { font-size: 11px; }
+
+  /* Info cards */
+  .icards { grid-template-columns: 1fr; gap: 10px; }
+  .icard { padding: 14px 16px; }
+
+  /* Projects */
+  .pgrid { grid-template-columns: 1fr; gap: 12px; }
+  .pname { font-size: 15px; }
+  .pdesc { font-size: 13px; }
+  .ptop { padding: 13px 14px 11px; }
+  .pbody { padding: 12px 14px 14px; }
+
+  /* Skills */
+  .sgrid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .scard { padding: 12px 12px; }
+  .slabel { font-size: 12px; }
+  .sk { font-size: 11px; padding: 2px 6px; }
+
+  /* Section headings */
+  .sh { font-size: 20px; }
+  .ss { font-size: 13px; margin-bottom: 20px; }
+
+  /* Timeline */
+  .timeline { padding-left: 20px; }
+  .tl-title { font-size: 14px; }
+  .tl-pts li { font-size: 13px; }
+  .tl-org { font-size: 13px; }
+  .tlcard { padding: 13px 15px; }
+  .tl-badge { font-size: 11px; padding: 2px 7px; }
+
+  /* Certs */
+  .cgrid { grid-template-columns: 1fr; gap: 12px; }
+  .ccard { padding: 16px 14px; gap: 5px; }
+  .cico { font-size: 24px; }
+  .ctitle { font-size: 14px; }
+
+  /* Contact */
+  .contact-layout { grid-template-columns: 1fr; gap: 14px; }
+  .cterm { display: none; }
+  .cccard { padding: 11px 14px; }
+  .cc-val { font-size: 13px; }
+}
+
+@media(max-width:400px) {
+  .sgrid { grid-template-columns: 1fr; }
+  .stats-row { gap: 6px; }
+  .stat { min-width: 52px; padding: 7px 8px; }
+  .a-h1 { font-size: 24px; }
+}
     }
   </style>
 </head>
@@ -2428,127 +2543,169 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
-    // ── Clock ─────────────────────────────────────────────────────────
-    (function tick() {
-      const n = new Date(), h = n.getHours(), m = n.getMinutes();
-      const ampm = h >= 12 ? 'PM' : 'AM', hh = (h % 12 || 12).toString().padStart(2, '0'), mm = m.toString().padStart(2, '0');
-      document.getElementById('clock').textContent = `${hh}:${mm} ${ampm}`;
-      setTimeout(tick, 10000);
-    })();
+   // ── Clock ─────────────────────────────────────────────────────────
+(function tick() {
+  const n = new Date(), h = n.getHours(), m = n.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM', hh = (h % 12 || 12).toString().padStart(2, '0'), mm = m.toString().padStart(2, '0');
+  document.getElementById('clock').textContent = `${hh}:${mm} ${ampm}`;
+  setTimeout(tick, 10000);
+})();
 
-    // ── Line gutters ──────────────────────────────────────────────────
-    const gutterLines = { 'g-about': 55, 'g-projects': 85, 'g-skills': 58, 'g-experience': 62, 'g-internships': 38, 'g-certifications': 34, 'g-contact': 38 };
-    Object.entries(gutterLines).forEach(([id, n]) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      for (let i = 1; i <= n; i++) { const s = document.createElement('span'); s.textContent = i; el.appendChild(s); }
-    });
+// ── Line gutters ──────────────────────────────────────────────────
+const gutterLines = { 'g-about': 55, 'g-projects': 85, 'g-skills': 58, 'g-experience': 62, 'g-internships': 38, 'g-certifications': 34, 'g-contact': 38 };
+Object.entries(gutterLines).forEach(([id, n]) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  for (let i = 1; i <= n; i++) { const s = document.createElement('span'); s.textContent = i; el.appendChild(s); }
+});
 
-    // ── Navigation ────────────────────────────────────────────────────
-    const meta = {
-      about: { file: 'about.jsx', dot: 'jsx', lang: 'JSX' },
-      projects: { file: 'projects.tsx', dot: 'tsx', lang: 'TSX' },
-      skills: { file: 'skills.json', dot: 'json', lang: 'JSON' },
-      experience: { file: 'extracurriculars.ts', dot: 'ts', lang: 'TypeScript' },
-      internships: { file: 'internships.tsx', dot: 'tsx', lang: 'TSX' },
-      certifications: { file: 'certifications.md', dot: 'md', lang: 'Markdown' },
-      contact: { file: 'contact.css', dot: 'css', lang: 'CSS' }
-    };
+// ── Navigation ────────────────────────────────────────────────────
+const meta = {
+  about:          { file: 'about.jsx',          dot: 'jsx',  lang: 'JSX' },
+  projects:       { file: 'projects.tsx',        dot: 'tsx',  lang: 'TSX' },
+  skills:         { file: 'skills.json',         dot: 'json', lang: 'JSON' },
+  experience:     { file: 'extracurriculars.ts', dot: 'ts',   lang: 'TypeScript' },
+  internships:    { file: 'internships.tsx',     dot: 'tsx',  lang: 'TSX' },
+  certifications: { file: 'certifications.md',  dot: 'md',   lang: 'Markdown' },
+  contact:        { file: 'contact.css',         dot: 'css',  lang: 'CSS' }
+};
 
-    let openTabs = ['about'], active = 'about';
+let openTabs = ['about'], active = 'about';
 
-    function navigate(id) {
-      if (!meta[id]) return;
-      const m = meta[id];
+function navigate(id) {
+  if (!meta[id]) return;
+  const m = meta[id];
 
-      document.querySelectorAll('.ed-sec').forEach(s => s.classList.remove('active'));
-      document.getElementById('sec-' + id).classList.add('active');
-      active = id;
+  document.querySelectorAll('.ed-sec').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  active = id;
 
-      document.querySelectorAll('.sn-item').forEach(n => n.classList.toggle('active', n.dataset.sec === id));
-      document.getElementById('bc').textContent = m.file;
-      document.getElementById('sb-lang').textContent = m.lang;
+  // Sidebar nav
+  document.querySelectorAll('.sn-item').forEach(n => n.classList.toggle('active', n.dataset.sec === id));
+  // Mobile bottom nav
+  document.querySelectorAll('.mn-item').forEach(n => n.classList.toggle('active', n.dataset.sec === id));
 
-      if (!openTabs.includes(id)) { openTabs.push(id); addTab(id, m); }
-      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.sec === id));
-      document.querySelector('.editor-wrap').scrollTo({ top: 0, behavior: 'smooth' });
-    }
+  document.getElementById('bc').textContent = m.file;
+  document.getElementById('sb-lang').textContent = m.lang;
 
-    function addTab(id, m) {
-      const tab = document.createElement('div');
-      tab.className = 'tab'; tab.dataset.sec = id;
-      tab.innerHTML = `<span class="t-dot ${m.dot}"></span>${m.file}<span class="t-close">✕</span>`;
-      tab.addEventListener('click', e => {
-        if (e.target.classList.contains('t-close')) { closeTab(id, tab); return; }
-        navigate(id);
-      });
-      document.getElementById('tabbar').appendChild(tab);
-    }
+  if (!openTabs.includes(id)) { openTabs.push(id); addTab(id, m); }
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.sec === id));
+  document.querySelector('.editor-wrap').scrollTo({ top: 0, behavior: 'smooth' });
 
-    function closeTab(id, el) {
-      if (openTabs.length <= 1) return;
-      const idx = openTabs.indexOf(id); openTabs.splice(idx, 1); el.remove();
-      if (active === id) navigate(openTabs[Math.min(idx, openTabs.length - 1)]);
-    }
+  // Scroll mobile nav item into view
+  const mnActive = document.querySelector('.mn-item.active');
+  if (mnActive) mnActive.scrollIntoView({ inline: 'center', behavior: 'smooth', block: 'nearest' });
+}
 
-    // Initial about tab
-    document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => {
-      if (e.target.classList.contains('t-close')) { closeTab('about', e.currentTarget); return; }
-      navigate('about');
-    });
-    document.querySelectorAll('.sn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
+function addTab(id, m) {
+  const tab = document.createElement('div');
+  tab.className = 'tab'; tab.dataset.sec = id;
+  tab.innerHTML = `<span class="t-dot ${m.dot}"></span>${m.file}<span class="t-close">✕</span>`;
+  tab.addEventListener('click', e => {
+    if (e.target.classList.contains('t-close')) { closeTab(id, tab); return; }
+    navigate(id);
+  });
+  document.getElementById('tabbar').appendChild(tab);
+}
 
-    // ── Scroll reveal ─────────────────────────────────────────────────
-    new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: .1 }).observe || (() => { })();
+function closeTab(id, el) {
+  if (openTabs.length <= 1) return;
+  const idx = openTabs.indexOf(id); openTabs.splice(idx, 1); el.remove();
+  if (active === id) navigate(openTabs[Math.min(idx, openTabs.length - 1)]);
+}
 
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: .1 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+// Initial about tab click handler
+document.querySelector('.tab[data-sec="about"]').addEventListener('click', e => {
+  if (e.target.classList.contains('t-close')) { closeTab('about', e.currentTarget); return; }
+  navigate('about');
+});
 
-    // ── Terminal ──────────────────────────────────────────────────────
-    const tLines = [
-      'git clone https://github.com/rizzit17/awesome-project.git',
-      'cd awesome-project',
-      'npm install && npm start',
-    ];
-    let tl = 0, tc = 0;
-    const tText = document.getElementById('termText');
-    const tBody = document.getElementById('termBody');
+// Sidebar nav
+document.querySelectorAll('.sn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
-    function typeT() {
-      if (tl >= tLines.length) {
-        const done = document.createElement('span');
-        done.className = 'ct-line ct-ok'; done.textContent = '✓ Ready to collaborate! 🚀';
-        tBody.insertBefore(done, tBody.firstChild);
-        document.getElementById('termCursor').style.display = 'none';
-        return;
-      }
-      const line = tLines[tl];
-      if (tc < line.length) { tText.textContent += line[tc++]; setTimeout(typeT, 30); }
-      else {
-        const done = document.createElement('span');
-        done.className = 'ct-line';
-        done.innerHTML = `<span class="ct-pr">$ </span><span class="ct-cmd">${line}</span>`;
-        tBody.insertBefore(done, tBody.firstChild);
-        tText.textContent = ''; tc = 0; tl++;
-        setTimeout(typeT, 500);
-      }
-    }
-    setTimeout(typeT, 1000);
+// Mobile bottom nav
+document.querySelectorAll('.mn-item').forEach(n => n.addEventListener('click', () => navigate(n.dataset.sec)));
 
-    // ── Keyboard shortcuts ────────────────────────────────────────────
-    document.addEventListener('keydown', e => {
-      if (e.key >= '1' && e.key <= '7' && !e.ctrlKey && !e.metaKey) {
-        const keys = Object.keys(meta);
-        if (keys[+e.key - 1]) navigate(keys[+e.key - 1]);
-      }
-    });
+// ── Scroll reveal ─────────────────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    navigate('about');
+// ── Terminal ──────────────────────────────────────────────────────
+const tLines = [
+  'git clone https://github.com/rizzit17/awesome-project.git',
+  'cd awesome-project',
+  'npm install && npm start',
+];
+let tl = 0, tc = 0;
+const tText = document.getElementById('termText');
+const tBody = document.getElementById('termBody');
+
+function typeT() {
+  if (tl >= tLines.length) {
+    const done = document.createElement('span');
+    done.className = 'ct-line ct-ok'; done.textContent = '✓ Ready to collaborate! 🚀';
+    tBody.insertBefore(done, tBody.firstChild);
+    document.getElementById('termCursor').style.display = 'none';
+    return;
+  }
+  const line = tLines[tl];
+  if (tc < line.length) { tText.textContent += line[tc++]; setTimeout(typeT, 30); }
+  else {
+    const done = document.createElement('span');
+    done.className = 'ct-line';
+    done.innerHTML = `<span class="ct-pr">$ </span><span class="ct-cmd">${line}</span>`;
+    tBody.insertBefore(done, tBody.firstChild);
+    tText.textContent = ''; tc = 0; tl++;
+    setTimeout(typeT, 500);
+  }
+}
+setTimeout(typeT, 1000);
+
+// ── Keyboard shortcuts ────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (e.key >= '1' && e.key <= '7' && !e.ctrlKey && !e.metaKey) {
+    const keys = Object.keys(meta);
+    if (keys[+e.key - 1]) navigate(keys[+e.key - 1]);
+  }
+});
+
+navigate('about');
   </script>
+  <!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mn-inner">
+    <div class="mn-item active" data-sec="about">
+      <span class="mn-ico">📄</span>
+      <span class="mn-lbl">about.jsx</span>
+    </div>
+    <div class="mn-item" data-sec="projects">
+      <span class="mn-ico">🚀</span>
+      <span class="mn-lbl">projects.tsx</span>
+    </div>
+    <div class="mn-item" data-sec="skills">
+      <span class="mn-ico">⚡</span>
+      <span class="mn-lbl">skills.json</span>
+    </div>
+    <div class="mn-item" data-sec="experience">
+      <span class="mn-ico">💼</span>
+      <span class="mn-lbl">extras.ts</span>
+    </div>
+    <div class="mn-item" data-sec="internships">
+      <span class="mn-ico">🎯</span>
+      <span class="mn-lbl">internships.tsx</span>
+    </div>
+    <div class="mn-item" data-sec="certifications">
+      <span class="mn-ico">🏆</span>
+      <span class="mn-lbl">certs.md</span>
+    </div>
+    <div class="mn-item" data-sec="contact">
+      <span class="mn-ico">📧</span>
+      <span class="mn-lbl">contact.css</span>
+    </div>
+  </div>
+</nav>
 </body>
 
 </html>
